@@ -1,0 +1,35 @@
+function default.itemslot_bg(x,y,w,h)
+	local imgs = ""
+	for i = 0, w-1,1 do
+		for j=0, h-1,1 do
+			imgs = imgs .."image["..x+i..","..y+j..";1,1;gui_itemslot_bg.png]"
+		end
+	end
+	return imgs
+end
+
+default.inv_form = "size[8,7.5;]"
+default.inv_form = default.inv_form.."listcolors[#00000000;#10101030;#00000000;#68B259;#FFF]"
+default.inv_form = default.inv_form.."bgcolor[#a88e69FF;false]"
+default.inv_form = default.inv_form.."list[current_player;main;0,3.5;8,4;]"
+default.inv_form = default.inv_form..default.itemslot_bg(0,3.5,8,4)
+default.inv_form = default.inv_form.."list[current_player;craft;1.5,0;3,3;]"
+default.inv_form = default.inv_form..default.itemslot_bg(1.5,0,3,3)
+default.inv_form = default.inv_form.."list[current_player;craftpreview;5,1;1,1;]"
+default.inv_form = default.inv_form..default.itemslot_bg(5,1,1,1)
+
+minetest.register_on_joinplayer(function(player)
+	player:hud_set_hotbar_image("gui_hotbar.png")
+	player:hud_set_hotbar_selected_image("gui_hotbar_selected.png")
+	player:set_inventory_formspec(default.inv_form)
+	
+	-- Testing of HUD elements
+	player:hud_add({
+		hud_elem_type = "waypoint",
+		name = "spawn",
+		text = "",
+		number = 255,
+		world_pos = {x=0,y=0,z=0}
+	})
+end)
+
