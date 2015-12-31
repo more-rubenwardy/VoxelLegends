@@ -290,7 +290,7 @@ minetest.register_node("default:plant_grass", {
 	drawtype = "plantlike",
 	paramtype = "light",
 	invetory_image = "default_plant_grass.png",
-	builtable = false,
+	buildable_to = true,
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
 })
@@ -301,7 +301,7 @@ minetest.register_node("default:flower_1", {
 	drawtype = "plantlike",
 	paramtype = "light",
 	invetory_image = "default_flower_1.png",
-	builtable = false,
+	buildable_to = true,
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
 })
@@ -313,7 +313,7 @@ minetest.register_node("default:flower_2", {
 	paramtype = "light",
 	invetory_image = "default_flower_2.png",
 	light_source = 10,
-	builtable = false,
+	buildable_to = true,
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
 })
