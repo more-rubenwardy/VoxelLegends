@@ -4,6 +4,12 @@ minetest.register_node("default:dirt", {
 	groups = {crumbly = 3},
 })
 
+minetest.register_node("default:gravel", {
+	description = "Gravel",
+	tiles = {"default_gravel.png"},
+	groups = {crumbly = 2, falling_node=1},
+})
+
 minetest.register_node("default:sand", {
 	description = "Sand",
 	tiles = {"default_sand.png"},
@@ -46,6 +52,12 @@ minetest.register_node("default:stone_with_iron", {
 minetest.register_node("default:wood", {
 	description = "Wood",
 	tiles = {"default_wood.png"},
+	groups = {choppy = 3},
+})
+
+minetest.register_node("default:wooden_planks", {
+	description = "Wooden Planks",
+	tiles = {"default_wooden_planks.png"},
 	groups = {choppy = 3},
 })
 
@@ -175,11 +187,10 @@ minetest.register_node("default:treasure_chest", {
 	end
 })
 
-minetest.register_node("default:glass", {
-	description = "Glass",
-	tiles = {"default_glass.png"},
-	drawtype = "glasslike",
-	paramtype = "light",
+minetest.register_node("default:lamp", {
+	description = "Lamp",
+	tiles = {"default_lamp.png"},
+	light_source = 14,
 	groups = {crumbly = 3},
 })
 
@@ -317,3 +328,82 @@ minetest.register_node("default:flower_2", {
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
 })
+
+-- frames
+
+minetest.register_node("default:frame", {
+	description = "Frame",
+	tiles = {"default_frame.png"},
+	drawtype = "allfaces",
+	paramtype = "light",
+	groups = {choppy = 3},
+})
+
+minetest.register_node("default:frame_with_wood", {
+	description = "Frame with Wood",
+	tiles = {"default_wood.png^default_frame.png"},
+	groups = {choppy = 3},
+})
+
+minetest.register_node("default:frame_with_stonebrick", {
+	description = "Frame with Stonebrick",
+	tiles = {"default_stonebrick.png^default_frame.png"},
+	groups = {choppy = 3},
+})
+
+minetest.register_node("default:frame_with_log", {
+	description = "Frame with Stonebrick",
+	tiles = {"default_log.png^default_frame.png"},
+	groups = {choppy = 3},
+})
+
+-- glass
+
+minetest.register_node("default:glass", {
+	description = "Glass",
+	tiles = {"default_glass.png"},
+	drawtype = "glasslike",
+	paramtype = "light",
+	groups = {crumbly = 3},
+})
+
+minetest.register_node("default:glass_with_wood", {
+	description = "Glass with Wood",
+	tiles = {"default_wood.png^default_glass.png"},
+	groups = {crumbly = 3},
+})
+
+minetest.register_node("default:glass_with_wood", {
+	description = "Glass with Wood",
+	tiles = {"default_wood.png^default_glass.png"},
+	groups = {crumbly = 3},
+})
+
+minetest.register_node("default:glass_with_log", {
+	description = "Glass with Wood",
+	tiles = {"default_log.png^default_glass.png"},
+	groups = {crumbly = 3},
+})
+
+minetest.register_node("default:glass_with_stonebrick", {
+	description = "Glass with Stonebrick",
+	tiles = {"default_stonebrick.png^default_glass.png"},
+	groups = {crumbly = 3},
+})
+
+-- floor
+
+default.register_floor = function(color)
+	minetest.register_node("default:floor_"..color, {
+		description = color.." Floor",
+		tiles = {"default_floor.png^[colorize:"..color..":120"},
+		groups = {crumbly=3},
+	})
+end
+
+default.register_floor("red")
+default.register_floor("green")
+default.register_floor("yellow")
+default.register_floor("brown")
+default.register_floor("white")
+default.register_floor("black")

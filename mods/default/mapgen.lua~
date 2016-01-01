@@ -5,6 +5,7 @@ minetest.register_alias("mapgen_dirt", "default:dirt")
 minetest.register_alias("mapgen_sand", "default:sand")
 minetest.register_alias("mapgen_dirt_with_grass", "default:grass")
 minetest.register_alias("mapgen_water_source", "default:water_source")
+minetest.register_alias("mapgen_gravel", "default:gravel")
 
 minetest.register_biome({
 	name = "grassland",
