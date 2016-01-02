@@ -4,12 +4,6 @@ minetest.register_node("default:dirt", {
 	groups = {crumbly = 3},
 })
 
-minetest.register_node("default:gravel", {
-	description = "Gravel",
-	tiles = {"default_gravel.png"},
-	groups = {crumbly = 2, falling_node=1},
-})
-
 minetest.register_node("default:sand", {
 	description = "Sand",
 	tiles = {"default_sand.png"},
@@ -20,45 +14,6 @@ minetest.register_node("default:grass", {
 	description = "Grass",
 	tiles = {"default_grass.png"},
 	groups = {crumbly = 3},
-})
-
-minetest.register_node("default:stone", {
-	description = "Stone",
-	tiles = {"default_stone.png"},
-	groups = {cracky = 3},
-	drop = "default:stone_item 5",
-})
-
-minetest.register_node("default:stonebrick", {
-	description = "Stonebrick",
-	tiles = {"default_stonebrick.png"},
-	groups = {cracky = 3},
-})
-
-minetest.register_node("default:wet_stone", {
-	description = "Wet Stone",
-	tiles = {"default_wet_stone.png"},
-	groups = {cracky = 3},
-	drop = {"default:stone_item 5"},
-})
-
-minetest.register_node("default:stone_with_iron", {
-	description = "Stone with Iron",
-	tiles = {"default_stone_with_iron.png"},
-	groups = {cracky = 2},
-	drop = {"default:stone_item 2", "default:iron_lump"},
-})
-
-minetest.register_node("default:wood", {
-	description = "Wood",
-	tiles = {"default_wood.png"},
-	groups = {choppy = 3},
-})
-
-minetest.register_node("default:wooden_planks", {
-	description = "Wooden Planks",
-	tiles = {"default_wooden_planks.png"},
-	groups = {choppy = 3},
 })
 
 minetest.register_node("default:leaves_1", {
@@ -87,71 +42,39 @@ minetest.register_node("default:stones_on_floor", {
 
 })
 
-minetest.register_node("default:log_1", {
-	description = "Log (thick)",
-	tiles = {"default_log.png"},
-	groups = {choppy = 3},
-	paramtype = "light",
-	paramtype2 = "facedir",
-	drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-				{-0.4, -0.5, -0.4, 0.4, 0.5, 0.4},
-			},
-	},
 
-})
+-- box
 
-minetest.register_node("default:log_2", {
-	description = "Log",
-	tiles = {"default_log.png"},
-	groups = {choppy = 3},
-	paramtype = "light",
-	paramtype2 = "facedir",
-	drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-				{-0.3, -0.5, -0.3, 0.3, 0.5, 0.3},
-			},
-	},
-
-})
-
-minetest.register_node("default:log_3", {
-	description = "Log (thin)",
-	tiles = {"default_log.png"},
-	groups = {choppy = 3},
-	paramtype = "light",
-	paramtype2 = "facedir",
-	drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-				{-0.2, -0.5, -0.2, 0.2, 0.5, 0.2},
-			},
-	},
-})
-
-
+local box_form = "size[8,9]"
+local box_form = box_form..default.gui_colors
+local box_form = box_form..default.gui_bg
+local box_form = box_form.."list[current_name;main;0,0.3;8,4;]" 
+local box_form = box_form..default.itemslot_bg(0,0.3,8,4)
+local box_form = box_form.."list[current_player;main;0,4.85;8,1;]" 
+local box_form = box_form..default.itemslot_bg(0,4.85,8,1)
+local box_form = box_form.."list[current_player;main;0,6.08;8,3;8]" 
+local box_form = box_form..default.itemslot_bg(0,6,8,3)
 
 minetest.register_node("default:box", {
 	description = "Box",
-	tiles = {"default_log.png"},
+	tiles = {"default_wooden_planks.png", "default_wooden_planks.png", "default_box_side.png", "default_box_side.png", "default_box_side.png", "default_box_front.png"},
 	groups = {choppy = 3},
 	paramtype = "light",
+	paramtype2 = "facedir",
 	drawtype = "nodebox",
 	node_box = {
 		type = "fixed",
 		fixed = {
-				{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5},
-				{-0.5, -0.5, -0.5, -0.4375, 0.5, 0.5},
-				{-0.5, -0.5, -0.5, 0.5, 0.5, -0.4375},
-				{-0.5, -0.5, 0.4375, 0.5, 0.5, 0.5},
-				{0.4375, -0.5, -0.5, 0.5, 0.5, 0.5},
+				{-0.4, -0.5, -0.4, 0.4, 0.2, 0.4},
 			},
 	},
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec", box_form)
+		meta:set_string("infotext", "Box")
+		local inv = meta:get_inventory()
+		inv:set_size("main", 8*4)
+	end,
 
 })
 
@@ -159,7 +82,7 @@ minetest.register_node("default:treasure_chest", {
 	description = "Treasure Chest",
 	tiles = {"default_treasure_chest.png"},
 	groups = {choppy = 3},
-	drop = "default:stick 2",
+	drop = "default:box",
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
@@ -293,6 +216,69 @@ minetest.register_node("default:water_flowing", {
 	post_effect_color = {a=100, r=0, g=64, b=200},
 })
 
+-- wood
+
+minetest.register_node("default:wood", {
+	description = "Wood",
+	tiles = {"default_wood.png"},
+	groups = {choppy = 3},
+})
+
+minetest.register_node("default:wooden_planks", {
+	description = "Wooden Planks",
+	tiles = {"default_wooden_planks.png"},
+	groups = {choppy = 3},
+})
+
+-- log
+
+minetest.register_node("default:log_1", {
+	description = "Log (thick)",
+	tiles = {"default_log.png"},
+	groups = {choppy = 3},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+				{-0.4, -0.5, -0.4, 0.4, 0.5, 0.4},
+			},
+	},
+
+})
+
+minetest.register_node("default:log_2", {
+	description = "Log",
+	tiles = {"default_log.png"},
+	groups = {choppy = 3},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+				{-0.3, -0.5, -0.3, 0.3, 0.5, 0.3},
+			},
+	},
+
+})
+
+minetest.register_node("default:log_3", {
+	description = "Log (thin)",
+	tiles = {"default_log.png"},
+	groups = {choppy = 3},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+				{-0.2, -0.5, -0.2, 0.2, 0.5, 0.2},
+			},
+	},
+})
+
 -- plants
 
 minetest.register_node("default:plant_grass", {
@@ -407,3 +393,52 @@ default.register_floor("yellow")
 default.register_floor("brown")
 default.register_floor("white")
 default.register_floor("black")
+
+-- stone
+
+minetest.register_node("default:stone", {
+	description = "Stone",
+	tiles = {"default_stone.png"},
+	groups = {cracky = 3},
+	drop = "default:stone_item 5",
+})
+
+minetest.register_node("default:stone_tile", {
+	description = "Stone Tile",
+	tiles = {"default_stone_tile.png"},
+	groups = {cracky = 3},
+})
+
+minetest.register_node("default:small_stone_tiles", {
+	description = "Small Stone Tiles",
+	tiles = {"default_small_stone_tile.png"},
+	groups = {cracky = 3},
+})
+
+minetest.register_node("default:stonebrick", {
+	description = "Stonebrick",
+	tiles = {"default_stonebrick.png"},
+	groups = {cracky = 3},
+})
+
+minetest.register_node("default:wet_stone", {
+	description = "Wet Stone",
+	tiles = {"default_wet_stone.png"},
+	groups = {cracky = 3},
+	drop = {"default:stone_item 5"},
+})
+
+minetest.register_node("default:gravel", {
+	description = "Gravel",
+	tiles = {"default_gravel.png"},
+	groups = {crumbly = 2, falling_node=1},
+})
+
+-- ores
+
+minetest.register_node("default:stone_with_iron", {
+	description = "Stone with Iron",
+	tiles = {"default_stone_with_iron.png"},
+	groups = {cracky = 2},
+	drop = {"default:stone_item 2", "default:iron_lump"},
+})
