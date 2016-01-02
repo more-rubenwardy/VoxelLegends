@@ -366,7 +366,7 @@ minetest.register_node("default:glass_with_wood", {
 })
 
 minetest.register_node("default:glass_with_log", {
-	description = "Glass with Wood",
+	description = "Glass with Log",
 	tiles = {"default_log.png^default_glass.png"},
 	groups = {crumbly = 3},
 })
