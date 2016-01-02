@@ -338,7 +338,7 @@ minetest.register_node("default:frame_with_stonebrick", {
 })
 
 minetest.register_node("default:frame_with_log", {
-	description = "Frame with Stonebrick",
+	description = "Frame with Log",
 	tiles = {"default_log.png^default_frame.png"},
 	groups = {choppy = 3},
 })
@@ -359,14 +359,8 @@ minetest.register_node("default:glass_with_wood", {
 	groups = {crumbly = 3},
 })
 
-minetest.register_node("default:glass_with_wood", {
-	description = "Glass with Wood",
-	tiles = {"default_wood.png^default_glass.png"},
-	groups = {crumbly = 3},
-})
-
 minetest.register_node("default:glass_with_log", {
-	description = "Glass with Wood",
+	description = "Glass with Log",
 	tiles = {"default_log.png^default_glass.png"},
 	groups = {crumbly = 3},
 })
