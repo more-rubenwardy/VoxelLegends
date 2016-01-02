@@ -338,7 +338,7 @@ minetest.register_node("default:frame_with_stonebrick", {
 })
 
 minetest.register_node("default:frame_with_log", {
-	description = "Frame with Stonebrick",
+	description = "Frame with Log",
 	tiles = {"default_log.png^default_frame.png"},
 	groups = {choppy = 3},
 })
