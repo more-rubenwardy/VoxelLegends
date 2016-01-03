@@ -286,7 +286,7 @@ minetest.register_node("default:plant_grass", {
 	tiles = {"default_plant_grass.png"},
 	drawtype = "plantlike",
 	paramtype = "light",
-	invetory_image = "default_plant_grass.png",
+	inventory_image = "default_plant_grass.png",
 	buildable_to = true,
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
@@ -297,7 +297,7 @@ minetest.register_node("default:flower_1", {
 	tiles = {"default_flower_1.png"},
 	drawtype = "plantlike",
 	paramtype = "light",
-	invetory_image = "default_flower_1.png",
+	inventory_image = "default_flower_1.png",
 	buildable_to = true,
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
@@ -308,7 +308,7 @@ minetest.register_node("default:flower_2", {
 	tiles = {"default_flower_2.png"},
 	drawtype = "plantlike",
 	paramtype = "light",
-	invetory_image = "default_flower_2.png",
+	inventory_image = "default_flower_2.png",
 	light_source = 10,
 	buildable_to = true,
 	walkable = false,
@@ -338,7 +338,7 @@ minetest.register_node("default:frame_with_stonebrick", {
 })
 
 minetest.register_node("default:frame_with_log", {
-	description = "Frame with Stonebrick",
+	description = "Frame with Log",
 	tiles = {"default_log.png^default_frame.png"},
 	groups = {choppy = 3},
 })
@@ -359,14 +359,8 @@ minetest.register_node("default:glass_with_wood", {
 	groups = {crumbly = 3},
 })
 
-minetest.register_node("default:glass_with_wood", {
-	description = "Glass with Wood",
-	tiles = {"default_wood.png^default_glass.png"},
-	groups = {crumbly = 3},
-})
-
 minetest.register_node("default:glass_with_log", {
-	description = "Glass with Wood",
+	description = "Glass with Log",
 	tiles = {"default_log.png^default_glass.png"},
 	groups = {crumbly = 3},
 })

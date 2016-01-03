@@ -16,11 +16,10 @@ classes.register_weapon = function(name,fromLevel,levels, def)
     			on_use = function(itemstack, user, pointed_thing)
 				if user == nil then return end
 				if minetest.registered_tools[itemstack:get_name()].class then print(minetest.registered_tools[itemstack:get_name()].class) end
-				if classes.selected[user:get_player_name()] == minetest.registered_tools[itemstack:get_name()].class then
-					print("use")	
+				if classes.selected[user:get_player_name()] == minetest.registered_tools[itemstack:get_name()].class then	
 					if pointed_thing.type == "object" then
 						pointed_thing.ref:punch(user, 10,minetest.registered_tools[itemstack:get_name()].tool_capabilities)
-						print("hit!!")						
+						print("[info]" .. user:get_player_name() .. " is fighting!")						
 						return nil
 					end
 				else
