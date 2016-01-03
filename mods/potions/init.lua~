@@ -112,3 +112,8 @@ minetest.register_craftitem("potions:running", {
 		return itemstack
 	end,
 })
+
+minetest.register_craftitem("potions:upgrading", {
+	description = "Potion of Upgrading",
+	inventory_image = "potions_green.png",
+})
