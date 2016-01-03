@@ -17,10 +17,14 @@ classes.register_weapon = function(name,fromLevel,levels, def)
 				if user == nil then return end
 				if minetest.registered_tools[itemstack:get_name()].class then print(minetest.registered_tools[itemstack:get_name()].class) end
 				if classes.selected[user:get_player_name()] == minetest.registered_tools[itemstack:get_name()].class then
-					return nil
+					print("use")	
+					if pointed_thing.type == "object" then
+						pointed_thing.ref:punch(user, 10,minetest.registered_tools[itemstack:get_name()].tool_capabilities)
+						print("hit!!")						
+						return nil
+					end
 				else
 					minetest.chat_send_player(user:get_player_name(), "You cant use this item!")
-					itemstack:take_item()
 					return itemstack
 				end
 			end
