@@ -8,15 +8,28 @@ minetest.register_node("story:character_static", {
 	tiles = {"character.png"},
 	drawtype = "mesh",
 	mesh = "character_static.obj",
-	groups = {crumbly = 3},
+	groups = {story = 1, quests =1},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	on_construct = function(pos)
-		local meta = minetest.get_meta(pos)
-		meta:set_string("formspec", story.talk_form)
-		meta:set_string("infotext", "Character")
-		local inv = meta:get_inventory()
-		inv:set_size("main", 8*4)
+		story.set_talk_form(pos, "Character", "")
+	end,
+	
+})
+
+minetest.register_craftitem("story:conversation", {
+	description = "Set Conversation",
+	inventory_image = "story_set_conversation.png",
+	on_place = function(itemstack, placer, pointed_thing)
+		if not placer or not placer:is_player() then
+			return
+		end
+		if not pointed_thing or not pointed_thing.under then
+			return
+		end
+		story.set_talk_form(pointed_thing.under)
 	end,
 })
+
+
 
