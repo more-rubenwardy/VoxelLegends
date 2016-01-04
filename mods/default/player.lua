@@ -38,6 +38,12 @@ minetest.register_on_joinplayer(function(player)
 	player:hud_set_hotbar_selected_image("gui_hotbar_selected.png")
 	player:set_inventory_formspec(default.inv_form)
 	
+	player:set_properties({
+		mesh = "character.x",
+		textures = {"character.png"},
+		visual = "mesh",
+		visual_size = {x=1, y=1},
+	})
 	-- Testing of HUD elements
 	player:hud_add({
 		hud_elem_type = "waypoint",
