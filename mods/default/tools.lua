@@ -41,6 +41,19 @@ minetest.register_tool("default:axe_stone", {
 	}
 })
 
+minetest.register_tool("default:pick", {
+	description = "Pick\n For Level: - \n Damage: 20",
+	inventory_image = "default_pick.png",
+	tool_capabilities = {
+		max_drop_level=3,
+		groupcaps= {
+			cracky={times={[1]=1.90, [2]=0.50, [3]=0.30}, uses=50, maxlevel=1},
+			choppy={times={[2]=3.50, [3]=1.10}, uses=50, maxlevel=1}
+		},
+		damage_groups = {fleshy=20},
+	}
+})
+
 minetest.register_tool("default:blade", {
 	description = "Blade\n Level: - \n Damage: 10",
 	inventory_image = "default_blade.png",

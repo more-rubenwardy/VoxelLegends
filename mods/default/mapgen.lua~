@@ -1,11 +1,41 @@
-minetest.register_alias("mapgen_stone", "default:stone")
-minetest.register_alias("mapgen_tree", "default:log_1")
-minetest.register_alias("mapgen_leaves", "default:leaves_1")
 minetest.register_alias("mapgen_dirt", "default:dirt")
-minetest.register_alias("mapgen_sand", "default:sand")
 minetest.register_alias("mapgen_dirt_with_grass", "default:grass")
 minetest.register_alias("mapgen_water_source", "default:water_source")
+minetest.register_alias("mapgen_river_water_source", "default:water_source")
+
+minetest.register_alias("mapgen_desert_stone", "default:desert_stone")
+minetest.register_alias("mapgen_sand", "default:sand")
+minetest.register_alias("mapgen_desert_sand", "default:sand")
+
+minetest.register_alias("mapgen_tree", "default:log_1")
+minetest.register_alias("mapgen_leaves", "default:leaves_1")
+
+minetest.register_alias("mapgen_dirt_with_snow", "default:dirt_with_snow")
+minetest.register_alias("mapgen_snowblock", "default:snow")
+minetest.register_alias("mapgen_snow", "default:snow")
+minetest.register_alias("mapgen_ice", "default:ice")
+minetest.register_alias("mapgen_sandstone", "default:desert_stone")
+
 minetest.register_alias("mapgen_gravel", "default:gravel")
+minetest.register_alias("mapgen_stone", "default:stone")
+
+minetest.register_alias("mapgen_cobble", "default:stonebrick")
+minetest.register_alias("mapgen_stair_cobble", "default:stonebrick")
+minetest.register_alias("mapgen_mossycobble", "default:stonebrick")
+minetest.register_alias("mapgen_sandstonebrick", "default:stonebrick")
+minetest.register_alias("mapgen_stair_sandstonebrick", "default:stonebrick")
+
+minetest.register_biome({
+      name = "tundra",
+      node_top = "default:dirt_with_snow",
+      node_filler = "default:dirt",
+      depth_filler = 2,
+      depth_top = 1,
+      y_min = 1,
+      y_max = 55,
+      heat_point = 15,
+      humidity_point = 35,
+})
 
 minetest.register_biome({
 	name = "grassland",
@@ -20,6 +50,18 @@ minetest.register_biome({
 })
 
 minetest.register_biome({
+	name = "forest",
+	node_top = "default:grass",
+	depth_top = 1,
+	node_filler = "default:dirt",
+	depth_filler = 0,
+	y_min = 6,
+	y_max = 31000,
+	heat_point = 25,
+	humidity_point = 35,
+})
+
+minetest.register_biome({
 	name = "beach",
 	node_top = "default:sand",
 	depth_top = 1,
@@ -30,6 +72,57 @@ minetest.register_biome({
 	heat_point = 45,
 	humidity_point = 30,
 })
+
+minetest.register_biome({
+	name = "swamp",
+	node_top = "default:dirt",
+	depth_top = 1,
+	node_filler = "default:dirt",
+	depth_filler = 2,
+	node_stone = "default:wet_stone",
+	y_min = -3,
+	y_max = 4,
+	heat_point = 95,
+	humidity_point = 90,
+})
+
+
+minetest.register_biome({
+      name = "savanna",
+      node_top = "default:dry_grass",
+      node_filler = "default:dirt",
+      depth_filler = 2,
+      depth_top = 1,
+      y_min = 1,
+      y_max = 55,
+      heat_point = 60,
+      humidity_point = 25,
+})
+
+minetest.register_biome({
+      name = "savanna",
+      node_top = "default:dry_grass",
+      node_filler = "default:dirt",
+      depth_filler = 2,
+      depth_top = 1,
+      y_min = 1,
+      y_max = 55,
+      heat_point = 60,
+      humidity_point = 25,
+})
+
+minetest.register_biome({
+      name = "desert",
+      node_top = "default:sand",
+      node_filler = "default:desert_stone",
+      depth_filler = 2,
+      depth_top = 1,
+      y_min = 1,
+      y_max = 256,
+      heat_point = 80,
+      humidity_point = 20,
+})
+-- deco
 
 minetest.register_decoration({
 	deco_type = "simple",
@@ -70,19 +163,4 @@ minetest.register_decoration({
 	y_max = 31000,
 	decoration = "default:plant_grass",
 })
-
-minetest.register_biome({
-	name = "swamp",
-	node_top = "default:dirt",
-	depth_top = 1,
-	node_filler = "default:dirt",
-	depth_filler = 2,
-	node_stone = "default:wet_stone",
-	y_min = -3,
-	y_max = 4,
-	heat_point = 95,
-	humidity_point = 90,
-})
-
-
 

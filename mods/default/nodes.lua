@@ -4,6 +4,13 @@ minetest.register_node("default:dirt", {
 	groups = {crumbly = 3},
 })
 
+
+minetest.register_node("default:dirt_with_snow", {
+	description = "Dirt with Snow",
+	tiles = {"default_snow.png", "default_dirt.png","default_dirt_with_snow.png"},
+	groups = {crumbly = 3},
+})
+
 minetest.register_node("default:sand", {
 	description = "Sand",
 	tiles = {"default_sand.png"},
@@ -13,6 +20,24 @@ minetest.register_node("default:sand", {
 minetest.register_node("default:grass", {
 	description = "Grass",
 	tiles = {"default_grass.png"},
+	groups = {crumbly = 3},
+})
+
+minetest.register_node("default:dry_grass", {
+	description = "dry Grass",
+	tiles = {"default_dry_grass.png"},
+	groups = {crumbly = 3},
+})
+
+minetest.register_node("default:snow", {
+	description = "Snow",
+	tiles = {"default_snow.png"},
+	groups = {crumbly = 3},
+})
+
+minetest.register_node("default:ice", {
+	description = "Ice",
+	tiles = {"default_ice.png"},
 	groups = {crumbly = 3},
 })
 
@@ -87,7 +112,7 @@ minetest.register_node("default:treasure_chest", {
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8*4)
-		local items = {"default:dirt", "default:sand", "default:iron_lump", "default:stone_item", "default:coin"}
+		local items = {"default:dirt", "default:sand", "default:iron_lump", "default:stone_item", "default:coin", "default:gold_lump", "default:coal_lump"}
 		local item = items[math.random(5)]
 		inv:add_item("main", {name = item, count = math.random(2,10)})
 		local item = items[math.random(5)]
@@ -388,11 +413,35 @@ default.register_floor("brown")
 default.register_floor("white")
 default.register_floor("black")
 
+-- wool
+
+default.register_wool = function(color)
+	minetest.register_node("default:wool_"..color, {
+		description = color.." Wool",
+		tiles = {"default_wool.png^[colorize:"..color..":120"},
+		groups = {crumbly=3},
+	})
+end
+
+default.register_wool("red")
+default.register_wool("green")
+default.register_wool("yellow")
+default.register_wool("brown")
+default.register_wool("white")
+default.register_wool("black")
+
 -- stone
 
 minetest.register_node("default:stone", {
 	description = "Stone",
 	tiles = {"default_stone.png"},
+	groups = {cracky = 3},
+	drop = "default:stone_item 5",
+})
+
+minetest.register_node("default:desert_stone", {
+	description = "Desert Stone",
+	tiles = {"default_stone.png^[colorize:orange:50"},
 	groups = {cracky = 3},
 	drop = "default:stone_item 5",
 })
@@ -430,9 +479,37 @@ minetest.register_node("default:gravel", {
 
 -- ores
 
+minetest.register_node("default:stone_with_coal", {
+	description = "Stone with Coal",
+	tiles = {"default_stone_with_coal.png"},
+	groups = {cracky = 2},
+	drop = "default:coal_lump",
+})
+
 minetest.register_node("default:stone_with_iron", {
 	description = "Stone with Iron",
 	tiles = {"default_stone_with_iron.png"},
 	groups = {cracky = 2},
-	drop = {"default:stone_item 2", "default:iron_lump"},
+	drop = "default:iron_lump",
+})
+
+minetest.register_node("default:stone_with_gold", {
+	description = "Stone with Gold",
+	tiles = {"default_stone_with_gold.png"},
+	groups = {cracky = 1},
+	drop = "default:gold_lump",
+})
+
+minetest.register_node("default:stone_with_diamond", {
+	description = "Stone with Diamond",
+	tiles = {"default_stone_with_diamond.png"},
+	groups = {cracky = 1},
+	drop = "default:diamond",
+})
+
+minetest.register_node("default:stone_with_ruby", {
+	description = "Stone with Ruby",
+	tiles = {"default_stone_with_ruby.png"},
+	groups = {cracky = 1},
+	drop = "default:ruby",
 })
