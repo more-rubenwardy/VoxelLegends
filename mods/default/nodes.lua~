@@ -528,3 +528,15 @@ minetest.register_node("default:rail", {
 	walkable = false,
 	groups = {choppy = 1, attached_node = 1},
 })
+
+minetest.register_node("default:wire", {
+	description = "Wire",
+	drawtype = "raillike",
+	tiles = {"default_wire.png", "default_wire_curve.png",
+		"default_wire_t.png", "default_wire_cross.png"},
+	inventory_image = "default_wire.png",
+	wield_image = "default_wire.png",
+	paramtype = "light",
+	walkable = false,
+	groups = {choppy = 1, attached_node = 1},
+})
