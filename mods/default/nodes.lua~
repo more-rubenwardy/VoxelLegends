@@ -208,7 +208,7 @@ minetest.register_node("default:water_source", {
 	liquid_alternative_source = "default:water_source",
 	liquid_viscosity = 3,
 	groups = {liquid=3, water = 1},
-	post_effect_color = {a=100, r=0, g=64, b=200},
+	post_effect_color = {a=50, r=0, g=64, b=200},
 })
 
 minetest.register_node("default:water_flowing", {
@@ -435,7 +435,7 @@ default.register_wool("black")
 minetest.register_node("default:stone", {
 	description = "Stone",
 	tiles = {"default_stone.png"},
-	groups = {cracky = 3},
+	groups = {cracky = 3, stone= 1},
 	drop = "default:stone_item 5",
 })
 
@@ -512,4 +512,19 @@ minetest.register_node("default:stone_with_ruby", {
 	tiles = {"default_stone_with_ruby.png"},
 	groups = {cracky = 1},
 	drop = "default:ruby",
+})
+
+-- rail
+
+
+minetest.register_node("default:rail", {
+	description = "Rail",
+	drawtype = "raillike",
+	tiles = {"default_rail.png", "default_rail_curve.png",
+		"default_rail_t.png", "default_rail_cross.png"},
+	inventory_image = "default_rail.png",
+	wield_image = "default_rail.png",
+	paramtype = "light",
+	walkable = false,
+	groups = {choppy = 1, attached_node = 1},
 })

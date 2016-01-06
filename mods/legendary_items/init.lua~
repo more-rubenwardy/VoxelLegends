@@ -1,7 +1,7 @@
 legendary_items = {}
 legendary_items.register_rare_weapon = function(name, forlevel, def)
 	minetest.register_tool(":legendary_items:"..name, {
-		description = def.description.."\n For Level: ".. tostring(forlevel).. "\n Damage: " .. tostring(def.damage),
+		description = def.description.."\n For Level: ".. tostring(forlevel).. "\n Damage: " .. tostring(def.damage) .. "\n Rare Item",
 		inventory_image = def.inventory_image,
 		wield_scale = def.wield_scale,
 		tool_capabilities = {
@@ -10,6 +10,17 @@ legendary_items.register_rare_weapon = function(name, forlevel, def)
 		},
 	})
 end
+
+-- rare
+
+legendary_items.register_rare_weapon("old_hammer", 3, {
+	description = "Old Hammer",
+	inventory_image = "legendary_items_old_hammer.png",
+	wield_scale = {x = 2, y = 2, z =1},
+	damage = 20,
+})
+
+-- super rare
 
 minetest.register_craftitem("legendary_items:paper", {
 	description = "The Legendary Paper",

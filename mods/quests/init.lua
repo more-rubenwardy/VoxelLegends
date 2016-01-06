@@ -5,9 +5,16 @@ minetest.register_node("quests:quest_block", {
 	on_punch = function(pos, node, player, pointed_thing)
 		
 		local meta = minetest.get_meta(pos)
+		if meta:get_string("item") ~= "" then
+			return
+		end
 		local items = {"default:dirt", "default:sand", "default:iron_lump", "default:stone_item", "default:string"}
 		local item = items[math.random(5)]
-		meta:set_string("infotext", "Bring me some " .. item .. ", pls :)")
+		if minetest.registered_nodes[item] then
+			meta:set_string("infotext", "Bring me some " .. minetest.registered_nodes[item].description .. ", pls :)")
+		else
+			meta:set_string("infotext", "Bring me some " .. minetest.registered_craftitems[item].description .. ", pls :)")
+		end
 		meta:set_string("item", item)
 	end,
 
@@ -20,7 +27,7 @@ minetest.register_node("quests:quest_block", {
 		end
 		if itemstack:to_table().name == meta:get_string("item") then
 			meta:set_string("infotext", "Thank you!")
-			player:get_inventory():add_item("main", {name = "default:xp"})
+			player:get_inventory():add_item("main", {name = "default:xp",count = math.random(10, 30)})
 			minetest.add_particlespawner({
 				amount = 500,
 				time = 5,
