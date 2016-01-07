@@ -164,6 +164,25 @@ minetest.register_decoration({
 	decoration = "default:plant_grass",
 })
 
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:dry_grass", "default:grass", "default:sand"},
+	sidelen = 16,
+	noise_params = {
+		offset = -0.015,
+		scale = 0.03,
+		spread = {x=200, y=200, z=200},
+		seed = 333,
+		octaves = 3,
+		persist = 0.6
+	},
+	biomes = {
+		"beach", "grassland", "forest", "savanna"
+	},
+	y_min = 0,
+	y_max = 31000,
+	decoration = "default:stones_on_floor",
+})
 -- ores
 
 minetest.register_ore({

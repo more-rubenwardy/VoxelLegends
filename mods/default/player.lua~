@@ -16,8 +16,8 @@ default.inv_form = default.inv_form..default.gui_colors
 default.inv_form = default.inv_form..default.gui_bg
 default.inv_form = default.inv_form.."list[current_player;main;0,3.5;8,4;]"
 default.inv_form = default.inv_form..default.itemslot_bg(0,3.5,8,4)
-default.inv_form = default.inv_form.."list[current_player;craft;1.5,0.5;2,2;]"
-default.inv_form = default.inv_form..default.itemslot_bg(1.5,0.5,2,2)
+default.inv_form = default.inv_form.."list[current_player;craft;1,1;3,1;]"
+default.inv_form = default.inv_form..default.itemslot_bg(1,1,3,1)
 default.inv_form = default.inv_form.."list[current_player;craftpreview;5,1;1,1;]"
 default.inv_form = default.inv_form..default.itemslot_bg(5,1,1,1)
 
