@@ -164,3 +164,79 @@ minetest.register_decoration({
 	decoration = "default:plant_grass",
 })
 
+-- ores
+
+minetest.register_ore({
+	ore_type        = "blob",
+	ore             = "default:gravel",
+	wherein         = {"default:stone"},
+	clust_scarcity  = 16 * 16 * 16,
+	clust_size      = 5,
+	y_min           = -31000,
+	y_max           = 31000,
+	noise_threshold = 0.0,
+	noise_params    = {
+		offset = 0.5,
+		scale = 0.2,
+		spread = {x = 5, y = 5, z = 5},
+		seed = 766,
+		octaves = 1,
+		persist = 0.0
+	},
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_coal",
+	wherein        = "default:stone",
+	clust_scarcity = 24 * 24 * 24,
+	clust_num_ores = 27,
+	clust_size     = 6,
+	y_min          = -31000,
+	y_max          = 30,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_iron",
+	wherein        = "default:stone",
+	clust_scarcity = 9*9*9,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	y_min          = -31000,
+	y_max          = 2,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_gold",
+	wherein        = "default:stone",
+	clust_scarcity = 9*9*9,
+	clust_num_ores = 5,
+	clust_size     = 3,
+	y_min          = -31000,
+	y_max          = -256,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_diamond",
+	wherein        = "default:stone",
+	clust_scarcity = 36 * 36 * 36,
+	clust_num_ores = 3,
+	clust_size     = 2,
+	y_min          = -31000,
+	y_max          = -256,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "default:stone_with_ruby",
+	wherein        = "default:stone",
+	clust_scarcity = 17*17*17,
+	clust_num_ores = 4,
+	clust_size     = 5,
+	y_min          = -31000,
+	y_max          = -256,
+})
+
