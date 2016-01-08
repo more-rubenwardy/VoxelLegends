@@ -27,7 +27,7 @@ minetest.register_node("quests:quest_block", {
 		end
 		if itemstack:to_table().name == meta:get_string("item") then
 			meta:set_string("infotext", "Thank you!")
-			player:get_inventory():add_item("main", {name = "default:xp",count = math.random(10, 30)})
+			xp.add_xp(player, math.random(3, 30))
 			minetest.add_particlespawner({
 				amount = 500,
 				time = 5,
@@ -46,7 +46,6 @@ minetest.register_node("quests:quest_block", {
 				texture = "default_xp.png",
 			})
 			minetest.remove_node(pos)
-			cmsg.push_message_player(player, "You got some XP!")
 		else
 			meta:set_string("infotext", "That isnt the item I am searching for..")
 		end
@@ -58,7 +57,7 @@ minetest.register_node("quests:map", {
 	tiles = {"quests_map_top.png", "quests_map_top.png", "quests_map.png", "quests_map.png", "quests_map.png", "quests_map.png"},	
 	groups = {quest = 1, cracky = 3},
 	on_punch = function(pos, node, player, pointed_thing)
-		player:get_inventory():add_item("main", {name = "default:xp", count = math.random(3, 20)})
+		xp.add_xp(player, math.random(3, 30))
 		minetest.add_particlespawner({
 			amount = 500,
 			time = 5,
@@ -77,7 +76,6 @@ minetest.register_node("quests:map", {
 			texture = "default_xp.png",
 		})
 		minetest.remove_node(pos)
-		cmsg.push_message_player(player, "You got some XP!")
 	end,
 })
 
