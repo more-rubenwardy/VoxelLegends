@@ -42,10 +42,40 @@ minetest.register_node("default:ice", {
 })
 
 minetest.register_node("default:leaves_1", {
-	description = "leaves",
+	description = "Leaves",
 	paramtype = "light",
 	drawtype = "allfaces",
 	tiles = {"default_leaves_1.png"},
+	groups = {crumbly = 3, leaves = 1},
+	walkable = false,
+	climbable = true,
+})
+
+minetest.register_node("default:leaves_2", {
+	description = "Leaves",
+	paramtype = "light",
+	drawtype = "allfaces",
+	tiles = {"default_leaves_2.png"},
+	groups = {crumbly = 3, leaves = 1},
+	walkable = false,
+	climbable = true,
+})
+
+minetest.register_node("default:leaves_3", {
+	description = "Leaves",
+	paramtype = "light",
+	drawtype = "allfaces",
+	tiles = {"default_leaves_3.png"},
+	groups = {crumbly = 3, leaves = 1},
+	walkable = false,
+	climbable = true,
+})
+
+minetest.register_node("default:leaves_4", {
+	description = "Leaves",
+	paramtype = "light",
+	drawtype = "allfaces",
+	tiles = {"default_leaves_4.png"},
 	groups = {crumbly = 3, leaves = 1},
 	walkable = false,
 	climbable = true,

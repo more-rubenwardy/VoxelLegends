@@ -100,18 +100,6 @@ minetest.register_biome({
 })
 
 minetest.register_biome({
-      name = "savanna",
-      node_top = "default:dry_grass",
-      node_filler = "default:dirt",
-      depth_filler = 2,
-      depth_top = 1,
-      y_min = 1,
-      y_max = 55,
-      heat_point = 60,
-      humidity_point = 25,
-})
-
-minetest.register_biome({
       name = "desert",
       node_top = "default:sand",
       node_filler = "default:desert_stone",
@@ -183,6 +171,85 @@ minetest.register_decoration({
 	y_max = 31000,
 	decoration = "default:stones_on_floor",
 })
+
+--trees
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:grass"},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.04,
+		scale = 0.02,
+		spread = {x = 250, y = 250, z = 250},
+		seed = 22,
+		octaves = 3,
+		persist = 0.66
+	},
+	biomes = {"forest"},
+	y_min = 1,
+	y_max = 31000,
+	schematic = minetest.get_modpath("default").."/schematics/tree1.mts",
+	flags = "place_center_x, place_center_z",
+})
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:grass"},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.04,
+		scale = 0.01,
+		spread = {x = 250, y = 250, z = 250},
+		seed = 21,
+		octaves = 3,
+		persist = 0.66
+	},
+	biomes = {"forest"},
+	y_min = 1,
+	y_max = 31000,
+	schematic = minetest.get_modpath("default").."/schematics/tree2.mts",
+	flags = "place_center_x, place_center_z",
+})
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:dirt_with_snow"},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.04,
+		scale = 0.01,
+		spread = {x = 250, y = 250, z = 250},
+		seed = 21,
+		octaves = 3,
+		persist = 0.66
+	},
+	biomes = {"tundra"},
+	y_min = 1,
+	y_max = 31000,
+	schematic = minetest.get_modpath("default").."/schematics/pinetree1.mts",
+	flags = "place_center_x, place_center_z",
+})
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:dry_grass"},
+	sidelen = 16,
+	noise_params = {
+		offset = 0.04,
+		scale = 0.01,
+		spread = {x = 250, y = 250, z = 250},
+		seed = 21,
+		octaves = 3,
+		persist = 0.66
+	},
+	biomes = {"savanna"},
+	y_min = 1,
+	y_max = 31000,
+	schematic = minetest.get_modpath("default").."/schematics/drytree2.mts",
+	flags = "place_center_x, place_center_z",
+})
+
 -- ores
 
 minetest.register_ore({
@@ -258,4 +325,5 @@ minetest.register_ore({
 	y_min          = -31000,
 	y_max          = -256,
 })
+
 
