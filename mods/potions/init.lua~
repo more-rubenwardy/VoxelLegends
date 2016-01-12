@@ -6,6 +6,7 @@ minetest.register_craftitem("potions:healing", {
 		if not dropper or not dropper:is_player() then
 			return
 		end
+		cmsg.push_message_player(dropper, "[hp] + 10")
 		dropper:set_hp(dropper:get_hp()+10)
 		itemstack:take_item()
 		return itemstack
@@ -15,6 +16,7 @@ minetest.register_craftitem("potions:healing", {
 		if not user or not user:is_player() then
 			return
 		end
+		cmsg.push_message_player(user, "[hp] + 10")
 		user:set_hp(user:get_hp()+10)
 		itemstack:take_item()
 		return itemstack
@@ -32,6 +34,7 @@ minetest.register_craftitem("potions:jumping", {
 		dropper:set_physics_override({
 			gravity = 0.1,
 		})
+		cmsg.push_message_player(dropper, "[effect] + jump")
 		
 
 		minetest.after(10.0, function(pl)
@@ -41,6 +44,7 @@ minetest.register_craftitem("potions:jumping", {
 			pl:set_physics_override({
 				gravity = 1,	
 			})
+			cmsg.push_message_player(pl, "[effect] - jump")
 		end, dropper)
 		itemstack:take_item()
 		return itemstack
@@ -53,6 +57,7 @@ minetest.register_craftitem("potions:jumping", {
 		user:set_physics_override({
 			gravity = 0.1,
 		})
+		cmsg.push_message_player(user, "[effect] + jump")
 
 		minetest.after(10.0, function(pl)
 			if not pl or not pl:is_player() then
@@ -61,6 +66,7 @@ minetest.register_craftitem("potions:jumping", {
 			pl:set_physics_override({
 				gravity = 1,	
 			})
+			cmsg.push_message_player(pl, "[effect] - jump")
 		end, user)
 		itemstack:take_item()
 		return itemstack
@@ -78,6 +84,7 @@ minetest.register_craftitem("potions:running", {
 		dropper:set_physics_override({
 			speed = 3,
 		})
+		cmsg.push_message_player(dropper, "[effect] + speed")
 		
 
 		minetest.after(10.0, function(pl)
@@ -87,6 +94,7 @@ minetest.register_craftitem("potions:running", {
 			pl:set_physics_override({
 				speed = 1,	
 			})
+			cmsg.push_message_player(pl, "[effect] - speed")
 		end, dropper)
 		itemstack:take_item()
 		return itemstack
@@ -99,6 +107,7 @@ minetest.register_craftitem("potions:running", {
 		user:set_physics_override({
 			speed = 3,
 		})
+		cmsg.push_message_player(user, "[effect] + speed")
 
 		minetest.after(10.0, function(pl)
 			if not pl or not pl:is_player() then
@@ -107,6 +116,7 @@ minetest.register_craftitem("potions:running", {
 			pl:set_physics_override({
 				speed = 1,	
 			})
+			cmsg.push_message_player(pl, "[effect] - speed")
 		end, user)
 		itemstack:take_item()
 		return itemstack
