@@ -28,6 +28,14 @@ classes.register_weapon = function(name,fromLevel,levels, def)
 				end
 			end
 		})
+		if i < levels then
+			minetest.register_craft({
+				output = "classes:"..name .. "_lvl_" .. tostring(i+1),
+				recipe = {
+					{"classes:"..name .. "_lvl_" .. tostring(i), "potions:upgrading"},
+				}
+			})
+		end
 	end
 end
 
