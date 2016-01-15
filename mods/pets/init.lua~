@@ -25,6 +25,7 @@ minetest.register_entity("pets:pig", {
 			return
 		end
 		self.pl = puncher
+		cmsg.push_message_player(puncher, "[pet] pig")
 	end,
 
 	on_step = function(self, dtime)
