@@ -106,6 +106,8 @@ end
 
 classes.register_class("farmer")
 classes.register_class("warrior")
+classes.register_class("thief")
+classes.register_class("healer")
 
 classes.load_selected_classes()
 
@@ -148,5 +150,13 @@ classes.register_weapon("pitchfork",20, 30, {
 	wield_scale = {x = 1, y=1, z = 1},
 	damage = 20,
 	class = "farmer",
+})
+
+classes.register_weapon("stick",0, 30, {
+	description = "Stick",
+	inventory_image = "classes_stick.png",
+	wield_scale = {x = 1, y=1, z = 1},
+	damage = 7,
+	class = "thief",
 })
 
