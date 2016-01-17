@@ -1,5 +1,6 @@
 pets = {}
 pets.players_pets = {}
+pets.pet_file = minetest.get_worldpath() .. "/pets"
 
 local function get_velocity(v, yaw, y)
 	local x = -math.sin(yaw) * v
@@ -34,6 +35,8 @@ function pets.register_pet(name, def)
 				pets.players_pets[clicker:get_player_name()] = name
 				cmsg.push_message_player(clicker, "[pet] + ".. def.description)
 				self.pl = clicker
+				pets.players_pets[clicker:get_player_name()] = name
+				pets.save_pets()
 			end
 		end,
 
@@ -91,6 +94,45 @@ function pets.register_pet(name, def)
 	})
 end 
 
+-- load save
+
+function pets.load_pets()
+	local input = io.open(pets.pet_file, "r")
+	if input then
+		local str = input:read()
+		if str then
+			for k, v1, v2 in str.gmatch(str,"(%w+)=(%w+):(%w+)") do
+    				pets.players_pets[k] = v1 .. ":" .. v2
+			end
+		end
+		io.close(input)
+	end
+end
+
+function pets.save_pets()
+	if pets.players_pets then
+		local output = io.open(pets.pet_file, "w")
+		local str = ""
+		for k, v in pairs(pets.players_pets) do 
+			str = str .. k .. "=" .. v .. ","
+		end
+		str = str:sub(1, #str - 1)
+		output:write(str)
+		io.close(output)
+	end
+end
+
+minetest.register_on_joinplayer(function(player)
+	if pets.players_pets[player:get_player_name()] then
+		local vec = player:getpos()
+		vec.x = vec.x + math.random(-3, 3)
+		vec.z = vec.z + math.random(-3, 3)
+		vec.y = vec.y + 3
+		print("[pets] add entity " .. pets.players_pets[player:get_player_name()])
+		local plpet = minetest.add_entity(vec, pets.players_pets[player:get_player_name()])
+		plpet:get_luaentity().pl = player
+	end
+end)
 pets.register_pet("pets:pig", {
 	description  = "pig",
 	hp_max = 30,
@@ -98,3 +140,5 @@ pets.register_pet("pets:pig", {
 	mesh = "pets_pig.x",
 	textures = {"pets_pig.png",},
 })
+pets.load_pets()
+
