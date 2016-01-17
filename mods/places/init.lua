@@ -35,7 +35,7 @@ end
 minetest.register_chatcommand("setplace", {
 	params = "<name>",
 	description = "Set a place",
-	privs = {},
+	privs = {server=true},
 	func = function(name, text)
 		if places.pos[text] then 
 			return true, "There already is a place named " .. text
