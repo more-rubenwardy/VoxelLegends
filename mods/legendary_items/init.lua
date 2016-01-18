@@ -60,6 +60,28 @@ legendary_items.register_rare_weapon("old_hammer_lvl_100", 100, {
 	damage = 150,
 })
 
+
+legendary_items.register_rare_weapon("old_battle_axe", 3, {
+	description = "Old Battle Axe",
+	inventory_image = "legendary_items_old_battle_axe.png",
+	wield_scale = {x = 1.2, y = 1.2, z =1},
+	damage = 21,
+})
+
+legendary_items.register_rare_weapon("old_battle_axe_lvl_10", 10, {
+	description = "Old Battle Axe",
+	inventory_image = "legendary_items_old_battle_axe.png",
+	wield_scale = {x = 1.2, y = 1.2, z =1},
+	damage = 30,
+})
+
+legendary_items.register_rare_weapon("old_battle_axe_lvl_14", 14, {
+	description = "Old Battle Axe",
+	inventory_image = "legendary_items_old_battle_axe.png",
+	wield_scale = {x = 1.2, y = 1.2, z =1},
+	damage = 33,
+})
+
 -- super rare
 
 minetest.register_craftitem("legendary_items:paper", {
