@@ -160,3 +160,11 @@ classes.register_weapon("stick",0, 30, {
 	class = "thief",
 })
 
+classes.register_weapon("long_stick",20, 60, {
+	description = "Long Stick",
+	inventory_image = "classes_stick.png",
+	wield_scale = {x = 2, y=2, z = 1},
+	damage = 20,
+	class = "thief",
+})
+
