@@ -18,12 +18,16 @@ classes.register_weapon = function(name,fromLevel,levels, def)
 				if minetest.registered_tools[itemstack:get_name()].class then print(minetest.registered_tools[itemstack:get_name()].class) end
 				if classes.selected[user:get_player_name()] == minetest.registered_tools[itemstack:get_name()].class then	
 					if pointed_thing.type == "object" then
-						pointed_thing.ref:punch(user, 10,minetest.registered_tools[itemstack:get_name()].tool_capabilities)
-						print("[info]" .. user:get_player_name() .. " is fighting!")						
+						if xp.player_levels[user:get_player_name()] and xp.player_levels[user:get_player_name()] > i-1 then
+							pointed_thing.ref:punch(user, 10,minetest.registered_tools[itemstack:get_name()].tool_capabilities)
+							print("[info]" .. user:get_player_name() .. " is fighting!")
+						else
+							cmsg.push_message_player(user, "[info] You have to be level "..tostring(i).. " to use this weapon!")	
+						end					
 						return nil
 					end
 				else
-					minetest.chat_send_player(user:get_player_name(), "You cant use this item!")
+					cmsg.push_message_player(user, "[info] You cant use this weapon.")	
 					return itemstack
 				end
 			end

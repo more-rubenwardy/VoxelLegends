@@ -24,6 +24,7 @@ function pets.register_pet(name, def)
 		automatic_rotate = true,
 		speed = 0,
 		pl = nil,
+		is_pet = false,
 
 		on_rightclick = function(self, clicker)
 			if not clicker or not clicker:is_player() then
@@ -63,6 +64,11 @@ function pets.register_pet(name, def)
 					end
 				end
 			else
+				if self.is_pet then
+					print("[info] remove pet")
+					self.object:remove()
+					return
+				end
 				if math.random(0, 50) == 15 then 
 					local vec = {x=math.random(-3, 3), y=-4, z=math.random(-3, 3)}
 					self.object:setvelocity(vec)
@@ -131,8 +137,10 @@ minetest.register_on_joinplayer(function(player)
 		print("[pets] add entity " .. pets.players_pets[player:get_player_name()])
 		local plpet = minetest.add_entity(vec, pets.players_pets[player:get_player_name()])
 		plpet:get_luaentity().pl = player
+		plpet:get_luaentity().is_pet = true
 	end
 end)
+
 pets.register_pet("pets:pig", {
 	description  = "pig",
 	hp_max = 30,

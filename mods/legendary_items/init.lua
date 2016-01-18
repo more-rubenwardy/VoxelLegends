@@ -8,6 +8,18 @@ legendary_items.register_rare_weapon = function(name, forlevel, def)
 			max_drop_level=3,
 			damage_groups = {fleshy=def.damage},
 		},
+		on_use = function(itemstack, user, pointed_thing)
+			if user == nil then return end
+			if pointed_thing.type == "object" then
+				if xp.player_levels[user:get_player_name()] and xp.player_levels[user:get_player_name()] > forlevel-1 then
+					pointed_thing.ref:punch(user, 10,minetest.registered_tools[itemstack:get_name()].tool_capabilities)
+					print("[info]" .. user:get_player_name() .. " is fighting!")
+				else
+					cmsg.push_message_player(user, "[info] You have to be level "..tostring(forlevel).. " to use this weapon!")	
+				end					
+				return nil
+			end
+		end
 	})
 end
 
