@@ -44,6 +44,7 @@ function pets.register_pet(name, def)
 		on_step = function(self, dtime)
 			if self.pl ~= nil then
 				if self.pl:getpos() then
+					self.object:set_armor_groups({fleshy = 0, friendly = 100}) 
 					if vector.distance(self.object:getpos(), self.pl:getpos()) > 2 then 
 						local vec = vector.direction(self.object:getpos(), self.pl:getpos())
 						vec.y = vec.y * 10
