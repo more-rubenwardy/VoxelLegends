@@ -87,3 +87,32 @@ minetest.register_craftitem("furnace:diamond_rod", {
 	description = "Diamond Rod",
 	inventory_image = "furnace_diamond_rod.png",
 })
+
+-- crafting
+
+minetest.register_craft({
+	output = "furnace:furnace",
+	recipe = {
+		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
+		{"default:stonebrick", "", "default:stonebrick"},
+		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
+	}
+})
+
+minetest.register_craft({
+	output = "furnace:pattern_rod",
+	recipe = {
+		{"default:stonebrick", "", "default:stonebrick"},
+		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
+		{"default:wood", "default:wood", "default:wood"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:pick",
+	recipe = {
+		{"", "furnace:iron_rod", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:log_3", ""},
+	}
+})
