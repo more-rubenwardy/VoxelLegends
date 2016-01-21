@@ -1,3 +1,52 @@
+-- story quests
+
+quests = {}
+quests.player_quests = {}
+
+function quests.add_quest(player, quest)
+	if not quests.player_quests[player] then
+		quests.player_quests[player] = {}
+	end
+
+	table.insert(quests.player_quests[player], quest)
+end
+
+minetest.register_on_dignode(function(pos, oldnode, digger)
+	if not quests.player_quests[digger:get_player_name()] then
+		return
+	end
+	table.foreach(quests.player_quests[digger:get_player_name()], function(k, v)
+		if v.quest_type == "dignode" and newnode.name == v.node then
+			v.progress = v.progress + 1
+			if v.v.progress > (v.max-1) and v.done == false then
+				xp.add_xp(player, v.xp)
+				v.done = true
+			end
+		end
+	end)
+end)
+
+minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
+	if not quests.player_quests[placer:get_player_name()] then
+		return
+	end
+	table.foreach(quests.player_quests[placer:get_player_name()], function(k, v)
+		if v.quest_type == "placenode" and newnode.name == v.node then
+			v.progress = v.progress + 1
+			if v.v.progress > (v.max-1) and v.done == false then
+				xp.add_xp(player, v.xp)
+				v.done = true
+			end
+		end
+	end)
+end)
+
+minetest.register_on_newplayer(function(player)
+	quests.player_quests[player:get_player_name()] = {}
+end)
+
+-- side quests
+
 minetest.register_node("quests:quest_block", {
 	description = "Quest Block",
 	tiles = {"quests_block.png"},	

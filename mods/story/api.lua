@@ -39,6 +39,8 @@ end)
 
 story.generator = {}
 story.generator.names = {"A", "B", "C", "D", "E", "F", "G"}
+story.generator.file_paths = {minetest.get_modpath(minetest.get_current_modname()).."/parts/test"}
+story.generator.parts = {}
 story.generator.players_storys = {}
 
 function story.generator.gen_next_step(player)
@@ -72,7 +74,7 @@ function story.generator.gen_next_step(player)
 	-- add entity
 	minetest.add_entity(p, "story:human")
 	story.generator.players_storys[player:get_player_name()].pos = p
-	story.generator.players_storys[player:get_player_name()].text = "Human : bla bla bla \nYou : bla bla\nHuman : bla"
+	story.generator.players_storys[player:get_player_name()].text = story.generator.parts[1]
 end
 
 function story.generator.new_player(player)
@@ -82,6 +84,14 @@ function story.generator.new_player(player)
 	story.generator.players_storys[player:get_player_name()].met_characters = {}
 	story.generator.players_storys[player:get_player_name()].met_characters_num = 0
 end
+
+function story.generator.load_parts()
+	-- testing
+	local file = io.open(story.generator.file_paths[1], "r")
+	story.generator.parts[1] = file:read()
+	io.close(file)
+end
+
 
 function story.generator.gen_dialog(player)
 	-- coming soon
@@ -151,3 +161,5 @@ minetest.register_craftitem("story:human", {
 		return itemstack
 	end,
 })
+
+story.generator.load_parts()

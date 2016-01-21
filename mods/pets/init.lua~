@@ -149,5 +149,13 @@ pets.register_pet("pets:pig", {
 	mesh = "pets_pig.x",
 	textures = {"pets_pig.png",},
 })
+
+pets.register_pet("pets:sheep", {
+	description  = "sheep",
+	hp_max = 25,
+	collisionbox = {-0.5,-0.5,-0.5, 0.5,0.5,0.5},
+	mesh = "pets_sheep.x",
+	textures = {"pets_sheep.png",},
+})
 pets.load_pets()
 
