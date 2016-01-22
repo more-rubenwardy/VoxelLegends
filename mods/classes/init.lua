@@ -115,19 +115,19 @@ classes.register_class("healer")
 
 classes.load_selected_classes()
 
-classes.register_weapon("spear",0, 5, {
+classes.register_weapon("spear",2, 12, {
 	description = "Spear",
 	inventory_image = "classes_spear.png",
 	wield_scale = {x = 2, y=2, z = 1},
-	damage = 15,
+	damage = 17,
 	class = "warrior",
 })
 
-classes.register_weapon("chemical_spear",0, 7, {
+classes.register_weapon("chemical_spear",2, 17, {
 	description = "Chemical Spear",
 	inventory_image = "classes_chemical_spear.png",
 	wield_scale = {x = 2, y=2, z = 1},
-	damage = 17,
+	damage = 19,
 	class = "warrior",
 })
 
@@ -135,16 +135,16 @@ classes.register_weapon("sword",20, 30, {
 	description = "Sword",
 	inventory_image = "classes_sword.png",
 	wield_scale = {x = 1.5, y=1.5, z = 1},
-	damage = 20,
+	damage = 21,
 	class = "warrior",
 })
 
 
-classes.register_weapon("hoe",0, 20, {
+classes.register_weapon("hoe",2, 20, {
 	description = "Hoe",
 	inventory_image = "classes_hoe.png",
 	wield_scale = {x = 1, y=1, z = 1},
-	damage = 10,
+	damage = 12,
 	class = "farmer",
 })
 
@@ -156,11 +156,11 @@ classes.register_weapon("pitchfork",20, 30, {
 	class = "farmer",
 })
 
-classes.register_weapon("stick",0, 30, {
+classes.register_weapon("stick",2, 30, {
 	description = "Stick",
 	inventory_image = "classes_stick.png",
 	wield_scale = {x = 1, y=1, z = 1},
-	damage = 7,
+	damage = 9,
 	class = "thief",
 })
 
