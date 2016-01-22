@@ -129,6 +129,9 @@ minetest.register_entity("story:human", {
 		if not clicker or not clicker:is_player() then
 			return
 		end
+		if not story.generator.players_storys[clicker:get_player_name()] then
+			return
+		end
 		-- shows the dialog
 		if story.generator.players_storys[clicker:get_player_name()].pos then
 			if vector.distance(self.object:getpos(), story.generator.players_storys[clicker:get_player_name()].pos) < 3 then
