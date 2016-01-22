@@ -70,4 +70,37 @@ minetest.register_chatcommand("join_clan", {
 	end,
 })
 
+minetest.register_chatcommand("list_clans", {
+	params = "<name>",
+	description = "Shows all clans",
+	privs = {},
+	func = function(name, text)
+		if not clans.all_clans then 
+			return true, "Error"
+		end	
+		local keys = {}
+		local i = 0
+		for k,_ in pairs(clans.all_clans) do
+			keys[i] = k
+			i= i+1
+		end
+		if not keys then 
+			return true, "Error"
+		end
+		minetest.chat_send_player(name, table.concat(keys, ","))
+		return true, "type /join_clan <clan> to join a clan"
+	end,
+})
 
+minetest.register_chatcommand("show_clan", {
+	params = "<name>",
+	description = "Shows the clan",
+	privs = {},
+	func = function(name, text)
+		if not clans.all_clans[text] then 
+			return true, "There is no clan named " .. text
+		end	
+		minetest.chat_send_player(name, table.concat(clans.all_clans[text], ","))
+		return true, "type /join_clan " .. text .." to join this clan"
+	end,
+})
