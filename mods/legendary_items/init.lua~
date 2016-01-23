@@ -82,6 +82,20 @@ legendary_items.register_rare_weapon("old_battle_axe_lvl_14", 14, {
 	damage = 33,
 })
 
+legendary_items.register_rare_weapon("sugar_sword_lvl_2", 2, {
+	description = "Sugar Sword",
+	inventory_image = "legendary_items_sugar_sword.png",
+	wield_scale = {x = 1.2, y = 1.2, z =1},
+	damage = 20,
+})
+
+legendary_items.register_rare_weapon("sugar_sword_lvl_50", 50, {
+	description = "Sugar Sword",
+	inventory_image = "legendary_items_sugar_sword.png",
+	wield_scale = {x = 1.2, y = 1.2, z =1},
+	damage = 68,
+})
+
 -- super rare
 
 minetest.register_craftitem("legendary_items:paper", {

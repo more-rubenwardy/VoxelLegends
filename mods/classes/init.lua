@@ -149,9 +149,9 @@ classes.register_weapon("sword",20, 30, {
 	damage = 21,
 	class = "warrior",
 	recipe = {
-		{"", "default:flint", ""},
+		{"", "default:blade", ""},
 		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "furnace:iron_rod", ""},
 	}
 })
 
@@ -162,14 +162,24 @@ classes.register_weapon("hoe",2, 20, {
 	wield_scale = {x = 1, y=1, z = 1},
 	damage = 12,
 	class = "farmer",
+	recipe = {
+		{"", "furnace:iron_rod", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:log_3", ""},
+	}
 })
 
-classes.register_weapon("pitchfork",20, 30, {
+classes.register_weapon("pitchfork",15, 30, {
 	description = "Pitchfork",
 	inventory_image = "classes_pitchfork.png",
 	wield_scale = {x = 1, y=1, z = 1},
-	damage = 20,
+	damage = 18,
 	class = "farmer",
+	recipe = {
+		{"furnace:iron_rod", "furnace:iron_rod", "furnace:iron_rod"},
+		{"", "default:string_strong", ""},
+		{"", "default:log_3", ""},
+	}
 })
 
 classes.register_weapon("stick",2, 30, {
@@ -178,6 +188,10 @@ classes.register_weapon("stick",2, 30, {
 	wield_scale = {x = 1, y=1, z = 1},
 	damage = 9,
 	class = "thief",
+	recipe = {
+		{"", "default:log_3", ""},
+		{"", "default:log_3", ""},
+	}
 })
 
 classes.register_weapon("long_stick",20, 60, {
@@ -186,5 +200,10 @@ classes.register_weapon("long_stick",20, 60, {
 	wield_scale = {x = 2, y=2, z = 1},
 	damage = 20,
 	class = "thief",
+	recipe = {
+		{"", "default:log_3", ""},
+		{"", "default:log_3", ""},
+		{"", "default:log_3", ""},
+	}
 })
 
