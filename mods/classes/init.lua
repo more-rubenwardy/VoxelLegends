@@ -41,6 +41,12 @@ classes.register_weapon = function(name,fromLevel,levels, def)
 			})
 		end
 	end
+	if def.recipe then
+		minetest.register_craft({
+			output = "classes:"..name .. "_lvl_" .. tostring(fromLevel),
+			recipe = def.recipe,
+		})
+	end
 end
 
 -- load save
@@ -121,6 +127,11 @@ classes.register_weapon("spear",2, 12, {
 	wield_scale = {x = 2, y=2, z = 1},
 	damage = 17,
 	class = "warrior",
+	recipe = {
+		{"", "default:flint", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:log_3", ""},
+	}
 })
 
 classes.register_weapon("chemical_spear",2, 17, {
@@ -170,5 +181,16 @@ classes.register_weapon("long_stick",20, 60, {
 	wield_scale = {x = 2, y=2, z = 1},
 	damage = 20,
 	class = "thief",
+})
+
+-- crafts
+
+minetest.register_craft({
+	output = "default:axe_stone",
+	recipe = {
+		{"", "default:stone_item", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:log_3", ""},
+	}
 })
 

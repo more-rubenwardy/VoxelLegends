@@ -7,6 +7,7 @@ function farming.register_plant(name, steps, def)
 			tiles = {def.texture.."_"..tostring(i)..".png"},
 			drawtype = "plantlike",
 			paramtype = "light",
+			inventory_image = def.texture.."_"..tostring(i)..".png",
 			drop = def.drop .. " " .. tostring(i),
 			groups = {crumbly=3},
 			walkable = false,

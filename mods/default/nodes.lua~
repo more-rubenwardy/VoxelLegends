@@ -505,6 +505,13 @@ minetest.register_node("default:gravel", {
 	description = "Gravel",
 	tiles = {"default_gravel.png"},
 	groups = {crumbly = 2, falling_node=1},
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'farming:wheat_seeds'},rarity = 5},
+			{items = {'default:plant_grass'}},
+		}
+	}
 })
 
 -- ores
