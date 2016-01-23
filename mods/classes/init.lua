@@ -148,6 +148,11 @@ classes.register_weapon("sword",20, 30, {
 	wield_scale = {x = 1.5, y=1.5, z = 1},
 	damage = 21,
 	class = "warrior",
+	recipe = {
+		{"", "default:flint", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:log_3", ""},
+	}
 })
 
 

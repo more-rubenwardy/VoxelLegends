@@ -466,7 +466,13 @@ minetest.register_node("default:stone", {
 	description = "Stone",
 	tiles = {"default_stone.png"},
 	groups = {cracky = 3, stone= 1},
-	drop = "default:stone_item 5",
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'default:flint'},rarity = 5},
+			{items = {"default:stone_item 5"}},
+		}
+	}
 })
 
 minetest.register_node("default:desert_stone", {
@@ -508,8 +514,8 @@ minetest.register_node("default:gravel", {
 	drop = {
 		max_items = 1,
 		items = {
-			{items = {'farming:wheat_seeds'},rarity = 5},
-			{items = {'default:plant_grass'}},
+			{items = {'default:flint'},rarity = 5},
+			{items = {'default:gravel'}},
 		}
 	}
 })

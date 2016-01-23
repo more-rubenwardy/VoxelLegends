@@ -45,6 +45,13 @@ minetest.register_abm({
 					myinv:remove_item("main", {name = "default:gold_lump"})
 				end
 			end
+			if pattern == "furnace:pattern_blade" then
+				local myinv = mymeta:get_inventory()
+				if myinv:contains_item("main", {name = "default:iron_lump"}) then
+					minetest.get_meta(patternpos):get_inventory():add_item("main", {name = "default:blade"})
+					myinv:remove_item("main", {name = "default:iron_lump"})
+				end
+			end
 		end
 	end,
 })
@@ -62,6 +69,20 @@ local pattern_form = pattern_form..default.itemslot_bg(0,6,8,3)
 minetest.register_node("furnace:pattern_rod", {
 	description = "Pattern for a Rod",
 	tiles = {"furnace_pattern_rod.png", "default_wooden_planks.png"},
+	groups = {snappy = 3, pattern = 1},
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec",pattern_form)
+		meta:set_string("infotext", "Pattern");
+		local inv = meta:get_inventory()
+		inv:set_size("main", 8*4)
+	end,
+
+})
+
+minetest.register_node("furnace:pattern_blade", {
+	description = "Pattern for a blade",
+	tiles = {"furnace_pattern_blade.png", "default_wooden_planks.png"},
 	groups = {snappy = 3, pattern = 1},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -103,6 +124,15 @@ minetest.register_craft({
 	output = "furnace:pattern_rod",
 	recipe = {
 		{"default:stonebrick", "", "default:stonebrick"},
+		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
+		{"default:wood", "default:wood", "default:wood"},
+	}
+})
+
+minetest.register_craft({
+	output = "furnace:pattern_blade",
+	recipe = {
+		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
 		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
 		{"default:wood", "default:wood", "default:wood"},
 	}
