@@ -183,14 +183,3 @@ classes.register_weapon("long_stick",20, 60, {
 	class = "thief",
 })
 
--- crafts
-
-minetest.register_craft({
-	output = "default:axe_stone",
-	recipe = {
-		{"", "default:stone_item", ""},
-		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
-	}
-})
-
