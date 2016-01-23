@@ -163,7 +163,7 @@ classes.register_weapon("hoe",2, 20, {
 	damage = 12,
 	class = "farmer",
 	recipe = {
-		{"", "furnace:iron_rod", ""},
+		{"", "furnace:iron_rod", "default:blade"},
 		{"", "default:string_strong", ""},
 		{"", "default:log_3", ""},
 	}
