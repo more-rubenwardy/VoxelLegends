@@ -472,6 +472,7 @@ minetest.register_node("default:stone", {
 			{items = {'default:flint'},rarity = 5},
 			{items = {'default:stone_with_zinc'},rarity = 40},
 			{items = {'default:stone_with_iron'},rarity = 20},
+			{items = {'default:stone_with_copper'},rarity = 30},
 			{items = {'default:stone_with_silver'},rarity = 60},
 			{items = {"default:stone_item 5"}},
 		}
