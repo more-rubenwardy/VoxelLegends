@@ -470,6 +470,9 @@ minetest.register_node("default:stone", {
 		max_items = 1,
 		items = {
 			{items = {'default:flint'},rarity = 5},
+			{items = {'default:stone_with_zinc'},rarity = 40},
+			{items = {'default:stone_with_iron'},rarity = 20},
+			{items = {'default:stone_with_silver'},rarity = 60},
 			{items = {"default:stone_item 5"}},
 		}
 	}
@@ -526,21 +529,36 @@ minetest.register_node("default:stone_with_coal", {
 	description = "Stone with Coal",
 	tiles = {"default_stone_with_coal.png"},
 	groups = {cracky = 2},
-	drop = "default:coal_lump",
 })
 
 minetest.register_node("default:stone_with_iron", {
 	description = "Stone with Iron",
 	tiles = {"default_stone_with_iron.png"},
 	groups = {cracky = 2},
-	drop = "default:iron_lump",
+})
+
+minetest.register_node("default:stone_with_copper", {
+	description = "Stone with Copper",
+	tiles = {"default_stone_with_copper.png"},
+	groups = {cracky = 2},
+})
+
+minetest.register_node("default:stone_with_zinc", {
+	description = "Stone with Zinc",
+	tiles = {"default_stone_with_zinc.png"},
+	groups = {cracky = 3},
+})
+
+minetest.register_node("default:stone_with_silver", {
+	description = "Stone with Silver",
+	tiles = {"default_stone_with_silver.png"},
+	groups = {cracky = 3},
 })
 
 minetest.register_node("default:stone_with_gold", {
 	description = "Stone with Gold",
 	tiles = {"default_stone_with_gold.png"},
 	groups = {cracky = 1},
-	drop = "default:gold_lump",
 })
 
 minetest.register_node("default:stone_with_diamond", {

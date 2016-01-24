@@ -54,6 +54,18 @@ minetest.register_tool("default:pick", {
 	}
 })
 
+minetest.register_tool("default:shovel", {
+	description = "Shovel\n For Level: - \n Damage: 7",
+	inventory_image = "default_shovel.png",
+	tool_capabilities = {
+		max_drop_level=3,
+		groupcaps= {
+			crumbly={times={[1]=0.90, [2]=0.40, [3]=0.20}, uses=100, maxlevel=1}
+		},
+		damage_groups = {fleshy=7},
+	}
+})
+
 minetest.register_tool("default:blade", {
 	description = "Blade\n Level: - \n Damage: 10",
 	inventory_image = "default_blade.png",

@@ -28,4 +28,5 @@ minetest.register_craft({
 minetest.register_craftitem("fishing:fish", {
 	description = "Fish",
 	inventory_image = "fishing_fish.png",
+	on_use = minetest.item_eat(3),
 })

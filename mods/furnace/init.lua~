@@ -37,19 +37,19 @@ minetest.register_abm({
 			local pattern = minetest.get_node(patternpos).name
 			if pattern == "furnace:pattern_rod" then
 				local myinv = mymeta:get_inventory()
-				if myinv:contains_item("main", {name = "default:iron_lump"}) then
+				if myinv:contains_item("main", {name = "default:stone_with_iron"}) then
 					minetest.get_meta(patternpos):get_inventory():add_item("main", {name = "furnace:iron_rod"})
-					myinv:remove_item("main", {name = "default:iron_lump"})
-				elseif myinv:contains_item("main", {name = "default:gold_lump"}) then
+					myinv:remove_item("main", {name = "default:stone_with_iron"})
+				elseif myinv:contains_item("main", {name = "default:stone_with_gold"}) then
 					minetest.get_meta(patternpos):get_inventory():add_item("main", {name = "furnace:gold_rod"})
-					myinv:remove_item("main", {name = "default:gold_lump"})
+					myinv:remove_item("main", {name = "default:stone_with_gold"})
 				end
 			end
 			if pattern == "furnace:pattern_blade" then
 				local myinv = mymeta:get_inventory()
-				if myinv:contains_item("main", {name = "default:iron_lump"}) then
+				if myinv:contains_item("main", {name = "default:stone_with_iron"}) then
 					minetest.get_meta(patternpos):get_inventory():add_item("main", {name = "default:blade"})
-					myinv:remove_item("main", {name = "default:iron_lump"})
+					myinv:remove_item("main", {name = "default:stone_with_iron"})
 				end
 			end
 		end
