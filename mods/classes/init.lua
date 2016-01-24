@@ -49,6 +49,30 @@ classes.register_weapon = function(name,fromLevel,levels, def)
 	end
 end
 
+function classes.register_tool(name, def)
+	minetest.register_craftitem(name, {
+		description = def.description,
+		inventory_image = def.inventory_image,
+		class = def.class,
+		on_use = function(itemstack, user, pointed_thing)
+			if user == nil then return end
+			if classes.selected[user:get_player_name()] == def.class then	
+				if pointed_thing.type == "object" then
+					if xp.player_levels[user:get_player_name()] and xp.player_levels[user:get_player_name()] > def.lvl then
+						def.on_use(itemstack, user, pointed_thing)
+					else
+						cmsg.push_message_player(user, "[info] You have to be level "..tostring(def.lvl).. " to use this tool!")	
+					end					
+					return nil
+				end
+			else
+				cmsg.push_message_player(user, "[info] You cant use this tool.")	
+				return itemstack
+			end
+		end
+	})
+end
+
 -- load save
 
 function classes.load_selected_classes()
