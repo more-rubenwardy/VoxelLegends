@@ -39,8 +39,8 @@ end)
 
 story.generator = {}
 story.generator.names = {"A", "B", "C", "D", "E", "F", "G"}
-story.generator.file_paths = {minetest.get_modpath(minetest.get_current_modname()).."/parts/test"}
 story.generator.parts = {}
+story.generator.dialogs = {}	
 story.generator.players_storys = {}
 
 function story.generator.gen_next_step(player)
@@ -85,21 +85,26 @@ function story.generator.new_player(player)
 	story.generator.players_storys[player:get_player_name()].met_characters_num = 0
 end
 
-function story.generator.load_parts()
-	-- testing
-	local file = io.open(story.generator.file_paths[1], "r")
-	story.generator.parts[1] = file:read()
-	io.close(file)
+function story.generator.get_part(name)
+	if not story.generator.parts[name] then
+		local file = io.open(minetest.get_modpath(minetest.get_current_modname()).."/parts/"..name..".part", "r")
+		story.generator.parts[name] = file:read()
+		io.close(file)
+		return story.generator.parts[name]
+	else
+		return story.generator.parts[name]
+	end
 end
 
-
-function story.generator.gen_dialog(player)
-	-- coming soon
-	str = ""
-	for i = 0, 10 do
-		str = str
+function story.generator.get_dialog(name)
+	if not story.generator.dialogs[name] then
+		local file = io.open(minetest.get_modpath(minetest.get_current_modname()).."/parts/"..name..".dialog", "r")
+		story.generator.dialogs[name] = file:read()
+		io.close(file)
+		return story.generator.dialogs[name]
+	else
+		return story.generator.dialogs[name]
 	end
-	return str
 end
 
 minetest.register_on_newplayer(function(player)
@@ -165,4 +170,3 @@ minetest.register_craftitem("story:human", {
 	end,
 })
 
-story.generator.load_parts()

@@ -53,6 +53,38 @@ minetest.override_item("default:plant_grass", {drop = {
 	}
 }})
 
+minetest.override_item("default:plant_grass_2", {drop = {
+	max_items = 1,
+	items = {
+		{items = {'farming:wheat_seeds'},rarity = 5},
+		{items = {'default:plant_grass'}},
+	}
+}})
+
+minetest.override_item("default:plant_grass_3", {drop = {
+	max_items = 1,
+	items = {
+		{items = {'farming:wheat_seeds'},rarity = 5},
+		{items = {'default:plant_grass'}},
+	}
+}})
+
+minetest.override_item("default:plant_grass_4", {drop = {
+	max_items = 1,
+	items = {
+		{items = {'farming:wheat_seeds'},rarity = 5},
+		{items = {'default:plant_grass'}},
+	}
+}})
+
+minetest.override_item("default:plant_grass_5", {drop = {
+	max_items = 1,
+	items = {
+		{items = {'farming:wheat_seeds'},rarity = 5},
+		{items = {'default:plant_grass'}},
+	}
+}})
+
 minetest.register_craftitem("farming:flour", {
 	description = "Flour",
 	inventory_image = "farming_flour.png",

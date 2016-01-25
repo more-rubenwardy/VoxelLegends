@@ -347,6 +347,54 @@ minetest.register_node("default:plant_grass", {
 	groups = {crumbly = 3, plant = 1},
 })
 
+minetest.register_node("default:plant_grass_2", {
+	description = "Grass (Plant)",
+	tiles = {"default_plant_grass_2.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	inventory_image = "default_plant_grass_2.png",
+	buildable_to = true,
+	walkable = false,
+	groups = {crumbly = 3, plant = 1},
+	drop = "default:plant_grass",
+})
+
+minetest.register_node("default:plant_grass_3", {
+	description = "Grass (Plant)",
+	tiles = {"default_plant_grass_3.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	inventory_image = "default_plant_grass_3.png",
+	buildable_to = true,
+	walkable = false,
+	groups = {crumbly = 3, plant = 1},
+	drop = "default:plant_grass",
+})
+
+minetest.register_node("default:plant_grass_4", {
+	description = "Grass (Plant)",
+	tiles = {"default_plant_grass_4.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	inventory_image = "default_plant_grass_4.png",
+	buildable_to = true,
+	walkable = false,
+	groups = {crumbly = 3, plant = 1},
+	drop = "default:plant_grass",
+})
+
+minetest.register_node("default:plant_grass_5", {
+	description = "Grass (Plant)",
+	tiles = {"default_plant_grass_5.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	inventory_image = "default_plant_grass_5.png",
+	buildable_to = true,
+	walkable = false,
+	groups = {crumbly = 3, plant = 1},
+	drop = "default:plant_grass",
+})
+
 minetest.register_node("default:flower_1", {
 	description = "Flower",
 	tiles = {"default_flower_1.png"},

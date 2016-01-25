@@ -116,20 +116,65 @@ minetest.register_decoration({
 	deco_type = "simple",
 	place_on = {"default:grass"},
 	sidelen = 16,
-	noise_params = {
-		offset = -0.015,
-		scale = 0.5,
-		spread = {x=200, y=200, z=200},
-		seed = 329,
-		octaves = 3,
-		persist = 0.6
+	fill_ratio = 0.07,
+	biomes = {
+		"grassland", "forest"
 	},
+	y_min = 0,
+	y_max = 31000,
+	decoration = "default:plant_grass",
+})
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:grass"},
+	sidelen = 16,
+	fill_ratio = 0.07,
+	biomes = {
+		"grassland", "forest"
+	},
+	y_min = 0,
+	y_max = 31000,
+	decoration = "default:plant_grass_2",
+})
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:grass"},
+	sidelen = 16,
+	fill_ratio = 0.06,
+	biomes = {
+		"grassland", "forest"
+	},
+	y_min = 0,
+	y_max = 31000,
+	decoration = "default:plant_grass_3",
+})
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:grass"},
+	sidelen = 16,
+	fill_ratio = 0.04,
 	biomes = {
 		"grassland"
 	},
 	y_min = 0,
 	y_max = 31000,
-	decoration = "default:plant_grass",
+	decoration = "default:plant_grass_4",
+})
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:grass"},
+	sidelen = 16,
+	fill_ratio = 0.04,
+	biomes = {
+		"grassland"
+	},
+	y_min = 0,
+	y_max = 31000,
+	decoration = "default:plant_grass_5",
 })
 
 minetest.register_decoration({
