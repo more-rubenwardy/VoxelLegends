@@ -1,3 +1,19 @@
+-- string
+function string:split(inSplitPattern, outResults)
+	if not outResults then
+		outResults = {}
+	end
+	local theStart = 1
+	local theSplitStart, theSplitEnd = string.find( self, inSplitPattern, theStart )
+	while theSplitStart do
+		table.insert( outResults, string.sub( self, theStart, theSplitStart-1 ) )
+		theStart = theSplitEnd + 1
+		theSplitStart, theSplitEnd = string.find( self, inSplitPattern, theStart )
+	end
+	table.insert( outResults, string.sub( self, theStart ) )
+	return outResults
+end
+
 -- form
 
 story.talk_form = "size[8,7.5;]"
@@ -35,32 +51,89 @@ minetest.register_on_joinplayer(function(player)
 	})
 end)
 
--- procedural generation
+-- generator
 
 story.generator = {}
-story.generator.names = {"A", "B", "C", "D", "E", "F", "G"}
 story.generator.parts = {}
 story.generator.dialogs = {}	
 story.generator.players_storys = {}
 
 function story.generator.gen_next_step(player)
-	if not places.pos then
-		return
-	end
-
-	-- get a random place
-	local keys = {}
-	local i = 0
-	for k,_ in pairs(places.pos) do
-		keys[i] = k
-		i= i+1
-	end
-
-	local p = places.pos[ keys[math.random( #keys)]]
-	if not p then
+	print("[INFO] generating story...")
+	if not story.generator.players_storys[player:get_player_name()] then
+		print("[ERROR][story] could not find players story")
 		return
 	end
 	
+	local part = story.generator.get_part(story.generator.players_storys[player:get_player_name()].part)
+	if part then
+		story.generator.players_storys[player:get_player_name()].part = story.generator.run(part, player)
+		return
+	else
+		print("[ERROR][story] could not find part file")
+		return
+	end
+end
+
+function story.generator.new_player(player)
+	-- adds a new entry to the story database
+	story.generator.players_storys[player:get_player_name()] = {}
+	story.generator.players_storys[player:get_player_name()].part = "base"
+end
+
+function story.generator.get_part(name)
+	if not name then return end
+	if name == "" then return end
+	if not story.generator.parts[name] then
+		local file = io.open(minetest.get_modpath("story").."/parts/"..name..".part", "r")
+		story.generator.parts[name] = file:read("*all")
+		io.close(file)
+		return story.generator.parts[name]
+	else
+		return story.generator.parts[name]
+	end
+end
+
+function story.generator.get_dialog(name)
+	if not story.generator.dialogs[name] then
+		local file = io.open(minetest.get_modpath("story").."/parts/"..name..".dialog", "r")
+		story.generator.dialogs[name] = file:read("*all")
+		io.close(file)
+		return story.generator.dialogs[name]
+	else
+		return story.generator.dialogs[name]
+	end
+end
+
+function story.generator.run(part, player)
+	local next_part = ""
+	print("[INFO] run script... " .. part)
+	local lines = part:split("\n")
+	if not lines then 
+		return ""
+	end	
+	for k,v in pairs(lines) do
+		local cmd = v:split(" ")
+		if cmd[1] then
+			print("[INFO] run line... " .. v)
+			if cmd[1] == "$dialog" and cmd[2] then
+				if story.generator.get_dialog(cmd[2]) then
+					story.generator.players_storys[player:get_player_name()].text = story.generator.get_dialog(cmd[2])	
+				end
+			end
+			if cmd[1] == "$create" then
+				story.generator.show(player, {x=0, y=10, z=0})
+			end
+			-- test cmd
+			if cmd[1] == "$pos" then
+				story.generator.players_storys[player:get_player_name()].pos = {x=0, y=10, z=0}
+			end
+		end
+	end
+	return next_part
+end
+
+function story.generator.show(player, p)
 	-- update waypoint
 	player:hud_remove(story.hud[player:get_player_name()])
 	story.hud[player:get_player_name()] = player:hud_add({
@@ -71,40 +144,7 @@ function story.generator.gen_next_step(player)
 		world_pos = p
 	})
 
-	-- add entity
 	minetest.add_entity(p, "story:human")
-	story.generator.players_storys[player:get_player_name()].pos = p
-	story.generator.players_storys[player:get_player_name()].text = story.generator.parts[1]
-end
-
-function story.generator.new_player(player)
-	-- adds a new entry to the story database
-	story.generator.players_storys[player:get_player_name()] = {}
-	story.generator.players_storys[player:get_player_name()].characters = { story.generator.names[math.random( #story.generator.names )],story.generator.names[math.random( #story.generator.names )]}
-	story.generator.players_storys[player:get_player_name()].met_characters = {}
-	story.generator.players_storys[player:get_player_name()].met_characters_num = 0
-end
-
-function story.generator.get_part(name)
-	if not story.generator.parts[name] then
-		local file = io.open(minetest.get_modpath(minetest.get_current_modname()).."/parts/"..name..".part", "r")
-		story.generator.parts[name] = file:read()
-		io.close(file)
-		return story.generator.parts[name]
-	else
-		return story.generator.parts[name]
-	end
-end
-
-function story.generator.get_dialog(name)
-	if not story.generator.dialogs[name] then
-		local file = io.open(minetest.get_modpath(minetest.get_current_modname()).."/parts/"..name..".dialog", "r")
-		story.generator.dialogs[name] = file:read()
-		io.close(file)
-		return story.generator.dialogs[name]
-	else
-		return story.generator.dialogs[name]
-	end
 end
 
 minetest.register_on_newplayer(function(player)
