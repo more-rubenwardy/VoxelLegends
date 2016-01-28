@@ -29,3 +29,4 @@ minetest.register_chatcommand("kit", {
 kits.register_kit("basic", {"default:log_3 10", "default:log_1 10"})
 kits.register_kit("customer", {"default:coin 10", "default:log_3 1", "default:log_1 1"})
 kits.register_kit("hard", {"default:log_3 1", "default:log_1 1"})
+kits.register_kit("peasant", {"default:log_3 1", "default:log_1 1", "farming:bowl_with_water", "farming:bowl_with_water", "farming:bowl_with_water", "farming:wheat_seeds 10"})
