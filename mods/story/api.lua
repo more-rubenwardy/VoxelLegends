@@ -57,6 +57,33 @@ story.generator = {}
 story.generator.parts = {}
 story.generator.dialogs = {}	
 story.generator.players_storys = {}
+story.generator.file = minetest.get_worldpath() .. "/story"
+
+function story.generator.load_storys()
+	local input = io.open(story.generator.file, "r")
+	if input then
+		local str = input:read("*all")
+		if str then
+			if minetest.deserialize(str) then
+				story.generator.players_storys = minetest.deserialize(str)
+			end
+		else 
+			print("[WARNING] story file is empty")
+		end
+		io.close(input)
+	else
+		print("[ERROR] couldnt find story file")
+	end
+end
+
+function story.generator.save_storys()
+	if story.generator.players_storys then
+		local output = io.open(story.generator.file, "w")
+		local str = minetest.serialize(story.generator.players_storys)
+		output:write(str)
+		io.close(output)
+	end
+end
 
 function story.generator.gen_next_step(player)
 	print("[INFO] generating story...")
@@ -64,10 +91,23 @@ function story.generator.gen_next_step(player)
 		print("[ERROR][story] could not find players story")
 		return
 	end
-	
-	local part = story.generator.get_part(story.generator.players_storys[player:get_player_name()].part)
+	local part = story.generator.players_storys[player:get_player_name()].part
+	part = story.generator.get_part(story.generator.players_storys[player:get_player_name()].part)
 	if part then
-		story.generator.players_storys[player:get_player_name()].part = story.generator.run(part, player)
+		local next_part = {}
+		if story.generator.players_storys[player:get_player_name()].wait then
+			next_part = story.generator.run(part, player, story.generator.players_storys[player:get_player_name()].wait_pos+1)
+		else
+			next_part = story.generator.run(part, player, 0)
+		end
+		if next_part.wait then
+			story.generator.players_storys[player:get_player_name()].wait = true
+			story.generator.players_storys[player:get_player_name()].wait_pos = next_part.param
+		else
+			story.generator.players_storys[player:get_player_name()].part = next_part.part
+			story.generator.players_storys[player:get_player_name()].wait_pos = 0
+		end
+		story.generator.save_storys()
 		return
 	else
 		print("[ERROR][story] could not find part file")
@@ -79,6 +119,7 @@ function story.generator.new_player(player)
 	-- adds a new entry to the story database
 	story.generator.players_storys[player:get_player_name()] = {}
 	story.generator.players_storys[player:get_player_name()].part = "base"
+	story.generator.players_storys[player:get_player_name()].wait_pos = 0
 end
 
 function story.generator.get_part(name)
@@ -105,32 +146,46 @@ function story.generator.get_dialog(name)
 	end
 end
 
-function story.generator.run(part, player)
-	local next_part = ""
+function story.generator.run(part, player, line_pos)
+	local out = {}
 	print("[INFO] run script... " .. part)
 	local lines = part:split("\n")
 	if not lines then 
 		return ""
 	end	
+	local i = 0
 	for k,v in pairs(lines) do
-		local cmd = v:split(" ")
-		if cmd[1] then
-			print("[INFO] run line... " .. v)
-			if cmd[1] == "$dialog" and cmd[2] then
-				if story.generator.get_dialog(cmd[2]) then
-					story.generator.players_storys[player:get_player_name()].text = story.generator.get_dialog(cmd[2])	
+		if i > line_pos-1 then
+			local cmd = v:split(" ")
+			if cmd[1] then
+				print("[INFO] run line... " .. v)
+				if cmd[1] == "$dialog" and cmd[2] then
+					if story.generator.get_dialog(cmd[2]) then
+						story.generator.players_storys[player:get_player_name()].text = story.generator.get_dialog(cmd[2])	
+					end
+				end
+				if cmd[1] == "$create" then
+					story.generator.show(player, story.generator.players_storys[player:get_player_name()].pos)
+				end
+				if cmd[1] == "$place" and cmd[2] then
+					if places.pos[cmd[2]] then
+						story.generator.players_storys[player:get_player_name()].pos = places.pos[cmd[2]]
+					end
+				end
+				if cmd[1] == "$pos" then
+					story.generator.players_storys[player:get_player_name()].pos = {x=0,y=10,z=0}
+				end
+				if cmd[1] == "$next" and cmd[2] then
+					out = {part=cmd[2], wait=false}
+				end
+				if cmd[1] == "$wait" then
+					return {cmd="$wait", param=i, wait=true}
 				end
 			end
-			if cmd[1] == "$create" then
-				story.generator.show(player, {x=0, y=10, z=0})
-			end
-			-- test cmd
-			if cmd[1] == "$pos" then
-				story.generator.players_storys[player:get_player_name()].pos = {x=0, y=10, z=0}
-			end
 		end
+		i = i +1
 	end
-	return next_part
+	return out
 end
 
 function story.generator.show(player, p)
@@ -209,4 +264,7 @@ minetest.register_craftitem("story:human", {
 		return itemstack
 	end,
 })
+
+
+story.generator.load_storys()
 

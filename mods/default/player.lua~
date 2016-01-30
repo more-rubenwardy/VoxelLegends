@@ -44,6 +44,10 @@ minetest.register_on_joinplayer(function(player)
 		visual = "mesh",
 		visual_size = {x=1, y=1},
 	})
+	-- player:set_animation({ x= 25, y= 60,}, 30, 0)
+	-- player:set_local_animation({x=0, y=20},{x= 25, y=60}, {x= 25, y=60}, {x= 25, y=60}, 30)
+	-- default.player_anim[player:get_player_name()] = "stand"
+
 	-- Testing of HUD elements
 	player:hud_add({
 		hud_elem_type = "waypoint",
