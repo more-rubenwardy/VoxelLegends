@@ -2,6 +2,33 @@
 
 quests = {}
 quests.player_quests = {}
+quests.file = minetest.get_worldpath() .. "/quests"
+
+function quests.load_quests()
+	local input = io.open(quests.file, "r")
+	if input then
+		local str = input:read("*all")
+		if str then
+			if minetest.deserialize(str) then
+				quests.player_quests = minetest.deserialize(str)
+			end
+		else 
+			print("[WARNING] quest file is empty")
+		end
+		io.close(input)
+	else
+		print("[ERROR] couldnt find quest file")
+	end
+end
+
+function quests.save_quests()
+	if quests.player_quests then
+		local output = io.open(quests.file, "w")
+		local str = minetest.serialize(quests.player_quests)
+		output:write(str)
+		io.close(output)
+	end
+end
 
 function quests.add_quest(player, quest)
 	if not quests.player_quests[player] then
