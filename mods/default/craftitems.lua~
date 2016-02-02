@@ -49,6 +49,11 @@ minetest.register_craftitem("default:coin", {
 	inventory_image = "default_coin.png",
 })
 
+minetest.register_craftitem("default:silver_coin", {
+	description = "Silver Coin",
+	inventory_image = "default_silver_coin.png",
+})
+
 minetest.register_craftitem("default:xp", {
 	description = "XP",
 	inventory_image = "default_xp.png",
