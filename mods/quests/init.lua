@@ -39,6 +39,9 @@ function quests.add_quest(player, quest)
 end
 
 minetest.register_on_dignode(function(pos, oldnode, digger)
+	if not digger or not digger:is_player() then
+		return
+	end
 	if not quests.player_quests[digger:get_player_name()] then
 		return
 	end
@@ -54,6 +57,9 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 end)
 
 minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
+	if not placer or not placer:is_player() then
+		return
+	end
 	if not quests.player_quests[placer:get_player_name()] then
 		return
 	end

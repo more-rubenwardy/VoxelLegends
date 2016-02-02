@@ -48,6 +48,7 @@ farming.register_plant("wheat", 5, {
 minetest.override_item("default:plant_grass", {drop = {
 	max_items = 1,
 	items = {
+		{items = {'farming:sugarcane'},rarity = 20},
 		{items = {'farming:wheat_seeds'},rarity = 5},
 		{items = {'default:plant_grass'}},
 	}
@@ -57,6 +58,7 @@ minetest.override_item("default:plant_grass_2", {drop = {
 	max_items = 1,
 	items = {
 		{items = {'farming:wheat_seeds'},rarity = 5},
+		{items = {'farming:sugarcane'},rarity = 20},
 		{items = {'default:plant_grass'}},
 	}
 }})
@@ -65,6 +67,7 @@ minetest.override_item("default:plant_grass_3", {drop = {
 	max_items = 1,
 	items = {
 		{items = {'farming:wheat_seeds'},rarity = 5},
+		{items = {'farming:sugarcane'},rarity = 20},
 		{items = {'default:plant_grass'}},
 	}
 }})
@@ -73,6 +76,7 @@ minetest.override_item("default:plant_grass_4", {drop = {
 	max_items = 1,
 	items = {
 		{items = {'farming:wheat_seeds'},rarity = 5},
+		{items = {'farming:sugarcane'},rarity = 20},
 		{items = {'default:plant_grass'}},
 	}
 }})
@@ -81,9 +85,35 @@ minetest.override_item("default:plant_grass_5", {drop = {
 	max_items = 1,
 	items = {
 		{items = {'farming:wheat_seeds'},rarity = 5},
+		{items = {'farming:sugarcane'},rarity = 20},
 		{items = {'default:plant_grass'}},
 	}
 }})
+
+-- other plants
+
+minetest.register_node("farming:sugarcane", {
+	description = "Sugarcane",
+	tiles = {"farming_sugarcane.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	inventory_image = "farming_sugarcane.png",
+	groups = {crumbly=3, falling_node=1},
+	walkable = false,
+})
+
+minetest.register_abm({
+	nodenames = {"farming:sugarcane"},
+	neighbors = {"default:dirt", "default:grass"},
+	interval = 10.0,
+	chance = 5,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		pos.y = pos.y + 1
+		minetest.set_node(pos, {name = "farming:sugarcane"})
+	end,
+})
+
+-- items
 
 minetest.register_craftitem("farming:flour", {
 	description = "Flour",
@@ -119,8 +149,15 @@ minetest.register_craftitem("farming:bowl_with_water", {
 minetest.register_craftitem("farming:slice_of_bread", {
 	description = "Slice of Bread",
 	inventory_image = "farming_slice_of_bread.png",
+	on_use = minetest.item_eat(4),
+})
+
+minetest.register_craftitem("farming:cookie", {
+	description = "Cookie",
+	inventory_image = "farming_cookie.png",
 	on_use = minetest.item_eat(5),
 })
+
 
 
 
@@ -129,6 +166,19 @@ minetest.register_craft({
 	output = "farming:flour",
 	recipe = {"farming:wheat_seeds", "farming:wheat_seeds", "farming:wheat_seeds"}
 })
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "farming:cookie 5",
+	recipe = {"farming:sugar", "farming:flour", "farming:bowl_with_water"}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "farming:sugar 3",
+	recipe = {"farming:sugarcane"}
+})
+
 
 minetest.register_craft({
 	output = "farming:bowl",
