@@ -170,7 +170,10 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "shapeless",
 	output = "farming:cookie 5",
-	recipe = {"farming:sugar", "farming:flour", "farming:bowl_with_water"}
+	recipe = {"farming:sugar", "farming:flour", "farming:bowl_with_water"},
+	replacements = {
+		{"farming:bowl_with_water", "farming:bowl"}
+	}
 })
 
 minetest.register_craft({
@@ -191,5 +194,8 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "shapeless",
 	output = "farming:slice_of_bread 10",
-	recipe = {"farming:flour", "farming:flour", "farming:bowl_with_water"}
+	recipe = {"farming:flour", "farming:flour", "farming:bowl_with_water"},
+	replacements = {
+		{"farming:bowl_with_water", "farming:bowl"}
+	}
 })
