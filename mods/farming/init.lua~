@@ -113,6 +113,36 @@ minetest.register_abm({
 	end,
 })
 
+minetest.register_node("farming:cactus", {
+	description = "Cactus",
+	tiles = {"farming_cactus_top.png", "farming_cactus_top.png", "farming_cactus.png"},
+	groups = {crumbly=3, falling_node=1},
+})
+
+minetest.register_abm({
+	nodenames = {"farming:cactus"},
+	neighbors = {"default:sand"},
+	interval = 60.0,
+	chance = 2,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		pos.y = pos.y + 1
+		minetest.set_node(pos, {name = "farming:cactus"})
+	end,
+})
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:sand"},
+	sidelen = 16,
+	fill_ratio = 0.004,
+	biomes = {
+		"desert"
+	},
+	y_min = 0,
+	y_max = 31000,
+	decoration = "farming:cactus",
+})
+
 -- items
 
 minetest.register_craftitem("farming:flour", {
