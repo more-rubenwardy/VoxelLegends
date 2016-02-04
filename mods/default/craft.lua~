@@ -64,8 +64,9 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "default:wooden_planks",
+	output = "default:wooden_planks 4",
 	recipe = {
+		{"default:wood", "default:wood"},
 		{"default:wood", "default:wood"},
 	}
 })
