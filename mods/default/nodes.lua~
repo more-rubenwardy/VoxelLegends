@@ -289,7 +289,7 @@ minetest.register_node("default:wooden_planks", {
 
 minetest.register_node("default:log_1", {
 	description = "Log (thick)",
-	tiles = {"default_log.png"},
+	tiles = {"default_log_top.png","default_log_top.png","default_log.png"},
 	groups = {choppy = 3},
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -305,7 +305,7 @@ minetest.register_node("default:log_1", {
 
 minetest.register_node("default:log_2", {
 	description = "Log",
-	tiles = {"default_log.png"},
+	tiles = {"default_log_top.png","default_log_top.png","default_log.png"},
 	groups = {choppy = 3},
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -321,7 +321,7 @@ minetest.register_node("default:log_2", {
 
 minetest.register_node("default:log_3", {
 	description = "Log (thin)",
-	tiles = {"default_log.png"},
+	tiles = {"default_log_top.png","default_log_top.png","default_log.png"},
 	groups = {choppy = 3},
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -417,6 +417,26 @@ minetest.register_node("default:flower_2", {
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
 })
+
+minetest.register_node("default:mushroom", {
+	description = "Mushroom",
+	tiles = {"default_mushroom.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	inventory_image = "default_mushroom_inv.png",
+	buildable_to = true,
+	walkable = false,
+	groups = {crumbly = 3, plant = 1},
+})
+
+-- straw
+
+minetest.register_node("default:straw", {
+	description = "Straw",
+	tiles = {"default_straw_top.png", "default_straw_top.png", "default_straw_side.png"},
+	groups = {crumbly = 3},
+})
+
 
 -- frames
 
@@ -570,6 +590,14 @@ minetest.register_node("default:gravel", {
 			{items = {'default:gravel'}},
 		}
 	}
+})
+
+--brick
+
+minetest.register_node("default:brick", {
+	description = "Brick",
+	tiles = {"default_brick.png"},
+	groups = {cracky = 3},
 })
 
 -- ores
