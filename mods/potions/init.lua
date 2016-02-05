@@ -1,18 +1,29 @@
-minetest.register_craftitem("potions:healing", {
-	description = "Potion of Healing",
-	inventory_image = "potions_red.png",
+potions = {}
+function potions.register_potion(name, def)
+	minetest.register_craftitem(name, {
+	description = def.description,
+	inventory_image = def.img,
  
 	on_drop = function(itemstack, dropper, pos)
 		if not dropper or not dropper:is_player() then
 			return
 		end
-		cmsg.push_message_player(dropper, "[hp] + 10")
-		dropper:set_hp(dropper:get_hp()+10)
-		itemstack:take_item()
-		return itemstack
+		return def.on_use(itemstack, dropper)
 	end,
 
 	on_use = function(itemstack, user, pointed_thing)
+		if not user or not user:is_player() then
+			return
+		end
+		return def.on_use(itemstack, user)
+	end,
+})
+end
+
+potions.register_potion("potions:healing", {
+	description = "Potion of Healing",
+	img = "potions_red.png",
+	on_use = function(itemstack, user)
 		if not user or not user:is_player() then
 			return
 		end
@@ -20,37 +31,13 @@ minetest.register_craftitem("potions:healing", {
 		user:set_hp(user:get_hp()+10)
 		itemstack:take_item()
 		return itemstack
-	end,
+	end
 })
 
-minetest.register_craftitem("potions:jumping", {
+potions.register_potion("potions:jumping", {
 	description = "Potion of Jumping",
-	inventory_image = "potions_blue.png",
- 
-	on_drop = function(itemstack, dropper, pos)
-		if not dropper or not dropper:is_player() then
-			return
-		end
-		dropper:set_physics_override({
-			gravity = 0.1,
-		})
-		cmsg.push_message_player(dropper, "[effect] + jump")
-		
-
-		minetest.after(10.0, function(pl)
-			if not pl or not pl:is_player() then
-				return
-			end
-			pl:set_physics_override({
-				gravity = 1,	
-			})
-			cmsg.push_message_player(pl, "[effect] - jump")
-		end, dropper)
-		itemstack:take_item()
-		return itemstack
-	end,
-
-	on_use = function(itemstack, user, pointed_thing)
+	img = "potions_blue.png",
+	on_use = function(itemstack, user)
 		if not user or not user:is_player() then
 			return
 		end
@@ -70,37 +57,13 @@ minetest.register_craftitem("potions:jumping", {
 		end, user)
 		itemstack:take_item()
 		return itemstack
-	end,
+	end
 })
 
-minetest.register_craftitem("potions:running", {
+potions.register_potion("potions:running", {
 	description = "Potion of Running",
-	inventory_image = "potions_yellow.png",
- 
-	on_drop = function(itemstack, dropper, pos)
-		if not dropper or not dropper:is_player() then
-			return
-		end
-		dropper:set_physics_override({
-			speed = 3,
-		})
-		cmsg.push_message_player(dropper, "[effect] + speed")
-		
-
-		minetest.after(10.0, function(pl)
-			if not pl or not pl:is_player() then
-				return
-			end
-			pl:set_physics_override({
-				speed = 1,	
-			})
-			cmsg.push_message_player(pl, "[effect] - speed")
-		end, dropper)
-		itemstack:take_item()
-		return itemstack
-	end,
-
-	on_use = function(itemstack, user, pointed_thing)
+	img = "potions_yellow.png",
+	on_use = function(itemstack, user)
 		if not user or not user:is_player() then
 			return
 		end
@@ -120,10 +83,61 @@ minetest.register_craftitem("potions:running", {
 		end, user)
 		itemstack:take_item()
 		return itemstack
-	end,
+	end
+})
+
+minetest.register_craftitem("potions:strange", {
+	description = "strange Potion",
+	inventory_image = "potions_black.png",
+})
+
+minetest.register_craftitem("potions:glass", {
+	description = "Glass",
+	inventory_image = "potions_glass.png",
 })
 
 minetest.register_craftitem("potions:upgrading", {
 	description = "Potion of Upgrading",
 	inventory_image = "potions_green.png",
+})
+
+-- crafting
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "potions:strange",
+	recipe = {"potions:glass", "juice:cactus", "juice:cactus", "juice:water"},
+	replacements = {
+		{"juice:cactus", "juice:glass"},
+		{"juice:cactus", "juice:glass"},
+		{"juice:water", "juice:glass"}
+	}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "potions:running",
+	recipe = {"juice:water_sugar", "juice:water_sugar", "juice:water_sugar", "potions:glass"},
+	replacements = {
+		{"juice:water_sugar", "juice:glass"},
+		{"juice:water_sugar", "juice:glass"},
+		{"juice:water_sugar", "juice:glass"}
+	}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "potions:jumping",
+	recipe = {"juice:water_sugar", "juice:water_sugar", "juice:water", "potions:glass"},
+	replacements = {
+		{"juice:water_sugar", "juice:glass"},
+		{"juice:water_sugar", "juice:glass"},
+		{"juice:water", "juice:glass"}
+	}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "potions:upgrading",
+	recipe = {"potions:strange", "default:stone_item", "farming:cactus", "default:sand"},
 })
