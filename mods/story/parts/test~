@@ -1,4 +1,0 @@
-<name> Hi! I have bad news for you, some angry blocks destroyed your house :(
-You : Thats not good...
-<name> You should build a new one.
-$quest placenode default:wood 99 15

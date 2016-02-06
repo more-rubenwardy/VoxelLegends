@@ -1,7 +1,0 @@
-$dialog test
-$pos
-$create
-$wait
-$dialog test
-$place testplace 
-$create
