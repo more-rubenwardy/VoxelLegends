@@ -6,7 +6,7 @@ local furnace_form = furnace_form..default.itemslot_bg(2,0.3,4,4)
 local furnace_form = furnace_form.."list[current_player;main;0,4.85;8,1;]" 
 local furnace_form = furnace_form..default.itemslot_bg(0,4.85,8,1)
 local furnace_form = furnace_form.."list[current_player;main;0,6.08;8,3;8]" 
-local furnace_form = furnace_form..default.itemslot_bg(0,6,8,3)
+local furnace_form = furnace_form..default.itemslot_bg(0,6.08,8,3)
 
 minetest.register_node("furnace:furnace", {
 	description = "Furnace",
@@ -78,7 +78,7 @@ local pattern_form = pattern_form..default.itemslot_bg(0,0.3,8,4)
 local pattern_form = pattern_form.."list[current_player;main;0,4.85;8,1;]" 
 local pattern_form = pattern_form..default.itemslot_bg(0,4.85,8,1)
 local pattern_form = pattern_form.."list[current_player;main;0,6.08;8,3;8]" 
-local pattern_form = pattern_form..default.itemslot_bg(0,6,8,3)
+local pattern_form = pattern_form..default.itemslot_bg(0,6.08,8,3)
 
 minetest.register_node("furnace:pattern_rod", {
 	description = "Pattern for a Rod",

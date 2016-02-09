@@ -176,3 +176,12 @@ minetest.register_craft({
 		{"", "default:log_3", ""},
 	}
 })
+
+minetest.register_craft({
+	output = "default:axe",
+	recipe = {
+		{"default:blade", "furnace:iron_plate", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:log_3", ""},
+	}
+})

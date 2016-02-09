@@ -16,7 +16,7 @@ minetest.register_item(":", {
 
 
 minetest.register_tool("default:basic_hammer", {
-	description = "Basic Hammer\n Level: - \n Damage: 8",
+	description = "Basic Hammer\n For Level: - \n Damage: 8",
 	inventory_image = "default_basic_hammer.png",
 	tool_capabilities = {
 		max_drop_level=3,
@@ -29,7 +29,7 @@ minetest.register_tool("default:basic_hammer", {
 })
 
 minetest.register_tool("default:axe_stone", {
-	description = "Stone Axe\n Level: - \n Damage: 5",
+	description = "Stone Axe\n For Level: - \n Damage: 5",
 	inventory_image = "default_axe_stone.png",
 	tool_capabilities = {
 		max_drop_level=3,
@@ -38,6 +38,18 @@ minetest.register_tool("default:axe_stone", {
 			choppy={times={[2]=3.50, [3]=1.10}, uses=10, maxlevel=1}
 		},
 		damage_groups = {fleshy=5},
+	}
+})
+
+minetest.register_tool("default:axe", {
+	description = "Axe\n For Level: - \n Damage: 13",
+	inventory_image = "default_axe.png",
+	tool_capabilities = {
+		max_drop_level=3,
+		groupcaps= {
+			choppy={times={[1]=1.00, [2]=0.40, [3]=0.30}, uses=70, maxlevel=1}
+		},
+		damage_groups = {fleshy=13},
 	}
 })
 
