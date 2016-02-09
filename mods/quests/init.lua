@@ -38,6 +38,33 @@ function quests.add_quest(player, quest)
 	table.insert(quests.player_quests[player], quest)
 end
 
+quests.show_quests_form = "size[8,7.5;]"
+quests.show_quests_form = quests.show_quests_form..default.gui_colors
+quests.show_quests_form = quests.show_quests_form..default.gui_bg
+quests.show_quests_form = quests.show_quests_form.."label[0,0;%s]"
+
+minetest.register_chatcommand("quests", {
+	params = "",
+	description = "Shows your quests",
+	privs = {},
+	func = function(name, text)
+		if not quests.player_quests[name] then
+			local s = quests.show_quests_form
+			s = string.format(s, "You have not got any quests yet.")
+			minetest.show_formspec(name, "quests:show_quests", s)
+			return
+		end
+		local s = quests.show_quests_form
+		local txt = ""
+		for k,v in pairs(quests.player_quests[name]) do
+			txt = txt .. " -> " .. k.quest_type .. " " .. v.node .. " (" .. tostring(v.progress) .. "/" .. tostring(v.max) .. ")\n"
+		end
+		s = string.format(s, txt)
+		minetest.show_formspec(name, "quests:show_quests", s)
+		return true, ""
+	end,
+})
+
 minetest.register_on_dignode(function(pos, oldnode, digger)
 	if not digger or not digger:is_player() then
 		return

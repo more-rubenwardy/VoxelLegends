@@ -19,9 +19,9 @@ end
 story.talk_form = "size[8,7.5;]"
 story.talk_form = story.talk_form..default.gui_colors
 story.talk_form = story.talk_form..default.gui_bg
-story.talk_form = story.talk_form.."image[0,0.0;3,8;story_player.png]"
-story.talk_form = story.talk_form.."label[2.5,0;%s]"
-story.talk_form = story.talk_form.."image[6,0.0;3,8;story_character_1.png]"
+--story.talk_form = story.talk_form.."image[0,0.0;3,8;story_player.png]"
+story.talk_form = story.talk_form.."label[0,0;%s]"
+--story.talk_form = story.talk_form.."image[6,0.0;3,8;story_character_1.png]"
 
 story.get_talk_form = function(text)
 	return string.format(story.talk_form, text)

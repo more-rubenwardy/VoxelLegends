@@ -23,7 +23,7 @@ function clans.remove_member(clan_name, plname)
 end
 
 function clans.show_my_clans(plname)
-	str = ""
+	local str = ""
 	for k,v in pairs(clans.all_clans) do
 		for m,n in pairs(clans.all_clans[k]) do
 			if n == plname then
