@@ -470,8 +470,9 @@ minetest.register_node("default:frame_with_log", {
 
 minetest.register_node("default:glass", {
 	description = "Glass",
-	tiles = {"default_glass.png"},
-	drawtype = "glasslike",
+	drawtype = "glasslike_framed_optional",
+	tiles = {"default_glass.png", "default_glass_detail.png"},
+	inventory_image = minetest.inventorycube("default_glass.png"),
 	paramtype = "light",
 	groups = {crumbly = 3},
 })
