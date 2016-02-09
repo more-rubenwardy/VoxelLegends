@@ -52,6 +52,20 @@ minetest.register_abm({
 					myinv:remove_item("main", {name = "default:stone_with_iron"})
 				end
 			end
+
+			if pattern == "furnace:pattern_plate" then
+				local myinv = mymeta:get_inventory()
+				if myinv:contains_item("main", {name = "default:stone_with_iron"}) then
+					minetest.get_meta(patternpos):get_inventory():add_item("main", {name = "furnace:iron_plate"})
+					myinv:remove_item("main", {name = "default:stone_with_iron"})
+				elseif myinv:contains_item("main", {name = "default:stone_with_gold"}) then
+					minetest.get_meta(patternpos):get_inventory():add_item("main", {name = "furnace:gold_plate"})
+					myinv:remove_item("main", {name = "default:stone_with_gold"})
+				elseif myinv:contains_item("main", {name = "default:stone_with_copper"}) then
+					minetest.get_meta(patternpos):get_inventory():add_item("main", {name = "furnace:copper_plate"})
+					myinv:remove_item("main", {name = "default:stone_with_copper"})
+				end
+			end
 		end
 	end,
 })
@@ -94,6 +108,20 @@ minetest.register_node("furnace:pattern_blade", {
 
 })
 
+minetest.register_node("furnace:pattern_plate", {
+	description = "Pattern for a plate",
+	tiles = {"furnace_pattern_plate.png", "default_wooden_planks.png"},
+	groups = {snappy = 3, pattern = 1},
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec",pattern_form)
+		meta:set_string("infotext", "Pattern");
+		local inv = meta:get_inventory()
+		inv:set_size("main", 8*4)
+	end,
+
+})
+
 minetest.register_craftitem("furnace:iron_rod", {
 	description = "Iron Rod",
 	inventory_image = "furnace_iron_rod.png",
@@ -108,6 +136,22 @@ minetest.register_craftitem("furnace:diamond_rod", {
 	description = "Diamond Rod",
 	inventory_image = "furnace_diamond_rod.png",
 })
+
+minetest.register_craftitem("furnace:iron_plate", {
+	description = "Iron Plate",
+	inventory_image = "furnace_iron_plate.png",
+})
+
+minetest.register_craftitem("furnace:gold_plate", {
+	description = "Gold Plate",
+	inventory_image = "furnace_gold_plate.png",
+})
+
+minetest.register_craftitem("furnace:copper_plate", {
+	description = "Copper Plate",
+	inventory_image = "furnace_copper_plate.png",
+})
+
 
 -- crafting
 
@@ -139,10 +183,10 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "default:pick",
+	output = "furnace:pattern_plate",
 	recipe = {
-		{"", "furnace:iron_rod", ""},
-		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "", ""},
+		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
+		{"default:wood", "default:wood", "default:wood"},
 	}
 })

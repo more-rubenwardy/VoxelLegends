@@ -158,3 +158,21 @@ minetest.register_craft({
 		{"", "default:log_3", ""},
 	}
 })
+
+minetest.register_craft({
+	output = "default:shovel",
+	recipe = {
+		{"", "furnace:iron_plate", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:log_3", ""},
+	}
+})
+
+minetest.register_craft({
+	output = "default:pick",
+	recipe = {
+		{"", "furnace:iron_rod", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:log_3", ""},
+	}
+})
