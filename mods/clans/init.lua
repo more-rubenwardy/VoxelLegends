@@ -12,6 +12,29 @@ function clans.add_member(clan_name, plname)
 	clans.save_clans()
 end
 
+function clans.remove_member(clan_name, plname)
+	for k,v in pairs(clans.all_clans[clan_name]) do
+		if v == plname then
+			table.remove(clans.all_clans[clan_name], k)
+			clans.save_clans()
+			break
+		end
+	end
+end
+
+function clans.show_my_clans(plname)
+	str = ""
+	for k,v in pairs(clans.all_clans) do
+		for m,n in pairs(clans.all_clans[k]) do
+			if n == plname then
+				str = str .. k .. ","
+				break
+			end
+		end
+	end
+	return str
+end
+
 function clans.load_clans()
 	local input = io.open(clans.clans_file, "r")
 	if input then
@@ -70,6 +93,23 @@ minetest.register_chatcommand("join_clan", {
 	end,
 })
 
+minetest.register_chatcommand("leave_clan", {
+	params = "<name>",
+	description = "Leave a clan",
+	privs = {},
+	func = function(name, text)
+		if not clans.all_clans[text] then 
+			return true, "There is no clan named " .. text
+		end	
+		local player = minetest.get_player_by_name(name)
+		if player then	
+			clans.remove_member(text, name)
+			return true, "Left clan " .. text
+		end
+		return true, "Error couldnt find player " .. name
+	end,
+})
+
 minetest.register_chatcommand("list_clans", {
 	params = "<name>",
 	description = "Shows all clans",
@@ -102,5 +142,15 @@ minetest.register_chatcommand("show_clan", {
 		end	
 		minetest.chat_send_player(name, table.concat(clans.all_clans[text], ","))
 		return true, "type /join_clan " .. text .." to join this clan"
+	end,
+})
+
+minetest.register_chatcommand("my_clans", {
+	params = "<name>",
+	description = "Shows the clan",
+	privs = {},
+	func = function(name, text)
+		minetest.chat_send_player(name, clans.show_my_clans(name))
+		return true, "type /leave_clan <name> to leave a clan"
 	end,
 })

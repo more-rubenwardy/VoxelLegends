@@ -141,3 +141,12 @@ minetest.register_craft({
 	output = "potions:upgrading",
 	recipe = {"potions:strange", "default:stone_item", "farming:cactus", "default:sand"},
 })
+
+minetest.register_craft({
+	output = "potions:glass 15",
+	recipe = {
+		{"", "default:glass", ""},
+		{"default:glass", "", "default:glass"},
+		{"default:glass", "default:glass", "default:glass"},
+	}
+})

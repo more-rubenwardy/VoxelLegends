@@ -75,3 +75,12 @@ minetest.register_craft({
 	output = "juice:water_sugar",
 	recipe = {"juice:water", "farming:sugar"},
 })
+
+minetest.register_craft({
+	output = "juice:glass 20",
+	recipe = {
+		{"default:glass", "", "default:glass"},
+		{"default:glass", "", "default:glass"},
+		{"default:glass", "default:glass", "default:glass"},
+	}
+})
