@@ -181,6 +181,11 @@ function story.generator.run(part, player, line_pos)
 				if cmd[1] == "$wait" then
 					return {cmd="$wait", param=i, wait=true}
 				end
+				if cmd[1] == "$spawn" and cmd[2] and cmd[3] then
+					if places.pos[cmd[3]] then
+						minetest.add_entity(places.pos[cmd[3]], cmd[2])
+					end
+				end
 			end
 		end
 		i = i +1
@@ -206,6 +211,21 @@ minetest.register_on_newplayer(function(player)
 	story.generator.new_player(player)
 	story.generator.gen_next_step(player)
 end)
+
+minetest.register_chatcommand("restart_story", {
+	params = "",
+	description = "restarts your story",
+	privs = {},
+	func = function(name, text)
+		local player = minetest.get_player_by_name(name)
+		if player and player:is_player() then
+			story.generator.new_player(player)
+			story.generator.gen_next_step(player)
+			return true, ""
+		end
+		return true, "Error"
+	end,
+})
 
 -- human
 minetest.register_entity("story:human", {

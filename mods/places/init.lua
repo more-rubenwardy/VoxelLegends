@@ -1,6 +1,7 @@
 places = {}
 places.pos = {}
 places.places_file = minetest.get_worldpath() .. "/places"
+places.show_places = false
 function places.register_place(name, pos)
 	places.pos[name] = pos
 end
@@ -53,6 +54,9 @@ minetest.register_chatcommand("setplace", {
 })
 
 minetest.register_on_joinplayer(function(player)
+	if not places.show_places then
+		return
+	end
 	if places.pos then
 		for k, v in pairs(places.pos) do 
 			player:hud_add({

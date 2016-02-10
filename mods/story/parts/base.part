@@ -1,7 +1,9 @@
 $dialog test
-$pos
+$place home
 $create
 $wait
 $dialog test
-$place testplace 
+$place homeB
 $create
+$wait
+$spawn pets:pig homePig
