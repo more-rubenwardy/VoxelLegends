@@ -16,10 +16,10 @@ default.inv_form = default.inv_form..default.gui_colors
 default.inv_form = default.inv_form..default.gui_bg
 default.inv_form = default.inv_form.."list[current_player;main;0,3.5;8,4;]"
 default.inv_form = default.inv_form..default.itemslot_bg(0,3.5,8,4)
-default.inv_form = default.inv_form.."list[current_player;craft;1,1;3,1;]"
-default.inv_form = default.inv_form..default.itemslot_bg(1,1,3,1)
-default.inv_form = default.inv_form.."list[current_player;craftpreview;5,1;1,1;]"
-default.inv_form = default.inv_form..default.itemslot_bg(5,1,1,1)
+default.inv_form = default.inv_form.."list[current_player;craft;2.5,0.5;3,1;]"
+default.inv_form = default.inv_form..default.itemslot_bg(2.5,0.5,3,1)
+default.inv_form = default.inv_form.."list[current_player;craftpreview;3.5,1.5;1,1;]"
+default.inv_form = default.inv_form..default.itemslot_bg(3.5,1.5,1,1)
 
 default.craft_form = "size[8,7.5;]"
 default.craft_form = default.craft_form..default.gui_colors
@@ -36,7 +36,7 @@ default.craft_form = default.craft_form..default.itemslot_bg(5,1,1,1)
 minetest.register_on_joinplayer(function(player)
 	player:hud_set_hotbar_image("gui_hotbar.png")
 	player:hud_set_hotbar_selected_image("gui_hotbar_selected.png")
-	player:set_inventory_formspec(default.inv_form)
+	player:set_inventory_formspec(default.inv_form:format(player:get_player_name()))
 	
 	player:set_properties({
 		mesh = "character.x",
