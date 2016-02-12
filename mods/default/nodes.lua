@@ -495,6 +495,7 @@ minetest.register_node("default:glass_with_stonebrick", {
 	groups = {crumbly = 3},
 })
 
+
 -- floor
 
 default.register_floor = function(color)
@@ -576,6 +577,12 @@ minetest.register_node("default:small_stone_tiles", {
 minetest.register_node("default:stonebrick", {
 	description = "Stonebrick",
 	tiles = {"default_stonebrick.png"},
+	groups = {cracky = 3},
+})
+
+minetest.register_node("default:mossy_stonebrick", {
+	description = "Mossy Stonebrick",
+	tiles = {"default_mossy_stonebrick.png"},
 	groups = {cracky = 3},
 })
 
