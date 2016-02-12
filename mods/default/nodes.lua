@@ -429,6 +429,25 @@ minetest.register_node("default:mushroom", {
 	groups = {crumbly = 3, plant = 1},
 })
 
+minetest.register_node("default:liana", {
+	description = "Liana",
+	drawtype = "signlike",
+	tiles = {"default_liana.png"},
+	inventory_image = "default_liana.png",
+	wield_image = "default_liana.png",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	sunlight_propagates = true,
+	walkable = false,
+	climbable = true,
+	is_ground_content = false,
+	selection_box = {
+		type = "wallmounted",
+	},
+	groups = {crumbly = 3, plant = 1},
+	legacy_wallmounted = true,
+})
+
 -- straw
 
 minetest.register_node("default:straw", {
