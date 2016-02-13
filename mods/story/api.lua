@@ -203,6 +203,9 @@ function story.generator.show(player, p)
 		number = 0x00FF00,
 		world_pos = p
 	})
+	if not p then
+		return
+	end
 
 	minetest.add_entity(p, "story:human")
 end
