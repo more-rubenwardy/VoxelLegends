@@ -9,7 +9,7 @@ minetest.register_node("torch:torch", {
 	light_source = 14,
 	walkable = false,
 	inventory_image = "torch_torch_inv.png",
-	wield_image = "torch_torch_inv.png",
+	--wield_image = "torch_torch_inv.png",
 })
 
 minetest.register_abm({
