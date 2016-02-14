@@ -17,6 +17,18 @@ minetest.register_node("default:sand", {
 	groups = {crumbly = 3, falling_node=1},
 })
 
+minetest.register_node("default:wet_grass", {
+	description = "Wet Grass",
+	tiles = {"default_grass_wet.png"},
+	groups = {crumbly = 3},
+})
+
+minetest.register_node("default:grass_flowers", {
+	description = "Grass with flowers",
+	tiles = {"default_grass_flowers.png"},
+	groups = {crumbly = 3},
+})
+
 minetest.register_node("default:grass", {
 	description = "Grass",
 	tiles = {"default_grass.png"},
