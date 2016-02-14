@@ -45,16 +45,26 @@ function pets.register_pet(name, def)
 			if self.pl ~= nil then
 				if self.pl:getpos() then
 					self.object:set_armor_groups({fleshy = 0, friendly = 100}) 
-					if vector.distance(self.object:getpos(), self.pl:getpos()) > 2 then 
-						local vec = vector.direction(self.object:getpos(), self.pl:getpos())
-						vec.y = vec.y * 10
+					local t = self.pl:getpos()
+					t.x = t.x + 1.5
+					t.z = t.z + 1.5
+					if vector.distance(self.object:getpos(), t) > 2 then 
+						local vec = vector.direction(self.object:getpos(), t)
+						--vec.y = vec.y * 10
+						if self.object:getpos().y < t.y+0.5 then
+							vec.y= vec.y + 2
+						else
+							vec.y= -3
+						end
 						self.object:setvelocity(vector.multiply(vec, 3))
 						local yaw = math.atan(vec.z/vec.x)+math.pi/2
 						yaw = yaw+(math.pi/2)
-						if self.pl:getpos().x > self.object:getpos().x then
+						if t.x > t.z then
 							yaw = yaw+math.pi
 						end
 						self.object:setyaw(yaw)
+					else
+						self.object:setvelocity({x=0, y=0, z=0})
 					end
 					if vector.distance(self.object:getpos(), self.pl:getpos()) > 15 then 
 						local vec = self.pl:getpos()
@@ -145,7 +155,7 @@ end)
 pets.register_pet("pets:pig", {
 	description  = "pig",
 	hp_max = 30,
-	collisionbox = {-0.5,-0.5,-0.5, 0.5,0.5,0.5},
+	collisionbox = {-0.3,-0.5,-0.3, 0.3,0.1,0.3},
 	mesh = "pets_pig.x",
 	textures = {"pets_pig.png",},
 })

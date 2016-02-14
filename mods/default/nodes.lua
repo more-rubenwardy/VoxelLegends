@@ -348,6 +348,34 @@ minetest.register_node("default:log_3", {
 
 -- plants
 
+minetest.register_node("default:sapling", {
+	description = "Sapling",
+	tiles = {"default_sapling.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	inventory_image = "default_sapling.png",
+	buildable_to = true,
+	walkable = false,
+	groups = {crumbly = 3, sapling = 1},
+})
+
+minetest.register_abm({
+	nodenames = {"default:sapling"},
+	neighbors = {"default:grass", "default:dirt"},
+	interval = 1.0,
+	chance = 1,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		minetest.set_node(pos, {name = "air"})
+		if math.random(2) == 1 then
+			local path = minetest.get_modpath("default") .. "/schematics/tree2.mts"
+			minetest.place_schematic({x = pos.x - 1, y = pos.y - 0, z = pos.z - 1}, path, 0, nil, false)
+		else
+			local path = minetest.get_modpath("default") .. "/schematics/tree1.mts"
+			minetest.place_schematic({x = pos.x - 2, y = pos.y - 0, z = pos.z - 2}, path, 0, nil, false)
+		end
+	end,
+})
+
 minetest.register_node("default:plant_grass", {
 	description = "Grass (Plant)",
 	tiles = {"default_plant_grass.png"},
