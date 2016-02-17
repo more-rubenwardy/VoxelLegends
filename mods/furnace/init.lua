@@ -10,7 +10,7 @@ local furnace_form = furnace_form..default.itemslot_bg(0,6.08,8,3)
 
 minetest.register_node("furnace:furnace", {
 	description = "Furnace",
-	tiles = {"furnace_stone_tile.png", "furnace_stone_tile.png", "furnace_stone_tile.png", "furnace_stone_tile.png","furnace_stone_tile.png","furnace_stone_front.png"},
+	tiles = {"furnace_stone_top.png", "furnace_stone_tile.png", "furnace_stone_tile.png", "furnace_stone_tile.png","furnace_stone_tile.png","furnace_stone_front.png"},
 	groups = {cracky = 2},
 	paramtype2 = "facedir",
 	on_construct = function(pos)
