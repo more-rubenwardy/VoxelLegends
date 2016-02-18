@@ -97,6 +97,15 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = "default:cobble 2",
+	recipe = {
+		{"default:stone_item", "default:stone_item", "default:stone_item"},
+		{"default:stone_item", "default:stone_item", "default:stone_item"},
+		{"default:stone_item", "default:stone_item", "default:stone_item"},
+	}
+})
+
 --workbench
 
 minetest.register_craft({

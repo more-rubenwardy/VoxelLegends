@@ -652,6 +652,18 @@ minetest.register_node("default:wet_stone", {
 	drop = {"default:stone_item 5"},
 })
 
+minetest.register_node("default:sandstone", {
+	description = "Sandstone",
+	tiles = {"default_sandstone.png"},
+	groups = {cracky = 3},
+})
+
+minetest.register_node("default:compressed_sandstone", {
+	description = "Compressed Sandstone",
+	tiles = {"default_compressed_sandstone.png"},
+	groups = {cracky = 3},
+})
+
 minetest.register_node("default:gravel", {
 	description = "Gravel",
 	tiles = {"default_gravel.png"},
