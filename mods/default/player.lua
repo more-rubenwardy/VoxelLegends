@@ -31,7 +31,7 @@ default.craft_form = default.craft_form..default.itemslot_bg(1.5,0,3,3)
 default.craft_form = default.craft_form.."list[current_player;craftpreview;5,1;1,1;]"
 default.craft_form = default.craft_form..default.itemslot_bg(5,1,1,1)
 
-
+default.player_anim = {}
 
 minetest.register_on_joinplayer(function(player)
 	player:hud_set_hotbar_image("gui_hotbar.png")
@@ -44,8 +44,8 @@ minetest.register_on_joinplayer(function(player)
 		visual = "mesh",
 		visual_size = {x=1, y=1},
 	})
-	-- player:set_animation({ x= 25, y= 60,}, 30, 0)
-	-- player:set_local_animation({x=0, y=20},{x= 25, y=60}, {x= 25, y=60}, {x= 25, y=60}, 30)
+	--player:set_animation({ x= 25, y= 60,}, 30, 0)
+	player:set_local_animation({x= 25, y=90},{x=0, y=20}, {x= 90, y=100}, {x= 90, y=100}, 30)
 	-- default.player_anim[player:get_player_name()] = "stand"
 
 	-- Testing of HUD elements
@@ -56,5 +56,33 @@ minetest.register_on_joinplayer(function(player)
 		number = 255,
 		world_pos = {x=0,y=0,z=0}
 	})
+end)
+
+local function set_pl_anim(a, b, name, player)
+	if default.player_anim[player:get_player_name()] ~= name then
+		player:set_animation({ x= a, y= b,}, 30, 0)
+		default.player_anim[player:get_player_name()] = name
+	end
+end
+
+minetest.register_globalstep(function(dtime)
+	for _, player in pairs(minetest.get_connected_players()) do
+		local name = player:get_player_name()
+		local controls = player:get_player_control()
+
+		if player:get_hp() == 0 then
+			--set_pl_anim(90, 100, "mine", player)
+		elseif controls.jump then
+			set_pl_anim(105, 120, "jump", player)
+		elseif controls.sneak then
+			set_pl_anim(125, 140, "sneak", player)
+		elseif controls.up or controls.down or controls.left or controls.right then
+			set_pl_anim(0, 20, "walk", player)
+		elseif controls.LMB then
+			set_pl_anim(90, 100, "mine", player)
+		else
+			set_pl_anim(25, 90, "stand", player)
+		end
+	end
 end)
 
