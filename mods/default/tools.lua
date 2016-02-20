@@ -53,6 +53,18 @@ minetest.register_tool("default:axe", {
 	}
 })
 
+minetest.register_tool("default:saw", {
+	description = "Saw\n For Level: - \n Damage: 13",
+	inventory_image = "default_saw.png",
+	tool_capabilities = {
+		max_drop_level=3,
+		groupcaps= {
+			choppy={times={[1]=0.30, [2]=0.20, [3]=0.10}, uses=70, maxlevel=1}
+		},
+		damage_groups = {fleshy=13},
+	}
+})
+
 minetest.register_tool("default:pick", {
 	description = "Pick\n For Level: - \n Damage: 20",
 	inventory_image = "default_pick.png",
