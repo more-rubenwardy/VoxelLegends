@@ -44,6 +44,16 @@ minetest.register_craftitem("default:string_strong", {
 	inventory_image = "default_string_strong.png",
 })
 
+minetest.register_craftitem("default:stick", {
+	description = "Stick",
+	inventory_image = "default_stick.png",
+})
+
+minetest.register_craftitem("default:twig", {
+	description = "Twig",
+	inventory_image = "default_twig.png",
+})
+
 minetest.register_craftitem("default:coin", {
 	description = "Coin",
 	inventory_image = "default_coin.png",

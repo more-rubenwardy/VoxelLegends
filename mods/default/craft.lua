@@ -43,6 +43,20 @@ minetest.register_node("default:workbench_v2", {
 -- wood
 
 minetest.register_craft({
+	output = "default:twig 3",
+	recipe = {
+		{"group:leaves"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:stick",
+	recipe = {
+		{"default:twig"},
+	}
+})
+
+minetest.register_craft({
 	output = "default:wood 3",
 	recipe = {
 		{"default:log_1"},
@@ -57,7 +71,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "default:wood",
+	output = "default:stick 4",
 	recipe = {
 		{"default:log_3"},
 	}
@@ -68,6 +82,23 @@ minetest.register_craft({
 	recipe = {
 		{"default:wood", "default:wood"},
 		{"default:wood", "default:wood"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:frame 2",
+	recipe = {
+		{"default:stick", "default:stick", "default:stick"},
+		{"default:stick", "default:stick", "default:stick"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:ladder",
+	recipe = {
+		{"default:stick", "", "default:stick"},
+		{"default:string_strong", "default:stick", "default:string_strong"},
+		{"default:stick", "", "default:stick"},
 	}
 })
 
@@ -155,7 +186,7 @@ minetest.register_craft({
 	recipe = {
 		{"", "default:log_1", ""},
 		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
 	}
 })
 
@@ -164,7 +195,7 @@ minetest.register_craft({
 	recipe = {
 		{"", "default:stone_item", ""},
 		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
 	}
 })
 
@@ -173,7 +204,7 @@ minetest.register_craft({
 	recipe = {
 		{"", "furnace:iron_plate", ""},
 		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
 	}
 })
 
@@ -182,7 +213,7 @@ minetest.register_craft({
 	recipe = {
 		{"", "furnace:iron_rod", ""},
 		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
 	}
 })
 
@@ -191,6 +222,6 @@ minetest.register_craft({
 	recipe = {
 		{"default:blade", "furnace:iron_plate", ""},
 		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
 	}
 })

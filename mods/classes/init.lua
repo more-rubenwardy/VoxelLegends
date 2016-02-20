@@ -154,7 +154,7 @@ classes.register_weapon("spear",2, 12, {
 	recipe = {
 		{"", "default:flint", ""},
 		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
 	}
 })
 
@@ -189,7 +189,7 @@ classes.register_weapon("hoe",2, 20, {
 	recipe = {
 		{"", "furnace:iron_rod", "default:blade"},
 		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
 	}
 })
 
@@ -202,7 +202,7 @@ classes.register_weapon("pitchfork",15, 30, {
 	recipe = {
 		{"furnace:iron_rod", "furnace:iron_rod", "furnace:iron_rod"},
 		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
 	}
 })
 
@@ -213,8 +213,8 @@ classes.register_weapon("stick",2, 30, {
 	damage = 9,
 	class = "thief",
 	recipe = {
-		{"", "default:log_3", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
+		{"", "default:stick", ""},
 	}
 })
 
@@ -225,9 +225,9 @@ classes.register_weapon("long_stick",20, 60, {
 	damage = 20,
 	class = "thief",
 	recipe = {
-		{"", "default:log_3", ""},
-		{"", "default:log_3", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
+		{"", "default:stick", ""},
+		{"", "default:stick", ""},
 	}
 })
 

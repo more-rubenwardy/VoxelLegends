@@ -19,9 +19,9 @@ minetest.register_craftitem("fishing:fishing_rod", {
 minetest.register_craft({
 	output = "fishing:fishing_rod",
 	recipe = {
-		{"default:log_3", "default:string", ""},
-		{"default:log_3", "default:string", ""},
-		{"default:log_3", "default:string", ""},
+		{"default:stick", "default:string", ""},
+		{"default:stick", "default:string", ""},
+		{"default:stick", "default:string", ""},
 	}
 })
 

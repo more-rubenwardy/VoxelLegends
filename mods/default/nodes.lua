@@ -61,6 +61,13 @@ minetest.register_node("default:leaves_1", {
 	groups = {crumbly = 3, leaves = 1},
 	walkable = false,
 	climbable = true,
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"default:sapling 2"},rarity = 3},
+			{items = {'default:leaves_1'}},
+		}
+	},
 })
 
 minetest.register_node("default:leaves_2", {
@@ -501,8 +508,8 @@ minetest.register_node("default:straw", {
 
 minetest.register_node("default:frame", {
 	description = "Frame",
-	tiles = {"default_frame.png"},
-	drawtype = "allfaces",
+	tiles = {"default_frame.png", "default_frame_detail.png"},
+	drawtype = "glasslike_framed_optional",
 	paramtype = "light",
 	groups = {choppy = 3},
 })

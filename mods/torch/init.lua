@@ -60,6 +60,6 @@ minetest.register_craft({
 	recipe = {
 		{"", "default:coal_lump", ""},
 		{"", "default:string_strong", ""},
-		{"", "default:log_3", ""},
+		{"", "default:stick", ""},
 	}
 })
