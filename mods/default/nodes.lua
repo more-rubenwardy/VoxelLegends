@@ -304,6 +304,12 @@ minetest.register_node("default:wooden_planks", {
 	groups = {choppy = 3},
 })
 
+minetest.register_node("default:wooden_planks_2", {
+	description = "Wooden Planks",
+	tiles = {"default_wooden_planks_2.png"},
+	groups = {choppy = 3},
+})
+
 -- log
 
 minetest.register_node("default:log_1", {
