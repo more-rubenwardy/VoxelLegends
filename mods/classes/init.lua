@@ -20,11 +20,12 @@ classes.register_weapon = function(name,fromLevel,levels, def)
 					if pointed_thing.type == "object" then
 						if xp.player_levels[user:get_player_name()] and xp.player_levels[user:get_player_name()] > i-1 then
 							pointed_thing.ref:punch(user, 10,minetest.registered_tools[itemstack:get_name()].tool_capabilities)
+							itemstack:add_wear(100)
 							print("[info]" .. user:get_player_name() .. " is fighting!")
 						else
 							cmsg.push_message_player(user, "[info] You have to be level "..tostring(i).. " to use this weapon!")	
 						end					
-						return nil
+						return itemstack
 					end
 				else
 					cmsg.push_message_player(user, "[info] You cant use this weapon.")	
@@ -47,6 +48,11 @@ classes.register_weapon = function(name,fromLevel,levels, def)
 			recipe = def.recipe,
 		})
 	end
+	minetest.register_craft({
+		output = "classes:"..name .. "_lvl_" .. tostring(i),
+		recipe = {"classes:"..name .. "_lvl_" .. tostring(i), "classes:"..name .. "_lvl_" ..tostring(i)},
+		type = "toolrepair",
+	})
 end
 
 function classes.register_tool(name, def)
@@ -163,7 +169,7 @@ classes.register_weapon("chemical_spear",2, 17, {
 	inventory_image = "classes_chemical_spear.png",
 	wield_scale = {x = 2, y=2, z = 1},
 	damage = 19,
-	class = "warrior",
+	class = "warrior"
 })
 
 classes.register_weapon("sword",20, 30, {
