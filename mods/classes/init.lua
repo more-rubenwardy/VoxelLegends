@@ -20,7 +20,7 @@ classes.register_weapon = function(name,fromLevel,levels, def)
 					if pointed_thing.type == "object" then
 						if xp.player_levels[user:get_player_name()] and xp.player_levels[user:get_player_name()] > i-1 then
 							pointed_thing.ref:punch(user, 10,minetest.registered_tools[itemstack:get_name()].tool_capabilities)
-							itemstack:add_wear(100)
+							itemstack:add_wear(300)
 							print("[info]" .. user:get_player_name() .. " is fighting!")
 						else
 							cmsg.push_message_player(user, "[info] You have to be level "..tostring(i).. " to use this weapon!")	
