@@ -15,7 +15,9 @@ function filter.register_material(name, drops)
 	filter.materials[name] = drops
 end
 
-filter.register_material("default:sand", {"default:stone_item", "default:diamond"})
+filter.register_material("default:sand", {"default:stone_item", "default:stick"})
+filter.register_material("default:dirt", {"default:stone_item", "default:stick", "default:twig"})
+filter.register_material("default:gravel", {"default:diamond", "default:ruby"})
 
 minetest.register_node("filter:filter", {
 	description = "Filter",
@@ -28,7 +30,8 @@ minetest.register_node("filter:filter", {
 		print("[filter] item : " .. item:to_string())
 		if item:get_count() == 1 then
 			if filter.materials[item:get_name()] then
-				inv:set_stack("main", 1, {name = filter.materials[item:get_name()][1]})
+				local mat = filter.materials[item:get_name()]
+				inv:set_stack("main", 1, {name = mat[math.random(1, #mat)]})
 			else
 				meta:set_string("infotext", "[filter] This wont work...")
 			end
