@@ -15,9 +15,9 @@ function filter.register_material(name, drops)
 	filter.materials[name] = drops
 end
 
-filter.register_material("default:sand", {"default:stone_item", "default:stick"})
-filter.register_material("default:dirt", {"default:stone_item", "default:stick", "default:twig"})
-filter.register_material("default:gravel", {"default:diamond", "default:ruby"})
+filter.register_material("default:sand", {"default:stone_item", "default:stick", "default:sandstone"})
+filter.register_material("default:dirt", {"default:stone_item", "default:stick", "default:twig", "default:flint"})
+filter.register_material("default:gravel", {"default:diamond", "default:ruby", "default:twig", "default:stone_item", "default:flint", "default:flint", "default:flint"})
 
 minetest.register_node("filter:filter", {
 	description = "Filter",

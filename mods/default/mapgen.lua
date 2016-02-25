@@ -38,6 +38,18 @@ minetest.register_biome({
 })
 
 minetest.register_biome({
+	name = "jungle",
+	node_top = "default:wet_grass",
+	depth_top = 1,
+	node_filler = "default:dirt",
+	depth_filler = 0,
+	y_min = 6,
+	y_max = 31000,
+	heat_point = 20,
+	humidity_point = 40,
+})
+
+minetest.register_biome({
 	name = "grassland",
 	node_top = "default:grass",
 	depth_top = 1,
@@ -293,6 +305,34 @@ minetest.register_decoration({
 	y_max = 31000,
 	schematic = minetest.get_modpath("default").."/schematics/drytree2.mts",
 	flags = "place_center_x, place_center_z",
+})
+
+-- jungle
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = {"default:wet_grass"},
+	sidelen = 16,
+	biomes = {"jungle"},
+	fill_ratio = 0.02,
+	y_min = 1,
+	y_max = 31000,
+	schematic = minetest.get_modpath("default").."/schematics/jungletree.mts",
+	flags = "place_center_x, place_center_z",
+})
+
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:wet_grass"},
+	sidelen = 16,
+	fill_ratio = 0.03,
+	biomes = {
+		"jungle"
+	},
+	y_min = 0,
+	y_max = 31000,
+	decoration = "default:flower_1",
 })
 
 -- ores

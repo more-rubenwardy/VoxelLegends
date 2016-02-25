@@ -359,6 +359,12 @@ minetest.register_node("default:log_3", {
 	},
 })
 
+minetest.register_node("default:jungle_tree", {
+	description = "Jungle Tree",
+	tiles = {"default_jungle_tree_top.png", "default_jungle_tree_top.png", "default_jungle_tree.png"},
+	groups = {choppy = 3},
+})
+
 -- plants
 
 minetest.register_node("default:sapling", {
