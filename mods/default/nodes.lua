@@ -683,6 +683,12 @@ minetest.register_node("default:compressed_sandstone", {
 	groups = {cracky = 3},
 })
 
+minetest.register_node("default:sandstone_brick", {
+	description = "Sandstone Brick",
+	tiles = {"default_sandstone_brick.png"},
+	groups = {cracky = 3},
+})
+
 minetest.register_node("default:gravel", {
 	description = "Gravel",
 	tiles = {"default_gravel.png"},
