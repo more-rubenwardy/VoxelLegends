@@ -106,3 +106,17 @@ minetest.register_abm({
 		end	
 	end,
 })
+
+-- craft
+
+blueprint.register_blueprint("pipe", {
+	description = "Pipe",
+	materials = {"furnace:iron_plate"},
+	out = "pipe:pipe"
+})
+
+blueprint.register_blueprint("pump", {
+	description = "Pump",
+	materials = {"furnace:iron_plate", "furnace:iron_plate", "furnace:iron_plate", "pipe:pipe"},
+	out = "pipe:pump"
+})
