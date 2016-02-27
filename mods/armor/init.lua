@@ -11,7 +11,7 @@ function armor.register_armor(name, def)
 		protection = def.protection,
 		skin = def.skin .. "_chestplate.png",
 	})
-	minetest.register_craftitem(name .. "_cboots", {
+	minetest.register_craftitem(name .. "_boots", {
 		description = def.description .. " Boots",
 		inventory_image = def.tex .. "_boots.png",
 		protection = def.protection,
@@ -117,6 +117,29 @@ armor.register_armor("armor:diamond", {
 	tex = "armor_diamond",
 	protection = 28,
 	skin = "armor_skin_diamond"
+})
+
+
+--craft
+blueprint.register_blueprint("armor_diamond_chestplate", {
+	description = "Diamond Chestplate",
+	materials = {"furnace:iron_plate", "furnace:iron_plate", "default:diamond", "default:diamond"},
+	out = "armor:diamond_chestplate",
+	color = "red"
+})
+
+blueprint.register_blueprint("armor_diamond_leggings", {
+	description = "Diamond Leggings",
+	materials = {"furnace:iron_plate", "default:diamond"},
+	out = "armor:diamond_leggings",
+	color = "red"
+})
+
+blueprint.register_blueprint("armor_diamond_boots", {
+	description = "Diamond Boots",
+	materials = {"furnace:iron_plate", "default:diamond"},
+	out = "armor:diamond_boots",
+	color = "red"
 })
 
 armor.load_armor()

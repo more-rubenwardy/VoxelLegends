@@ -7,7 +7,7 @@ function blueprint.register_blueprint(name, def)
 
 	minetest.register_craftitem(":blueprint:"..name, {
 		description = "Blueprint : " .. def.description,
-		inventory_image = "blueprint_blueprint.png",
+		inventory_image = "blueprint_blueprint.png^[colorize:"..def.color..":80",
 	})
 
 	minetest.register_craft({
