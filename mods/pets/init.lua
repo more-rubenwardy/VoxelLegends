@@ -141,14 +141,19 @@ end
 
 minetest.register_on_joinplayer(function(player)
 	if pets.players_pets[player:get_player_name()] then
-		local vec = player:getpos()
-		vec.x = vec.x + math.random(-3, 3)
-		vec.z = vec.z + math.random(-3, 3)
-		vec.y = vec.y + 3
 		print("[pets] add entity " .. pets.players_pets[player:get_player_name()])
-		local plpet = minetest.add_entity(vec, pets.players_pets[player:get_player_name()])
-		plpet:get_luaentity().pl = player
-		plpet:get_luaentity().is_pet = true
+		minetest.after(3, function(player)
+			if not player then
+				return
+			end
+			local vec = player:getpos()
+			vec.x = vec.x + math.random(-3, 3)
+			vec.z = vec.z + math.random(-3, 3)
+			vec.y = vec.y + 3
+			local plpet = minetest.add_entity(vec, pets.players_pets[player:get_player_name()])
+			plpet:get_luaentity().pl = player
+			plpet:get_luaentity().is_pet = true
+		end , player)
 	end
 end)
 
@@ -167,5 +172,6 @@ pets.register_pet("pets:sheep", {
 	mesh = "pets_sheep.x",
 	textures = {"pets_sheep.png",},
 })
+
 pets.load_pets()
 
