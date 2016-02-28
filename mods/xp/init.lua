@@ -42,7 +42,10 @@ function xp.add_lvl(player)
 end
 
 minetest.register_on_joinplayer(function(player)
-	if xp.player_xp[player:get_player_name()] then
+	if not player then
+		return
+	end
+	if xp.player_xp[player:get_player_name()] and xp.player_levels[player:get_player_name()] then
 		xp.xp_hud[player:get_player_name()] = player:hud_add({
 			hud_elem_type = "statbar",
 			position = {x=0.5,y=1.0},

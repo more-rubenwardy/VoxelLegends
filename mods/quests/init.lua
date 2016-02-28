@@ -129,8 +129,6 @@ minetest.register_node("quests:quest_block", {
 
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local meta = minetest.get_meta(pos)
-		print(itemstack)
-		print(itemstack:to_table())
 		if not itemstack or not itemstack:to_table() then
 			return
 		end
