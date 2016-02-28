@@ -108,6 +108,27 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = "default:jungle_wood 2",
+	recipe = {
+		{"default:jungle_tree"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:wooden_planks_jungle",
+	recipe = {
+		{"default:frame", "default:jungle_wood"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:wooden_planks_2_jungle",
+	recipe = {
+		{"default:frame", "default:jungle_wood", "default:jungle_wood"},
+	}
+})
+
 -- stone
 
 minetest.register_craft({

@@ -310,6 +310,24 @@ minetest.register_node("default:wooden_planks_2", {
 	groups = {choppy = 3},
 })
 
+minetest.register_node("default:jungle_wood", {
+	description = "Jungle Wood",
+	tiles = {"default_jungle_wood.png"},
+	groups = {choppy = 3},
+})
+
+minetest.register_node("default:wooden_planks_jungle", {
+	description = "Wooden Planks (Jungle wood)",
+	tiles = {"default_wooden_planks_jungle.png"},
+	groups = {choppy = 3},
+})
+
+minetest.register_node("default:wooden_planks_2_jungle", {
+	description = "Wooden Planks (Jungle wood)",
+	tiles = {"default_wooden_planks_2_jungle.png"},
+	groups = {choppy = 3},
+})
+
 -- log
 
 minetest.register_node("default:log_1", {
