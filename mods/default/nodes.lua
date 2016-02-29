@@ -780,6 +780,14 @@ minetest.register_node("default:stone_with_ruby", {
 	drop = "default:ruby",
 })
 
+--quartz
+
+minetest.register_node("default:quartz", {
+	description = "Quartz",
+	tiles = {"default_quartz.png"},
+	groups = {cracky = 2},
+})
+
 -- rail
 
 
