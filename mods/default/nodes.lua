@@ -652,6 +652,12 @@ minetest.register_node("default:desert_stone", {
 	drop = "default:stone_item 5",
 })
 
+minetest.register_node("default:andesite", {
+	description = "Andesite",
+	tiles = {"default_andesite.png"},
+	groups = {cracky = 3},
+})
+
 minetest.register_node("default:cobble", {
 	description = "Cobble",
 	tiles = {"default_cobble.png"},
