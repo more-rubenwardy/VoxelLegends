@@ -10,6 +10,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	local c_wood = minetest.get_content_id("default:wood")
 	local c_wooden_planks = minetest.get_content_id("default:wooden_planks")
 	local c_wooden_planks_2 = minetest.get_content_id("default:wooden_planks_2")
+	local c_jungletree = minetest.get_content_id("default:jungle_tree")
 
 	local c_glass = minetest.get_content_id("default:glass")
 
@@ -35,29 +36,40 @@ minetest.register_on_generated(function(minp, maxp, seed)
 						first_height = math.floor(heightmap[h_index]/4)*4
 					end
 					if math.abs(perlin1:get2d({x=part.x, y=part.z})) > 0.7 then
-						if y < (math.abs(perlin1:get2d({x=part.x, y=part.z})) * 8 -2) + first_height and y > height then
+						if y < 8 + first_height and y > height then
 							if y > -1 and x > part.x and z > part.z and x < part.x+9 and z < part.z+9 then
 								-- walls
 								if part.x+1 == x then
-									data[pos] = c_wood
+									data[pos] = c_wooden_planks
 								end
 								if part.z+1 == z then
-									data[pos] = c_wood
+									data[pos] = c_wooden_planks
 								end
 
 								if part.x+8 == x then
-									data[pos] = c_wood
+									data[pos] = c_wooden_planks
 								end
 								if part.z+8 == z then
-									data[pos] = c_wood
+									data[pos] = c_wooden_planks
 								end
 
 								-- roof/floor
-								if part.y == y then
-									data[pos] = c_wood
-								end
 								if part.y+3 == y then
-									data[pos] = c_wood
+									data[pos] = c_wooden_planks_2
+								end
+								
+								-- jungletree
+								if part.z+1 == z and part.x+1 == x then
+									data[pos] = c_jungletree
+								end
+								if part.z+8 == z and part.x+1 == x then
+									data[pos] = c_jungletree
+								end
+								if part.z+1 == z and part.x+8 == x then
+									data[pos] = c_jungletree
+								end
+								if part.z+8 == z and part.x+8 == x then
+									data[pos] = c_jungletree
 								end
 							elseif height == y then
 								data[pos] = c_stonebrick
