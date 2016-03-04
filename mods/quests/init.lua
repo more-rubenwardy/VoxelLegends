@@ -67,15 +67,12 @@ minetest.register_chatcommand("quests", {
 })
 
 minetest.register_on_dignode(function(pos, oldnode, digger)
-	print("[quests] dig")
 	if not digger or not digger:is_player() then
 		return
 	end
-	print("[quests] dig 1")
 	if not quests.player_quests[digger:get_player_name()] then
 		return
 	end
-	print("[quests] dig 2")
 	table.foreach(quests.player_quests[digger:get_player_name()], function(k, v)
 		print("[quests] run quest " .. v.quest_type .. ", " .. v.node)
 		if v.quest_type == "dignode" and oldnode.name == v.node then
