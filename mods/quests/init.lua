@@ -34,8 +34,9 @@ function quests.add_quest(player, quest)
 	if not quests.player_quests[player] then
 		quests.player_quests[player] = {}
 	end
-
+	print("[quests] add quest")
 	table.insert(quests.player_quests[player], quest)
+	quests.save_quests()
 end
 
 quests.show_quests_form = "size[8,7.5;]"
@@ -57,7 +58,7 @@ minetest.register_chatcommand("quests", {
 		local s = quests.show_quests_form
 		local txt = ""
 		for k,v in pairs(quests.player_quests[name]) do
-			txt = txt .. " -> " .. k.quest_type .. " " .. v.node .. " (" .. tostring(v.progress) .. "/" .. tostring(v.max) .. ")\n"
+			txt = txt .. " -> " .. v.quest_type .. " " .. v.node .. " (" .. tostring(v.progress) .. "/" .. tostring(v.max) .. ")\n"
 		end
 		s = string.format(s, txt)
 		minetest.show_formspec(name, "quests:show_quests", s)
@@ -66,19 +67,24 @@ minetest.register_chatcommand("quests", {
 })
 
 minetest.register_on_dignode(function(pos, oldnode, digger)
+	print("[quests] dig")
 	if not digger or not digger:is_player() then
 		return
 	end
+	print("[quests] dig 1")
 	if not quests.player_quests[digger:get_player_name()] then
 		return
 	end
+	print("[quests] dig 2")
 	table.foreach(quests.player_quests[digger:get_player_name()], function(k, v)
-		if v.quest_type == "dignode" and newnode.name == v.node then
+		print("[quests] run quest " .. v.quest_type .. ", " .. v.node)
+		if v.quest_type == "dignode" and oldnode.name == v.node then
 			v.progress = v.progress + 1
-			if v.v.progress > (v.max-1) and v.done == false then
-				xp.add_xp(player, v.xp)
+			if v.progress > (v.max-1) and v.done == false then
+				xp.add_xp(digger, v.xp)
 				v.done = true
 			end
+			quests.save_quests()
 		end
 	end)
 end)
@@ -93,10 +99,11 @@ minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack
 	table.foreach(quests.player_quests[placer:get_player_name()], function(k, v)
 		if v.quest_type == "placenode" and newnode.name == v.node then
 			v.progress = v.progress + 1
-			if v.v.progress > (v.max-1) and v.done == false then
-				xp.add_xp(player, v.xp)
+			if v.progress > (v.max-1) and v.done == false then
+				xp.add_xp(placer, v.xp)
 				v.done = true
 			end
+			quests.save_quests()
 		end
 	end)
 end)
@@ -104,6 +111,8 @@ end)
 minetest.register_on_newplayer(function(player)
 	quests.player_quests[player:get_player_name()] = {}
 end)
+
+quests.load_quests()
 
 -- side quests
 

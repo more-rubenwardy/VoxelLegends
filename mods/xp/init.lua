@@ -13,6 +13,9 @@ function xp.add_xp(player, num)
 		xp.player_xp[player:get_player_name()] = xp.player_xp[player:get_player_name()] + num
 	else
 		xp.player_xp[player:get_player_name()] = num
+		if not xp.player_levels[player:get_player_name()] then
+			xp.player_levels[player:get_player_name()] = 1
+		end	
 	end
 
 	cmsg.push_message_player(player, "You got "..tostring(num).. " xp!")

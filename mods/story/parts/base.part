@@ -2,8 +2,4 @@ $dialog test
 $place home
 $create
 $wait
-$dialog test
-$place homeB
-$create
-$wait
-$spawn pets:pig homePig
+$quest dignode default:grass 10 39

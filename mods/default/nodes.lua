@@ -116,6 +116,22 @@ minetest.register_node("default:stones_on_floor", {
 
 })
 
+minetest.register_node("default:rope", {
+	description = "Rope",
+	tiles = {"default_rope.png"},
+	groups = {snappy = 3},
+	paramtype = "light",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+				{-0.1, -0.5, -0.1, 0.1, 0.5, 0.1},
+			},
+	},
+	walkable = false,
+	climbable = true,
+})
+
 
 -- box
 

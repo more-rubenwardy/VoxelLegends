@@ -172,6 +172,16 @@ function story.generator.run(part, player, line_pos)
 						story.generator.players_storys[player:get_player_name()].pos = places.pos[cmd[2]]
 					end
 				end
+				if cmd[1] == "$quest" and cmd[2] and cmd[3] and cmd[4] and cmd[5] and tonumber(cmd[4]) and tonumber(cmd[5]) then
+					quests.add_quest(player:get_player_name(), {
+						quest_type = cmd[2],
+						node = cmd[3],
+						progress = 0,
+						done = false,
+						max = tonumber(cmd[4]),
+						xp = tonumber(cmd[5])
+					})
+				end
 				if cmd[1] == "$pos" then
 					story.generator.players_storys[player:get_player_name()].pos = {x=0,y=10,z=0}
 				end
