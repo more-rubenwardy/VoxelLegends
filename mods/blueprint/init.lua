@@ -23,4 +23,8 @@ end
 minetest.register_craftitem("blueprint:empty", {
 	description = "Empty Blueprint",
 	inventory_image = "blueprint_empty.png",
+	on_place = function(itemstack, placer, pointed_thing)
+		itemstack:set_name(blueprint.all[math.random(#blueprint.all)])
+		return itemstack
+	end
 })

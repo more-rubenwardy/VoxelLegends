@@ -152,6 +152,26 @@ minetest.register_craftitem("furnace:copper_plate", {
 	inventory_image = "furnace_copper_plate.png",
 })
 
+-- blocks
+
+minetest.register_node("furnace:iron_block", {
+	description = "Iron Block",
+	tiles = {"furnace_iron_block.png"},
+	groups = {cracky = 1},
+})
+
+minetest.register_node("furnace:gold_block", {
+	description = "Gold Block",
+	tiles = {"furnace_gold_block.png"},
+	groups = {cracky = 1},
+})
+
+minetest.register_node("furnace:copper_block", {
+	description = "Copper Block",
+	tiles = {"furnace_copper_block.png"},
+	groups = {cracky = 1},
+})
+
 
 -- crafting
 
@@ -189,4 +209,30 @@ minetest.register_craft({
 		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
 		{"default:wood", "default:wood", "default:wood"},
 	}
+})
+
+minetest.register_craft({
+	output = "furnace:iron_block",
+	type = "shapeless",
+	recipe = {"default:frame", "furnace:iron_plate", "furnace:iron_plate", "furnace:iron_plate", "furnace:iron_plate", "furnace:iron_plate", "furnace:iron_plate"}
+})
+
+minetest.register_craft({
+	output = "furnace:gold_block",
+	type = "shapeless",
+	recipe = {"default:frame", "furnace:gold_plate", "furnace:gold_plate", "furnace:gold_plate", "furnace:gold_plate", "furnace:gold_plate", "furnace:gold_plate"}
+})
+
+minetest.register_craft({
+	output = "furnace:copper_block",
+	type = "shapeless",
+	recipe = {"default:frame", "furnace:copper_plate", "furnace:copper_plate", "furnace:copper_plate", "furnace:copper_plate", "furnace:copper_plate", "furnace:copper_plate"}
+})
+
+minetest.register_node("furnace:steel_frame", {
+	description = "Steel Frame",
+	tiles = {"furnace_steel_frame.png", "furnace_steel_frame_detail.png"},
+	drawtype = "glasslike_framed_optional",
+	paramtype = "light",
+	groups = {choppy = 2},
 })

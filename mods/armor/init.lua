@@ -35,7 +35,7 @@ function armor.update_armor(name, pl)
 		armor.data[name][k] = v:to_string() 
 		print(armor.data[name][k])
 	end
-	pl:set_armor_groups({fleshy = p})
+	pl:set_armor_groups({friendly = p})
 	armor.save_armor()
 end
 
@@ -70,6 +70,7 @@ function armor.save_armor()
 end
 
 minetest.register_on_joinplayer(function(player)
+	player:set_armor_groups({friendly = 100})
 	if armor.invs[player:get_player_name()] then
 		return
 	end
@@ -91,6 +92,7 @@ minetest.register_on_joinplayer(function(player)
 	else
 		armor.data[player:get_player_name()] = {}
 	end
+	armor.update_armor(player:get_player_name(), player)
 	
 end)
 

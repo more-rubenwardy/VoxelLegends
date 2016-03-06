@@ -62,7 +62,7 @@ mobs.register_mob("mobs:angry_player", {
 		max_drop_level = 0,
 		groupcaps = {
 		},
-		damage_groups = {fleshy=3},
+		damage_groups = {friendly=3},
 	},
 	collisionbox = {-0.3, -1, -0.3, 0.3, 0.5, 0.3},
 	description = "Angry Player",

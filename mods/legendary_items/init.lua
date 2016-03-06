@@ -1,5 +1,7 @@
 legendary_items = {}
+legendary_items.rare_weapons = {}
 legendary_items.register_rare_weapon = function(name, forlevel, def)
+	table.insert(legendary_items.rare_weapons, name)
 	minetest.register_tool(":legendary_items:"..name, {
 		description = def.description.."\n For Level: ".. tostring(forlevel).. "\n Damage: " .. tostring(def.damage) .. "\n Rare Item",
 		inventory_image = def.inventory_image,
@@ -13,11 +15,12 @@ legendary_items.register_rare_weapon = function(name, forlevel, def)
 			if pointed_thing.type == "object" then
 				if xp.player_levels[user:get_player_name()] and xp.player_levels[user:get_player_name()] > forlevel-1 then
 					pointed_thing.ref:punch(user, 10,minetest.registered_tools[itemstack:get_name()].tool_capabilities)
+					itemstack:add_wear(300)
 					print("[info]" .. user:get_player_name() .. " is fighting!")
 				else
 					cmsg.push_message_player(user, "[info] You have to be level "..tostring(forlevel).. " to use this weapon!")	
 				end					
-				return nil
+				return itemstack
 			end
 		end
 	})
