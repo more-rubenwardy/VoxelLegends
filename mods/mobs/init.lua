@@ -6,6 +6,12 @@ function mobs.get_velocity(v, yaw, y)
 end
 
 function mobs.register_mob(name, def)
+	if not def.hp then
+		if def.lvl and def.hits then
+			def.hp = classes.get_dmg(def.lvl)*def.hits
+		end
+	end
+
 	minetest.register_entity(name, {
 		hp_max = def.hp,
 		physical = true,
@@ -56,7 +62,8 @@ end
 mobs.register_mob("mobs:angry_player", {
 	mesh = "character.x",
 	textures = {"character.png",},
-	hp = 40,
+	lvl = 3,
+	hits = 6,
 	dmg = {
 		full_punch_interval = 0.9,
 		max_drop_level = 0,

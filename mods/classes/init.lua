@@ -2,7 +2,17 @@ classes = {}
 classes.all_classes = {}
 classes.selected = {}
 classes.classes_file = minetest.get_worldpath() .. "/classes"
+
+function classes.get_dmg(lvl)
+	return lvl+2
+end
+
 classes.register_weapon = function(name,fromLevel,levels, def)
+	if not def.damage then
+		if def.damage_m and def.damage_d then
+			def.damage = math.floor(classes.get_dmg(fromLevel)*def.damage_m-def.damage_d)
+		end
+	end
 	for i = fromLevel, levels, 1 do
 		minetest.register_tool("classes:"..name .. "_lvl_" .. tostring(i), {
 			description = def.description.."\n For Level: ".. tostring(i).. "\n Damage: " .. tostring(def.damage+ i-fromLevel) .." \n Class: " .. def.class,
@@ -155,7 +165,8 @@ classes.register_weapon("spear",2, 12, {
 	description = "Spear",
 	inventory_image = "classes_spear.png",
 	wield_scale = {x = 2, y=2, z = 1},
-	damage = 17,
+	damage_m = 1.0,
+	damage_d = 0,
 	class = "warrior",
 	recipe = {
 		{"", "default:flint", ""},
@@ -164,11 +175,12 @@ classes.register_weapon("spear",2, 12, {
 	}
 })
 
-classes.register_weapon("chemical_spear",2, 17, {
+classes.register_weapon("chemical_spear",5, 17, {
 	description = "Chemical Spear",
 	inventory_image = "classes_chemical_spear.png",
 	wield_scale = {x = 2, y=2, z = 1},
-	damage = 19,
+	damage_m = 1.1,
+	damage_d = -1,
 	class = "warrior"
 })
 
@@ -176,7 +188,8 @@ classes.register_weapon("sword",20, 30, {
 	description = "Sword",
 	inventory_image = "classes_sword.png",
 	wield_scale = {x = 1.5, y=1.5, z = 1},
-	damage = 21,
+	damage_m = 1.0,
+	damage_d = 0,
 	class = "warrior",
 	recipe = {
 		{"", "default:blade", ""},
@@ -190,7 +203,8 @@ classes.register_weapon("hoe",2, 20, {
 	description = "Hoe",
 	inventory_image = "classes_hoe.png",
 	wield_scale = {x = 1, y=1, z = 1},
-	damage = 12,
+	damage_m = 0.9,
+	damage_d = 1,
 	class = "farmer",
 	recipe = {
 		{"", "furnace:iron_rod", "default:blade"},
@@ -203,7 +217,8 @@ classes.register_weapon("pitchfork",15, 30, {
 	description = "Pitchfork",
 	inventory_image = "classes_pitchfork.png",
 	wield_scale = {x = 1, y=1, z = 1},
-	damage = 18,
+	damage_m = 0.95,
+	damage_d = 0,
 	class = "farmer",
 	recipe = {
 		{"furnace:iron_rod", "furnace:iron_rod", "furnace:iron_rod"},
@@ -216,7 +231,8 @@ classes.register_weapon("stick",2, 30, {
 	description = "Stick",
 	inventory_image = "classes_stick.png",
 	wield_scale = {x = 1, y=1, z = 1},
-	damage = 9,
+	damage_m = 0.8,
+	damage_d = 1,
 	class = "thief",
 	recipe = {
 		{"", "default:stick", ""},
@@ -228,7 +244,8 @@ classes.register_weapon("long_stick",20, 60, {
 	description = "Long Stick",
 	inventory_image = "classes_stick.png",
 	wield_scale = {x = 2, y=2, z = 1},
-	damage = 20,
+	damage_m = 0.8,
+	damage_d = 1,
 	class = "thief",
 	recipe = {
 		{"", "default:stick", ""},
