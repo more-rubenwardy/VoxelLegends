@@ -48,3 +48,12 @@ minetest.register_node("filter:filter", {
 		inv:set_size("main", 1)
 	end,
 })
+
+minetest.register_craft({
+	output = "filter:filter",
+	recipe = {
+		{"default:string_strong", "default:string_strong", "default:string_strong"},
+		{"default:string_strong", "default:string_strong", "default:string_strong"},
+		{"furnace:iron_rod", "furnace:iron_plate", "furnace:iron_rod"},
+	}
+})
