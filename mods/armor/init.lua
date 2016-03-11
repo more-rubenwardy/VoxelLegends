@@ -23,6 +23,12 @@ function armor.register_armor(name, def)
 		protection = def.protection,
 		skin = def.skin .. "_leggings.png",
 	})
+	minetest.register_craftitem(name .. "_helm", {
+		description = def.description .. " Helm",
+		inventory_image = def.tex .. "_helm.png",
+		protection = def.protection,
+		skin = def.skin .. "_helm.png",
+	})
 end
 
 function armor.update_armor(name, pl)
@@ -39,8 +45,8 @@ function armor.update_armor(name, pl)
 	armor.save_armor()
 end
 
-default.inv_form = default.inv_form .. "list[detached:armor_%s;main;0,0;1,3;]"
-default.inv_form = default.inv_form.. default.itemslot_bg(0,0,1,3)
+default.inv_form = default.inv_form .. "list[detached:armor_%s;main;0,0.5;2,2;]"
+default.inv_form = default.inv_form.. default.itemslot_bg(0,0.5,2,2)
 
 function armor.load_armor()
 	local input = io.open(armor.armor_file, "r")
@@ -83,12 +89,15 @@ minetest.register_on_joinplayer(function(player)
 			armor.update_armor(player:get_player_name(), player)
 		end,
 	})
-	armor.invs[player:get_player_name()]:set_size("main", 3)
+	armor.invs[player:get_player_name()]:set_size("main", 4)
 
 	if armor.data[player:get_player_name()] then
 		armor.invs[player:get_player_name()]:add_item('main', armor.data[player:get_player_name()][1])
 		armor.invs[player:get_player_name()]:add_item('main', armor.data[player:get_player_name()][2])
 		armor.invs[player:get_player_name()]:add_item('main', armor.data[player:get_player_name()][3])
+		if armor.data[player:get_player_name()][4] then
+			armor.invs[player:get_player_name()]:add_item('main', armor.data[player:get_player_name()][4])
+		end
 	else
 		armor.data[player:get_player_name()] = {}
 	end
@@ -103,21 +112,21 @@ end)
 armor.register_armor("armor:iron", {
 	description = "Iron",
 	tex = "armor_iron",
-	protection = 15,
+	protection = 12,
 	skin = "armor_skin_iron"
 })
 
 armor.register_armor("armor:copper", {
 	description = "Copper",
 	tex = "armor_copper",
-	protection = 20,
+	protection = 15,
 	skin = "armor_skin_copper"
 })
 
 armor.register_armor("armor:diamond", {
 	description = "Diamond",
 	tex = "armor_diamond",
-	protection = 28,
+	protection = 20,
 	skin = "armor_skin_diamond"
 })
 
