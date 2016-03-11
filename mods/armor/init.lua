@@ -153,4 +153,11 @@ blueprint.register_blueprint("armor_diamond_boots", {
 	color = "red"
 })
 
+blueprint.register_blueprint("armor_diamond_helm", {
+	description = "Diamond Helm",
+	materials = {"furnace:iron_plate", "default:diamond"},
+	out = "armor:diamond_helm",
+	color = "red"
+})
+
 armor.load_armor()
