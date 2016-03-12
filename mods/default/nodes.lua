@@ -410,6 +410,10 @@ minetest.register_node("default:sapling", {
 	buildable_to = true,
 	walkable = false,
 	groups = {crumbly = 3, sapling = 1},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5},
+	},
 })
 
 minetest.register_abm({
@@ -438,6 +442,10 @@ minetest.register_node("default:plant_grass", {
 	buildable_to = true,
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5},
+	},
 })
 
 minetest.register_node("default:plant_grass_2", {
@@ -450,6 +458,10 @@ minetest.register_node("default:plant_grass_2", {
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
 	drop = "default:plant_grass",
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5},
+	},
 })
 
 minetest.register_node("default:plant_grass_3", {
@@ -462,6 +474,10 @@ minetest.register_node("default:plant_grass_3", {
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
 	drop = "default:plant_grass",
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5},
+	},
 })
 
 minetest.register_node("default:plant_grass_4", {
@@ -474,6 +490,10 @@ minetest.register_node("default:plant_grass_4", {
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
 	drop = "default:plant_grass",
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5},
+	},
 })
 
 minetest.register_node("default:plant_grass_5", {
@@ -486,6 +506,10 @@ minetest.register_node("default:plant_grass_5", {
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
 	drop = "default:plant_grass",
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5},
+	},
 })
 
 minetest.register_node("default:flower_1", {
@@ -497,6 +521,10 @@ minetest.register_node("default:flower_1", {
 	buildable_to = true,
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5},
+	},
 })
 
 minetest.register_node("default:flower_2", {
@@ -509,6 +537,10 @@ minetest.register_node("default:flower_2", {
 	buildable_to = true,
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5},
+	},
 })
 
 minetest.register_node("default:mushroom", {
@@ -520,6 +552,10 @@ minetest.register_node("default:mushroom", {
 	buildable_to = true,
 	walkable = false,
 	groups = {crumbly = 3, plant = 1},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5},
+	},
 })
 
 minetest.register_node("default:liana", {

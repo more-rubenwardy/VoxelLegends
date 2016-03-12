@@ -11,6 +11,10 @@ function farming.register_plant(name, steps, def)
 			drop = def.drop .. " " .. tostring(i),
 			groups = {crumbly=3},
 			walkable = false,
+			selection_box = {
+				type = "fixed",
+				fixed = {-0.5, -0.5, -0.5, 0.5, -0.4, 0.5},
+			},
 		})
 		minetest.register_abm({
 			nodenames = {"farming:"..name.."_"..tostring(i)},
