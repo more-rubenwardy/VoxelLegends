@@ -167,9 +167,20 @@ function story.generator.run(part, player, line_pos)
 				if cmd[1] == "$create" then
 					story.generator.show(player, story.generator.players_storys[player:get_player_name()].pos)
 				end
-				if cmd[1] == "$place" and cmd[2] then
-					if places.pos[cmd[2]] then
-						story.generator.players_storys[player:get_player_name()].pos = places.pos[cmd[2]]
+				if cmd[1] == "$place" and cmd[2] and cmd[3] then
+					if cmd[2] == "at" then
+						if places.pos[cmd[3]] then
+							story.generator.players_storys[player:get_player_name()].pos = places.pos[cmd[3]]
+						end
+					elseif cmd[2] == "near" then
+						if places.pos[cmd[3]] then
+							local place = places.pos[cmd[3]]
+							story.generator.players_storys[player:get_player_name()].pos = {x=place.x+math.random(-5, 5), y=place.y, z=place.z+math.random(-5, 5)}
+						end
+					else
+						if places.pos[cmd[3]] then
+							story.generator.players_storys[player:get_player_name()].pos = places.pos[cmd[3]]
+						end
 					end
 				end
 				if cmd[1] == "$quest" and cmd[2] and cmd[3] and cmd[4] and cmd[5] and tonumber(cmd[4]) and tonumber(cmd[5]) then
@@ -186,7 +197,29 @@ function story.generator.run(part, player, line_pos)
 					story.generator.players_storys[player:get_player_name()].pos = {x=0,y=10,z=0}
 				end
 				if cmd[1] == "$next" and cmd[2] then
-					out = {part=cmd[2], wait=false}
+					if cmd[2] == "rnd" then
+						if cmd[3] and cmd[4] and cmd[5] then
+							local rnd = math.random(3)
+							if rnd == 1 then
+								out = {part=cmd[3], wait=false}
+							elseif rnd == 2 then
+								out = {part=cmd[4], wait=false}
+							else
+								out = {part=cmd[5], wait=false}
+							end
+						elseif cmd[3] and cmd[4] then
+							local rnd = math.random(2)
+							if rnd == 1 then
+								out = {part=cmd[3], wait=false}
+							else
+								out = {part=cmd[4], wait=false}
+							end
+						else 
+							out = {part=cmd[3], wait=false}
+						end
+					else
+						out = {part=cmd[2], wait=false}
+					end
 				end
 				if cmd[1] == "$wait" then
 					return {cmd="$wait", param=i, wait=true}

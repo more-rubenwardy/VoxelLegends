@@ -1,5 +1,6 @@
 village = {}
 village.houses = {}
+village.num = 1
 
 function village.facedir_to_text_1(f)
 	local all = {[0]="0",[3]="90",[2]="180",[1]="270",[4]="360"}
@@ -77,5 +78,18 @@ minetest.register_abm({
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		minetest.set_node(pos, {name = "air"})
 		village.gen(pos)
+		if not places.pos["village_" .. tostring(village.num)] then
+			places.pos["village_" .. tostring(village.num)] = {x=pos.x, y=pos.y, z=pos.z}
+			village.num = village.num +1
+			places.save_places()
+		else
+			-- TODO : save village num
+			village.num = village.num +10
+			if not places.pos["village_" .. tostring(village.num)] then
+				places.pos["village_" .. tostring(village.num)] = {x=pos.x, y=pos.y, z=pos.z}
+				village.num = village.num +1
+				places.save_places()
+			end
+		end
 	end,
 })

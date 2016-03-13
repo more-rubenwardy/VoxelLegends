@@ -1,5 +1,13 @@
-$dialog test
-$place home
+$dialog welcome
+$place near village_1
 $create
 $wait
-$quest dignode default:grass 10 39
+$dialog welcome_1
+$place at village_1
+$create
+$wait
+$dialog quest_1
+$place near village_1
+$create
+$wait
+$quest dignode farming:wheat_5 20 10
