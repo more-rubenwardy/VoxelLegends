@@ -51,7 +51,7 @@ function village.road(pos)
 	end
 	minetest.place_schematic({x = pos.x+(dir.x*6*4), y = pos.y - 1, z = pos.z+(dir.z*6*4)}, path_road, 0, nil, true)
 
-	if math.random(0,5) ~= 1 then
+	if math.random(2) == 1 then
 		village.road(vector.add(pos, vector.multiply(dir, 6*4)))
 	end
 end
