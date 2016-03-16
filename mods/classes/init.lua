@@ -66,21 +66,19 @@ classes.register_weapon = function(name,fromLevel,levels, def)
 end
 
 function classes.register_tool(name, def)
-	minetest.register_craftitem(name, {
+	minetest.register_craftitem("classes:" .. name, {
 		description = def.description,
 		inventory_image = def.inventory_image,
 		class = def.class,
 		on_use = function(itemstack, user, pointed_thing)
 			if user == nil then return end
 			if classes.selected[user:get_player_name()] == def.class then	
-				if pointed_thing.type == "object" then
-					if xp.player_levels[user:get_player_name()] and xp.player_levels[user:get_player_name()] > def.lvl then
-						def.on_use(itemstack, user, pointed_thing)
-					else
-						cmsg.push_message_player(user, "[info] You have to be level "..tostring(def.lvl).. " to use this tool!")	
-					end					
-					return nil
-				end
+				if xp.player_levels[user:get_player_name()] and xp.player_levels[user:get_player_name()] > def.lvl-1 then
+					def.on_use(itemstack, user, pointed_thing)
+				else
+					cmsg.push_message_player(user, "[info] You have to be level "..tostring(def.lvl).. " to use this tool!")	
+				end					
+				return nil
 			else
 				cmsg.push_message_player(user, "[info] You cant use this tool.")	
 				return itemstack
@@ -182,6 +180,26 @@ classes.register_weapon("chemical_spear",5, 17, {
 	damage_m = 1.1,
 	damage_d = -1,
 	class = "warrior"
+})
+
+classes.register_tool("shield", {
+	description = "Shield",
+	inventory_image = "classes_shield.png",
+	wield_scale = {x = 2, y=2, z = 1},
+	class = "warrior",
+	lvl = 5,
+	on_use = function(itemstack, user, pointed_thing)
+		user:set_armor_groups({friendly = 0})
+		cmsg.push_message_player(user, "[armor] + shield")
+		
+		minetest.after(3.0, function(player)
+			if not player or not player:is_player() then
+				return
+			end
+			armor.update_armor(player:get_player_name(), player)
+			cmsg.push_message_player(player, "[armor] - shield")
+		end, user)
+	end
 })
 
 classes.register_weapon("sword",20, 30, {
