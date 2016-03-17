@@ -70,6 +70,7 @@ function classes.register_tool(name, def)
 		description = def.description,
 		inventory_image = def.inventory_image,
 		class = def.class,
+		wield_scale = def.wield_scale,
 		on_use = function(itemstack, user, pointed_thing)
 			if user == nil then return end
 			if classes.selected[user:get_player_name()] == def.class then	
@@ -190,6 +191,9 @@ classes.register_tool("shield", {
 	lvl = 5,
 	on_use = function(itemstack, user, pointed_thing)
 		user:set_armor_groups({friendly = 0})
+		user:set_physics_override({
+			speed = 0.3,
+		})
 		cmsg.push_message_player(user, "[armor] + shield")
 		
 		minetest.after(3.0, function(player)
@@ -197,6 +201,9 @@ classes.register_tool("shield", {
 				return
 			end
 			armor.update_armor(player:get_player_name(), player)
+			player:set_physics_override({
+				speed = 1,
+			})
 			cmsg.push_message_player(player, "[armor] - shield")
 		end, user)
 	end
