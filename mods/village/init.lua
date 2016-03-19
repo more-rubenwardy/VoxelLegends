@@ -104,7 +104,7 @@ minetest.register_decoration({
 	biomes = {
 		"grassland", "jungle"
 	},
-	y_min = 0,
-	y_max = 31000,
+	y_min = 6,
+	y_max = 20,
 	decoration = "village:spawn",
 })

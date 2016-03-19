@@ -3,7 +3,6 @@ $place near village_1
 $create
 $wait
 $dialog welcome_1
-$place at village_1
 $create
 $wait
 $dialog quest_1
