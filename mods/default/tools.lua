@@ -28,6 +28,19 @@ minetest.register_tool("default:basic_hammer", {
 	}
 })
 
+minetest.register_tool("default:flint_pick", {
+	description = "Flint Pick\n For Level: - \n Damage: 8",
+	inventory_image = "default_flint_pick.png",
+	tool_capabilities = {
+		max_drop_level=3,
+		groupcaps= {
+			cracky={times={[2]=1.50, [3]=0.80}, uses=50, maxlevel=1},
+			choppy={times={[2]=1.50, [3]=1.00}, uses=20, maxlevel=1}
+		},
+		damage_groups = {fleshy=8},
+	}
+})
+
 minetest.register_tool("default:axe_stone", {
 	description = "Stone Axe\n For Level: - \n Damage: 5",
 	inventory_image = "default_axe_stone.png",

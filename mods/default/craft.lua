@@ -236,6 +236,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = "default:flint_pick",
+	recipe = {
+		{"default:flint", "default:flint", "default:flint"},
+		{"", "default:string_strong", ""},
+		{"", "default:stick", ""},
+	}
+})
+
+minetest.register_craft({
 	output = "default:pick",
 	recipe = {
 		{"", "furnace:iron_rod", ""},
