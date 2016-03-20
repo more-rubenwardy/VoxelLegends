@@ -30,7 +30,7 @@ minetest.register_abm({
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local mymeta = minetest.get_meta(pos)
 		pos.y = pos.y - 1
-		if minetest.get_node(pos).name == "lava:lava_source" then
+		if minetest.get_node(pos).name == "lava:lava_source" or minetest.get_node(pos).name == "default:coalblock_glowing" then
 			local dir = vector.multiply(minetest.facedir_to_dir(minetest.get_node({x = pos.x, y= pos.y+1, z=pos.z}).param2), -1)
 			local patternpos = vector.add(pos, dir)
 	

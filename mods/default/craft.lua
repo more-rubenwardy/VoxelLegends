@@ -164,6 +164,41 @@ minetest.register_craft({
 	}
 })
 
+-- coal
+
+
+minetest.register_craft({
+	output = "default:coal_dust 3",
+	recipe = {
+		{"default:stone_with_coal"},
+	}
+})
+
+
+minetest.register_craft({
+	output = "default:coal_lump",
+	recipe = {
+		{"default:coal_dust", "default:coal_dust", "default:coal_dust"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:coalblock",
+	recipe = {
+		{"default:coal_lump", "default:coal_lump", "default:coal_lump"},
+		{"default:coal_lump", "default:coal_lump", "default:coal_lump"},
+		{"default:coal_lump", "default:coal_lump", "default:coal_lump"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:coalblock_glowing",
+	recipe = {
+		{"default:coalblock", "torch:torch"},
+	}
+})
+
+
 --workbench
 
 minetest.register_craft({

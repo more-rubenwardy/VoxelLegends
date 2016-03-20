@@ -838,6 +838,21 @@ minetest.register_node("default:stone_with_ruby", {
 	drop = "default:ruby",
 })
 
+-- coalblock
+
+minetest.register_node("default:coalblock", {
+	description = "Coalblock",
+	tiles = {"default_coalblock.png"},
+	groups = {cracky = 2},
+})
+
+minetest.register_node("default:coalblock_glowing", {
+	description = "Coalblock (GLOWING)",
+	tiles = {"default_coalblock_glowing.png"},
+	light_source = 7,
+	groups = {cracky = 2},
+})
+
 --quartz
 
 minetest.register_node("default:quartz", {

@@ -23,6 +23,11 @@ minetest.register_craftitem("default:coal_lump", {
 	inventory_image = "default_coal_lump.png",
 })
 
+minetest.register_craftitem("default:coal_dust", {
+	description = "Coal Dust",
+	inventory_image = "default_coal_dust.png",
+})
+
 minetest.register_craftitem("default:iron_lump", {
 	description = "Iron Lump",
 	inventory_image = "default_iron_lump.png",

@@ -56,7 +56,7 @@ minetest.register_abm({
 })
 
 minetest.register_craft({
-	output = "torch:torch",
+	output = "torch:torch 4",
 	recipe = {
 		{"", "default:coal_lump", ""},
 		{"", "default:string_strong", ""},
