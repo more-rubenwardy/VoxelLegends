@@ -57,6 +57,13 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = "default:stick 2",
+	recipe = {
+		{"default:wood"},
+	}
+})
+
+minetest.register_craft({
 	output = "default:wood 3",
 	recipe = {
 		{"default:log_1"},
@@ -231,6 +238,14 @@ minetest.register_craft({
 		{"group:plant", "group:plant", "group:plant"},
 	}
 })
+
+minetest.register_craft({
+	output = "default:string_strong",
+	recipe = {
+		{"default:liana"},
+	}
+})
+
 
 -- grass
 

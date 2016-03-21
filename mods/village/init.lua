@@ -98,11 +98,11 @@ minetest.register_abm({
 
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"default:grass", "default:wet_grass"},
+	place_on = {"default:grass"},
 	sidelen = 16,
 	fill_ratio = 0.004,
 	biomes = {
-		"grassland", "jungle"
+		"grassland"
 	},
 	y_min = 6,
 	y_max = 20,
