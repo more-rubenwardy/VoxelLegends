@@ -1,0 +1,5 @@
+$dialog quest_1
+$create
+$wait
+$quest dignode farming:wheat_5 20 10
+$quit

@@ -31,6 +31,7 @@ function xp.add_xp(player, num)
 	print("[info] xp for player ".. player:get_player_name() .. " " .. xp.player_xp[player:get_player_name()].."/"..xp.lvl*xp.player_levels[player:get_player_name()].." = " .. (xp.player_xp[player:get_player_name()])/(xp.lvl*xp.player_levels[player:get_player_name()]))
 	player:hud_change(xp.xp_hud[player:get_player_name()], "number", 20*((xp.player_xp[player:get_player_name()])/(xp.lvl*xp.player_levels[player:get_player_name()])))
 	xp.save_xp()
+	xp.save_levels()
 end
 
 function xp.add_lvl(player)

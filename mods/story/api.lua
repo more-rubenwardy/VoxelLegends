@@ -91,15 +91,28 @@ function story.generator.gen_next_step(player)
 		print("[ERROR][story] could not find players story")
 		return
 	end
+	-- load part
 	local part = story.generator.players_storys[player:get_player_name()].part
 	part = story.generator.get_part(story.generator.players_storys[player:get_player_name()].part)
 	if part then
 		local next_part = {}
+
+		-- run a new part?
 		if story.generator.players_storys[player:get_player_name()].wait then
 			next_part = story.generator.run(part, player, story.generator.players_storys[player:get_player_name()].wait_pos+1)
 		else
 			next_part = story.generator.run(part, player, 0)
 		end
+		
+		--quit
+		if next_part.quit then
+			story.generator.players_storys[player:get_player_name()].pos = nil
+			story.generator.players_storys[player:get_player_name()].part = ""
+			story.generator.players_storys[player:get_player_name()].wait_pos = 0
+			return
+		end
+		
+		-- wait or not?
 		if next_part.wait then
 			story.generator.players_storys[player:get_player_name()].wait = true
 			story.generator.players_storys[player:get_player_name()].wait_pos = next_part.param
@@ -107,6 +120,8 @@ function story.generator.gen_next_step(player)
 			story.generator.players_storys[player:get_player_name()].part = next_part.part
 			story.generator.players_storys[player:get_player_name()].wait_pos = 0
 		end
+		
+		-- save
 		story.generator.save_storys()
 		return
 	else
@@ -118,7 +133,7 @@ end
 function story.generator.new_player(player)
 	-- adds a new entry to the story database
 	story.generator.players_storys[player:get_player_name()] = {}
-	story.generator.players_storys[player:get_player_name()].part = "base"
+	story.generator.players_storys[player:get_player_name()].part = ""
 	story.generator.players_storys[player:get_player_name()].wait_pos = 0
 end
 
@@ -126,11 +141,13 @@ function story.generator.get_part(name)
 	if not name then return end
 	if name == "" then return end
 	if not story.generator.parts[name] then
-		local file = io.open(minetest.get_modpath("story").."/parts/"..name..".part", "r")
+		print("[story] loading part : " .. name)
+		local file = io.open(minetest.get_modpath("story").."/parts/"..name..".quest", "r")
 		story.generator.parts[name] = file:read("*all")
 		io.close(file)
 		return story.generator.parts[name]
 	else
+		print("[story] get part : " .. name)
 		return story.generator.parts[name]
 	end
 end
@@ -144,6 +161,29 @@ function story.generator.get_dialog(name)
 	else
 		return story.generator.dialogs[name]
 	end
+end
+
+function story.generator.get_quest(player)
+	local input = io.open(minetest.get_modpath("story").."/parts/quests.conf", "r")
+	if input then
+		local str = input:read("*all")
+		if str then
+			local lines = str:split("\n")
+			for k,v in pairs(lines) do
+				local var = v:split("=")[1]
+				local val = (v:split("=")[2]):split(",")
+				if var == "lvl".. tostring(xp.player_levels[player:get_player_name()] or 1) then
+					return val[math.random(#val)]
+				end
+			end
+		else 
+			print("[WARNING] quest.conf is empty")
+		end
+		io.close(input)
+	else
+		print("[ERROR] couldnt find quest.conf")
+	end
+	return nil
 end
 
 function story.generator.run(part, player, line_pos)
@@ -229,6 +269,10 @@ function story.generator.run(part, player, line_pos)
 						minetest.add_entity(places.pos[cmd[3]], cmd[2])
 					end
 				end
+				if cmd[1] == "$quit" then
+					out = {part="", wait=false, quit=true}
+					return out
+				end
 			end
 		end
 		i = i +1
@@ -255,7 +299,7 @@ end
 
 minetest.register_on_newplayer(function(player)
 	story.generator.new_player(player)
-	story.generator.gen_next_step(player)
+	--story.generator.gen_next_step(player)
 end)
 
 minetest.register_chatcommand("restart_story", {
@@ -267,6 +311,20 @@ minetest.register_chatcommand("restart_story", {
 		if player and player:is_player() then
 			story.generator.new_player(player)
 			story.generator.gen_next_step(player)
+			return true, ""
+		end
+		return true, "Error"
+	end,
+})
+
+minetest.register_chatcommand("reset_story", {
+	params = "",
+	description = "resets your story",
+	privs = {},
+	func = function(name, text)
+		local player = minetest.get_player_by_name(name)
+		if player and player:is_player() then
+			story.generator.new_player(player)
 			return true, ""
 		end
 		return true, "Error"
@@ -305,6 +363,11 @@ minetest.register_entity("story:human", {
 				story.generator.gen_next_step(clicker)	
 				-- TODO : delete npc after talking with it (or move it some where else)	
 			end
+		else
+			story.generator.players_storys[clicker:get_player_name()].part = story.generator.get_quest(clicker)
+			story.generator.players_storys[clicker:get_player_name()].pos = self.object:getpos()
+			story.generator.players_storys[clicker:get_player_name()].wait_pos = 0
+			story.generator.gen_next_step(clicker)	
 		end
 	end,
 
