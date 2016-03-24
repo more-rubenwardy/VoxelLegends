@@ -372,7 +372,10 @@ minetest.register_entity("story:human", {
 	end,
 
 	on_step = function(self, dtime)
-		-- nothing
+		self.object:setvelocity({x=0, y=-9.2, z=0})
+		if math.random(50) == 15 then
+			self.object:setyaw(math.random(10))
+		end
 	end,
 })
 
