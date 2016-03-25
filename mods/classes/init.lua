@@ -279,3 +279,7 @@ classes.register_weapon("long_stick",20, 60, {
 	}
 })
 
+
+local modpath = minetest.get_modpath("classes")
+
+dofile(modpath.."/skills.lua")
