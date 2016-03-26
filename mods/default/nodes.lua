@@ -168,6 +168,7 @@ minetest.register_node("default:box", {
 
 })
 
+default.treasure_chest_items = {"default:dirt", "default:sand", "default:stone_item", "default:coin", "default:coal_lump", "default:wood"}
 minetest.register_node("default:treasure_chest", {
 	description = "Treasure Chest",
 	tiles = {"default_treasure_chest.png"},
@@ -177,10 +178,10 @@ minetest.register_node("default:treasure_chest", {
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8*4)
-		local items = {"default:dirt", "default:sand", "default:iron_lump", "default:stone_item", "default:coin", "default:gold_lump", "default:coal_lump"}
-		local item = items[math.random(5)]
+		local items = default.treasure_chest_items
+		local item = items[math.random(#items)]
 		inv:add_item("main", {name = item, count = math.random(2,10)})
-		local item = items[math.random(5)]
+		local item = items[math.random(#items)]
 		inv:add_item("main", {name = item, count = math.random(2,10)})
 	end,
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)

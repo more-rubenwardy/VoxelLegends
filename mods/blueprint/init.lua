@@ -24,7 +24,10 @@ minetest.register_craftitem("blueprint:empty", {
 	description = "Empty Blueprint",
 	inventory_image = "blueprint_empty.png",
 	on_place = function(itemstack, placer, pointed_thing)
-		itemstack:set_name(blueprint.all[math.random(#blueprint.all)])
+		placer:get_inventory():add_item("main", blueprint.all[math.random(#blueprint.all)])
+		itemstack:take_item()
 		return itemstack
 	end
 })
+
+table.insert(default.treasure_chest_items, "blueprint:empty")
