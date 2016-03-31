@@ -11,3 +11,8 @@ Take a look at the mods!
 1. go to the games folder in your minetest folder
 2. open the terminal from there
 3. run git clone https://github.com/cdqwertz/rpgtest.git rpgtest
+
+##URLs
+GitHub : https://github.com/cdqwertz/rpgtest
+Website : http://cdqwertz.github.io/
+Minetest : http://www.minetest.net/
