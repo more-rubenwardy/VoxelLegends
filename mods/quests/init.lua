@@ -3,6 +3,7 @@
 quests = {}
 quests.player_quests = {}
 quests.file = minetest.get_worldpath() .. "/quests"
+quests.callback = nil
 
 function quests.load_quests()
 	local input = io.open(quests.file, "r")
@@ -37,6 +38,7 @@ function quests.add_quest(player, quest)
 	print("[quests] add quest")
 	table.insert(quests.player_quests[player], quest)
 	quests.save_quests()
+	return #quests.player_quests[player]
 end
 
 quests.show_quests_form = "size[8,7.5;]"
@@ -80,6 +82,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 			if v.progress > (v.max-1) and v.done == false then
 				xp.add_xp(digger, v.xp)
 				v.done = true
+				quests.callback(digger)
 			end
 			quests.save_quests()
 		end
@@ -99,6 +102,7 @@ minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack
 			if v.progress > (v.max-1) and v.done == false then
 				xp.add_xp(placer, v.xp)
 				v.done = true
+				quests.callback(placer)
 			end
 			quests.save_quests()
 		end
