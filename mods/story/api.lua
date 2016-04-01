@@ -229,7 +229,15 @@ function story.generator.run(part, player, line_pos)
 							story.generator.players_storys[player:get_player_name()].pos = places.pos[cmd[3]]
 						end
 					elseif cmd[2] == "near" then
-						if places.pos[cmd[3]] then
+						if cmd[3] == "player" then
+							if cmd[4] then
+								local place = minetest:get_player_by_name(cmd[4]):getpos()
+								story.generator.players_storys[player:get_player_name()].pos = {x=place.x+math.random(-5, 5), y=place.y, z=place.z+math.random(-5, 5)}
+							else
+								local place = player:getpos()
+								story.generator.players_storys[player:get_player_name()].pos = {x=place.x+math.random(-5, 5), y=place.y, z=place.z+math.random(-5, 5)}						
+							end
+						elseif places.pos[cmd[3]] then
 							local place = places.pos[cmd[3]]
 							story.generator.players_storys[player:get_player_name()].pos = {x=place.x+math.random(-5, 5), y=place.y, z=place.z+math.random(-5, 5)}
 						end
