@@ -2,3 +2,4 @@ default
 places
 quests
 pets
+character_editor

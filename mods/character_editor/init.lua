@@ -1,5 +1,6 @@
 character_editor = {}
 character_editor.characters = {}
+character_editor.language = {}
 character_editor.mesh = {}
 
 character_editor.shirts = {"character_editor_red_shirt.png", "character_editor_blue_shirt.png", "character_editor_yellow_shirt.png"}
@@ -32,6 +33,18 @@ function character_editor.set_texture(player, pos, texture)
 	character_editor.update_character(player)
 end
 
+character_editor.window = "size[8,7.5;]"
+character_editor.window = character_editor.window .. default.gui_colors
+character_editor.window = character_editor.window .. default.gui_bg
+character_editor.window = character_editor.window .. "label[0,0;Select your language! All dialogs will be translated\nin this language. Items are not translated.\nIf you cant find your language in this list,\n pls send a private message to cd2 on the minetest forums.]"
+character_editor.window = character_editor.window .. "button[3,2;2,1;lang_EN;EN]"
+character_editor.window = character_editor.window .. "button[3,3;2,1;lang_DE;DE]"
+
+function character_editor.show_window(player)
+	local name = player:get_player_name()
+	minetest.show_formspec(name, "character_editor:language", character_editor.window)
+end
+
 minetest.register_chatcommand("shirt", {
 	params = "<name>",
 	description = "[TEST CMD] Select your shirt",
@@ -53,4 +66,21 @@ minetest.register_on_joinplayer(function(player)
 	character_editor.set_texture(player, 1, "character.png")
 end)
 
+minetest.register_on_newplayer(function(player)
+	character_editor.show_window(player)
+end)
 
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+	if formname == "character_editor:language" then
+		print("FORM")
+		print("Player "..player:get_player_name().." submitted fields "..dump(fields))
+		local name = player:get_player_name()
+		if fields["lang_EN"] then
+			print("EN")
+			character_editor.language[name] = ""
+		elseif fields["lang_DE"] then
+			print("DE")
+			character_editor.language[name] = "de/"
+		end
+	end
+end)

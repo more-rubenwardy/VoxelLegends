@@ -151,7 +151,7 @@ function story.generator.get_part(name)
 	if name == "" then return end
 	if not story.generator.parts[name] then
 		print("[story] loading part : " .. name)
-		local file = io.open(minetest.get_modpath("story").."/parts/"..name..".quest", "r")
+		local file = io.open(minetest.get_modpath("story").."/parts/" ..name..".quest", "r")
 		story.generator.parts[name] = file:read("*all")
 		io.close(file)
 		return story.generator.parts[name]
@@ -161,9 +161,9 @@ function story.generator.get_part(name)
 	end
 end
 
-function story.generator.get_dialog(name)
+function story.generator.get_dialog(name, player)
 	if not story.generator.dialogs[name] then
-		local file = io.open(minetest.get_modpath("story").."/parts/"..name..".dialog", "r")
+		local file = io.open(minetest.get_modpath("story").."/parts/"  .. (character_editor.language[player:get_player_name()] or "") ..name..".dialog", "r")
 		story.generator.dialogs[name] = file:read("*all")
 		io.close(file)
 		return story.generator.dialogs[name]
@@ -216,8 +216,8 @@ function story.generator.run(part, player, line_pos)
 			if cmd[1] then
 				print("[INFO] run line... " .. v)
 				if cmd[1] == "$dialog" and cmd[2] then
-					if story.generator.get_dialog(cmd[2]) then
-						story.generator.players_storys[player:get_player_name()].text = story.generator.get_dialog(cmd[2])	
+					if story.generator.get_dialog(cmd[2], player) then
+						story.generator.players_storys[player:get_player_name()].text = story.generator.get_dialog(cmd[2], player)	
 					end
 				end
 				if cmd[1] == "$create" then
