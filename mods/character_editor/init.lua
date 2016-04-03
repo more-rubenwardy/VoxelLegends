@@ -39,6 +39,7 @@ character_editor.window = character_editor.window .. default.gui_bg
 character_editor.window = character_editor.window .. "label[0,0;Select your language! All dialogs will be translated\nin this language. Items are not translated.\nIf you cant find your language in this list,\n pls send a private message to cd2 on the minetest forums.]"
 character_editor.window = character_editor.window .. "button[3,2;2,1;lang_EN;EN]"
 character_editor.window = character_editor.window .. "button[3,3;2,1;lang_DE;DE]"
+character_editor.window = character_editor.window .. "button[3,4;2,1;lang_FR;FR]"
 
 function character_editor.show_window(player)
 	local name = player:get_player_name()
@@ -81,6 +82,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		elseif fields["lang_DE"] then
 			print("DE")
 			character_editor.language[name] = "de/"
+		elseif fields["lang_FR"] then
+			print("FR")
+			character_editor.language[name] = "fr/"
 		end
 	end
 end)

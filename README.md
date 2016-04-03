@@ -18,3 +18,7 @@ GitHub : https://github.com/cdqwertz/rpgtest
 Website : http://cdqwertz.github.io/
 
 Minetest : http://www.minetest.net/
+
+##Thanks to
+* farfadet46 (dog/wolf model + french translation)
+* ExcaliburZero (cleaning up my code)
