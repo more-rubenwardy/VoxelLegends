@@ -40,6 +40,7 @@ character_editor.window = character_editor.window .. "label[0,0;Select your lang
 character_editor.window = character_editor.window .. "button[3,2;2,1;lang_EN;EN]"
 character_editor.window = character_editor.window .. "button[3,3;2,1;lang_DE;DE]"
 character_editor.window = character_editor.window .. "button[3,4;2,1;lang_FR;FR]"
+character_editor.window = character_editor.window .. "button[3,4;2,1;lang_ID;ID]"
 character_editor.window = character_editor.window .. "button[3,5;2,1;lang_TR;TR]"
 
 function character_editor.show_window(player)
@@ -86,6 +87,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		elseif fields["lang_FR"] then
 			print("FR")
 			character_editor.language[name] = "fr/"
+		elseif fields["lang_ID"] then
+			print("ID")
+			character_editor.language[name] = "id/"
 		elseif fields["lang_TR"] then
 			print("TR")
 			character_editor.language[name] = "tr/"
