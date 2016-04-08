@@ -108,3 +108,4 @@ minetest.register_decoration({
 	y_max = 20,
 	decoration = "village:spawn",
 })
+
