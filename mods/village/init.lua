@@ -77,20 +77,18 @@ minetest.register_abm({
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		minetest.set_node(pos, {name = "air"})
-		if math.random(150) == 50 then
-			village.gen(pos)
+		village.gen(pos)
+		if not places.pos["village_" .. tostring(village.num)] then
+			places.pos["village_" .. tostring(village.num)] = {x=pos.x, y=pos.y, z=pos.z}
+			village.num = village.num +1
+			places.save_places()
+		else
+			-- TODO : save village num
+			village.num = village.num +10
 			if not places.pos["village_" .. tostring(village.num)] then
 				places.pos["village_" .. tostring(village.num)] = {x=pos.x, y=pos.y, z=pos.z}
 				village.num = village.num +1
 				places.save_places()
-			else
-				-- TODO : save village num
-				village.num = village.num +10
-				if not places.pos["village_" .. tostring(village.num)] then
-					places.pos["village_" .. tostring(village.num)] = {x=pos.x, y=pos.y, z=pos.z}
-					village.num = village.num +1
-					places.save_places()
-				end
 			end
 		end
 	end,
@@ -100,7 +98,7 @@ minetest.register_decoration({
 	deco_type = "simple",
 	place_on = {"default:grass"},
 	sidelen = 16,
-	fill_ratio = 0.004,
+	noise_params = {offset=0, scale=0.0001, spread={x=100, y=100, z=100}, seed=354, octaves=3, persist=0.7},
 	biomes = {
 		"grassland"
 	},
