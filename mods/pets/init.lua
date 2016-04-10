@@ -34,11 +34,17 @@ function pets.register_pet(name, def)
 			if pets.players_pets[clicker:get_player_name()] then
 				cmsg.push_message_player(clicker, "[pet] You already have a pet!")
 			else
-				pets.players_pets[clicker:get_player_name()] = name
-				cmsg.push_message_player(clicker, "[pet] + ".. def.description)
-				self.pl = clicker
-				pets.players_pets[clicker:get_player_name()] = name
-				pets.save_pets()
+				if clicker:get_wielded_item():get_name() == (def.food or "farming:wheat_seeds") then
+					local wielded_item = clicker:get_wielded_item()
+					wielded_item:take_item()
+					clicker:set_wielded_item(wielded_item)
+					
+					pets.players_pets[clicker:get_player_name()] = name
+					cmsg.push_message_player(clicker, "[pet] + ".. def.description)
+					self.pl = clicker
+					pets.players_pets[clicker:get_player_name()] = name
+					pets.save_pets()
+				end
 			end
 		end,
 
