@@ -120,7 +120,9 @@ minetest.register_abm({
 	chance = 5,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		pos.y = pos.y + 1
-		minetest.set_node(pos, {name = "farming:sugarcane"})
+		if minetest.get_node(pos).name == "air" then
+			minetest.set_node(pos, {name = "farming:sugarcane"})
+		end
 	end,
 })
 
@@ -152,7 +154,9 @@ minetest.register_abm({
 	chance = 2,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		pos.y = pos.y + 1
-		minetest.set_node(pos, {name = "farming:cactus"})
+		if minetest.get_node(pos).name == "air" then
+			minetest.set_node(pos, {name = "farming:cactus"})
+		end
 	end,
 })
 
