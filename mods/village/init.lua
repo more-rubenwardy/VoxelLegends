@@ -107,3 +107,30 @@ minetest.register_decoration({
 	decoration = "village:spawn",
 })
 
+
+-- after start game
+minetest.register_on_joinplayer(function(player)
+	if not places.pos["home_village"] and minetest.get_player_privs(player:get_player_name()).server then
+		minetest.chat_send_player(player:get_player_name(), "Choose a point for the home village!")
+		minetest.chat_send_player(player:get_player_name(), "Try to find a grassland biome - the start is much easier there :)")
+		minetest.chat_send_player(player:get_player_name(), "The biome should be flat.")
+		player:get_inventory():add_item("main", "village:create_start_game")
+	end
+end)
+
+minetest.register_craftitem("village:create_start_game", {
+	description = "Create Home Village",
+	inventory_image = "village_create.png",
+ 
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type == "node" then
+			village.gen(pointed_thing.above)
+			itemstack:take_item()
+			places.pos["home_village"] = pointed_thing.above
+			placer:setpos(pointed_thing.above)
+			places.save_places()
+		end
+		return itemstack
+	end,
+})
+

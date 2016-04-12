@@ -297,6 +297,9 @@ function story.generator.run(part, player, line_pos)
 					out = {part="", wait=false, quit=true}
 					return out
 				end
+				if cmd[1] == "$give" and cmd[2] and cmd[3] then
+					player:get_inventory():add_item("main", cmd[2].. " " .. cmd[3])
+				end
 			end
 		end
 		i = i +1

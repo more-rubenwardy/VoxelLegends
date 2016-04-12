@@ -67,9 +67,6 @@ minetest.register_on_joinplayer(function(player)
 	character_editor.mesh[player:get_player_name()] = "character.x"
 	character_editor.characters[player:get_player_name()] = {}
 	character_editor.set_texture(player, 1, "character.png")
-end)
-
-minetest.register_on_newplayer(function(player)
 	character_editor.show_window(player)
 end)
 
