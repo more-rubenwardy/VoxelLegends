@@ -36,6 +36,7 @@ minetest.register_node("default:workbench_v2", {
 		local inv = meta:get_inventory()
 		inv:set_size("main", 3*2)
 	end,
+	after_dig_node = default.drop_items,
 })
 
 -- crafts

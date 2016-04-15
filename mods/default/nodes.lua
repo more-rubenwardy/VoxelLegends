@@ -143,7 +143,9 @@ local box_form = box_form..default.itemslot_bg(0,0.3,8,4)
 local box_form = box_form.."list[current_player;main;0,4.85;8,1;]" 
 local box_form = box_form..default.itemslot_bg(0,4.85,8,1)
 local box_form = box_form.."list[current_player;main;0,6.08;8,3;8]" 
-local box_form = box_form..default.itemslot_bg(0,6,8,3)
+local box_form = box_form..default.itemslot_bg(0,6.08,8,3)
+local box_form = box_form.."listring[current_name;main]"
+local box_form = box_form.."listring[current_player;main]"
 
 minetest.register_node("default:box", {
 	description = "Box",
@@ -165,7 +167,7 @@ minetest.register_node("default:box", {
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8*4)
 	end,
-
+	after_dig_node = default.drop_items,
 })
 
 default.treasure_chest_items = {"default:dirt", "default:sand", "default:stone_item", "default:coin", "default:coal_lump", "default:wood"}
@@ -689,9 +691,6 @@ minetest.register_node("default:stone", {
 		max_items = 1,
 		items = {
 			{items = {'default:flint'},rarity = 5},
-			{items = {'default:stone_with_zinc'},rarity = 40},
-			{items = {'default:stone_with_iron'},rarity = 20},
-			{items = {'default:stone_with_copper'},rarity = 30},
 			{items = {'default:stone_with_silver'},rarity = 60},
 			{items = {"default:stone_item 5"}},
 		}

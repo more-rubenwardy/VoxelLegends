@@ -8,4 +8,5 @@ pets.register_pet("wolf:wolf", {
 		walk = {x=80, y=100},
 		sit = {x=0, y=80}
 	},
+	food = "fishing:fish",
 })

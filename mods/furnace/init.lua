@@ -7,6 +7,8 @@ local furnace_form = furnace_form.."list[current_player;main;0,4.85;8,1;]"
 local furnace_form = furnace_form..default.itemslot_bg(0,4.85,8,1)
 local furnace_form = furnace_form.."list[current_player;main;0,6.08;8,3;8]" 
 local furnace_form = furnace_form..default.itemslot_bg(0,6.08,8,3)
+local furnace_form = furnace_form.."listring[current_name;main]" 
+local furnace_form = furnace_form.."listring[current_player;main]"
 
 minetest.register_node("furnace:furnace", {
 	description = "Furnace",
@@ -20,6 +22,7 @@ minetest.register_node("furnace:furnace", {
 		local inv = meta:get_inventory()
 		inv:set_size("main", 4*4)
 	end,
+	after_dig_node = default.drop_items,
 })
 
 minetest.register_abm({
@@ -79,6 +82,8 @@ local pattern_form = pattern_form.."list[current_player;main;0,4.85;8,1;]"
 local pattern_form = pattern_form..default.itemslot_bg(0,4.85,8,1)
 local pattern_form = pattern_form.."list[current_player;main;0,6.08;8,3;8]" 
 local pattern_form = pattern_form..default.itemslot_bg(0,6.08,8,3)
+local pattern_form = pattern_form.."listring[current_name;main]"
+local pattern_form = pattern_form.."listring[current_player;main]"
 
 minetest.register_node("furnace:pattern_rod", {
 	description = "Pattern for a Rod",
@@ -91,7 +96,7 @@ minetest.register_node("furnace:pattern_rod", {
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8*4)
 	end,
-
+	after_dig_node = default.drop_items,
 })
 
 minetest.register_node("furnace:pattern_blade", {
@@ -105,7 +110,7 @@ minetest.register_node("furnace:pattern_blade", {
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8*4)
 	end,
-
+	after_dig_node = default.drop_items,
 })
 
 minetest.register_node("furnace:pattern_plate", {
@@ -119,7 +124,7 @@ minetest.register_node("furnace:pattern_plate", {
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8*4)
 	end,
-
+	after_dig_node = default.drop_items,
 })
 
 minetest.register_craftitem("furnace:iron_rod", {

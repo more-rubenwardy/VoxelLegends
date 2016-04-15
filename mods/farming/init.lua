@@ -53,7 +53,6 @@ minetest.override_item("default:plant_grass", {drop = {
 	max_items = 1,
 	items = {
 		{items = {'farming:sugarcane'},rarity = 20},
-		{items = {'farming:wheat_seeds'},rarity = 5},
 		{items = {'default:plant_grass'}},
 	}
 }})
@@ -62,7 +61,6 @@ minetest.override_item("default:plant_grass_2", {drop = {
 	max_items = 1,
 	items = {
 		{items = {'farming:wheat_seeds'},rarity = 5},
-		{items = {'farming:sugarcane'},rarity = 20},
 		{items = {'default:plant_grass'}},
 	}
 }})
@@ -71,7 +69,6 @@ minetest.override_item("default:plant_grass_3", {drop = {
 	max_items = 1,
 	items = {
 		{items = {'farming:wheat_seeds'},rarity = 5},
-		{items = {'farming:sugarcane'},rarity = 20},
 		{items = {'default:plant_grass'}},
 	}
 }})
@@ -80,7 +77,6 @@ minetest.override_item("default:plant_grass_4", {drop = {
 	max_items = 1,
 	items = {
 		{items = {'farming:wheat_seeds'},rarity = 5},
-		{items = {'farming:sugarcane'},rarity = 20},
 		{items = {'default:plant_grass'}},
 	}
 }})
@@ -89,12 +85,23 @@ minetest.override_item("default:plant_grass_5", {drop = {
 	max_items = 1,
 	items = {
 		{items = {'farming:wheat_seeds'},rarity = 5},
-		{items = {'farming:sugarcane'},rarity = 20},
 		{items = {'default:plant_grass'}},
 	}
 }})
 
 -- other plants
+
+minetest.register_node("farming:apple", {
+	description = "Apple",
+	tiles = {"farming_apple.png"},
+	drawtype = "plantlike",
+	paramtype = "light",
+	inventory_image = "farming_apple.png",
+	groups = {crumbly=3},
+	walkable = false,
+	on_use = minetest.item_eat(2),
+})
+
 
 minetest.register_node("farming:sugarcane", {
 	description = "Sugarcane",
@@ -108,13 +115,30 @@ minetest.register_node("farming:sugarcane", {
 
 minetest.register_abm({
 	nodenames = {"farming:sugarcane"},
-	neighbors = {"default:dirt", "default:grass"},
+	neighbors = {"default:dirt", "default:grass", "default:sand"},
 	interval = 10.0,
 	chance = 5,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		pos.y = pos.y + 1
-		minetest.set_node(pos, {name = "farming:sugarcane"})
+		if minetest.get_node(pos).name == "air" then
+			minetest.set_node(pos, {name = "farming:sugarcane"})
+		end
 	end,
+})
+
+minetest.register_decoration({
+	deco_type = "simple",
+	place_on = {"default:sand"},
+	sidelen = 16,
+	fill_ratio = 0.04,
+	biomes = {
+		"beach"
+	},
+	spawn_by = "default:water_source",
+	num_spawn_by = 1,
+	y_min = 0,
+	y_max = 31000,
+	decoration = "farming:sugarcane",
 })
 
 minetest.register_node("farming:cactus", {
@@ -130,7 +154,9 @@ minetest.register_abm({
 	chance = 2,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		pos.y = pos.y + 1
-		minetest.set_node(pos, {name = "farming:cactus"})
+		if minetest.get_node(pos).name == "air" then
+			minetest.set_node(pos, {name = "farming:cactus"})
+		end
 	end,
 })
 

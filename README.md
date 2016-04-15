@@ -20,5 +20,7 @@ Website : http://cdqwertz.github.io/
 Minetest : http://www.minetest.net/
 
 ##Thanks to
-* farfadet46 (dog/wolf model + french translation)
+* farfadet46 (dog/wolf model + French translation)
 * ExcaliburZero (cleaning up my code)
+* mahmutelmas06 (Turkish translation)
+* srifqi (Indonesian translation)

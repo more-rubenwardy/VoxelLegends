@@ -3,12 +3,12 @@ legendary_items.rare_weapons = {}
 legendary_items.register_rare_weapon = function(name, forlevel, def)
 	table.insert(legendary_items.rare_weapons, name)
 	minetest.register_tool(":legendary_items:"..name, {
-		description = def.description.."\n For Level: ".. tostring(forlevel).. "\n Damage: " .. tostring(def.damage) .. "\n Rare Item",
+		description = def.description.."\n For Level: ".. tostring(forlevel).. "\n Damage: " .. tostring(def.damage+classes.get_dmg(forlevel)) .. "\n Rare Item",
 		inventory_image = def.inventory_image,
 		wield_scale = def.wield_scale,
 		tool_capabilities = {
 			max_drop_level=3,
-			damage_groups = {fleshy=def.damage},
+			damage_groups = {fleshy=def.damage+classes.get_dmg(forlevel)},
 		},
 		on_use = function(itemstack, user, pointed_thing)
 			if user == nil then return end
@@ -24,6 +24,13 @@ legendary_items.register_rare_weapon = function(name, forlevel, def)
 			end
 		end
 	})
+	table.insert(def.materials, "default:ruby")
+	blueprint.register_blueprint(name, {
+		description = def.description .. "\n For Level: ".. tostring(forlevel).. "\n Damage: " .. tostring(def.damage+classes.get_dmg(forlevel)) .. "\n Rare Item",
+		materials = def.materials,
+		out = "legendary_items:"..name,
+		color = "yellow"
+	})
 end
 
 -- rare
@@ -32,35 +39,40 @@ legendary_items.register_rare_weapon("old_hammer", 3, {
 	description = "Old Hammer",
 	inventory_image = "legendary_items_old_hammer.png",
 	wield_scale = {x = 2, y = 2, z =1},
-	damage = 20,
+	damage = 3,
+	materials = {"default:stick", "default:stone"},
 })
 
 legendary_items.register_rare_weapon("old_hammer_lvl_5", 5, {
 	description = "Old Hammer",
 	inventory_image = "legendary_items_old_hammer.png",
 	wield_scale = {x = 2, y = 2, z =1},
-	damage = 28,
+	damage = 5,
+	materials = {"default:stick", "default:stone", "default:stone"},
 })
 
 legendary_items.register_rare_weapon("old_hammer_lvl_30", 30, {
 	description = "Old Hammer",
 	inventory_image = "legendary_items_old_hammer.png",
 	wield_scale = {x = 2, y = 2, z =1},
-	damage = 40,
+	damage = 7,
+	materials = {"default:stick", "default:stone", "default:stone"},
 })
 
 legendary_items.register_rare_weapon("old_hammer_lvl_60", 60, {
 	description = "Old Hammer",
 	inventory_image = "legendary_items_old_hammer.png",
 	wield_scale = {x = 2, y = 2, z =1},
-	damage = 75,
+	damage = 11,
+	materials = {"default:stick", "default:stone", "default:stone"},
 })
 
 legendary_items.register_rare_weapon("old_hammer_lvl_100", 100, {
 	description = "Old Hammer",
 	inventory_image = "legendary_items_old_hammer.png",
 	wield_scale = {x = 2, y = 2, z =1},
-	damage = 150,
+	damage = 17,
+	materials = {"default:stick", "default:stone", "default:stone"},
 })
 
 
@@ -68,35 +80,40 @@ legendary_items.register_rare_weapon("old_battle_axe", 3, {
 	description = "Old Battle Axe",
 	inventory_image = "legendary_items_old_battle_axe.png",
 	wield_scale = {x = 1.2, y = 1.2, z =1},
-	damage = 21,
+	damage = 3,
+	materials = {"default:stick", "default:stone", "default:stone"},
 })
 
 legendary_items.register_rare_weapon("old_battle_axe_lvl_10", 10, {
 	description = "Old Battle Axe",
 	inventory_image = "legendary_items_old_battle_axe.png",
 	wield_scale = {x = 1.2, y = 1.2, z =1},
-	damage = 30,
+	damage = 7,
+	materials = {"default:stick", "default:stone", "default:stone"},
 })
 
 legendary_items.register_rare_weapon("old_battle_axe_lvl_14", 14, {
 	description = "Old Battle Axe",
 	inventory_image = "legendary_items_old_battle_axe.png",
 	wield_scale = {x = 1.2, y = 1.2, z =1},
-	damage = 33,
+	damage = 7,
+	materials = {"default:stick", "default:stone", "default:stone"},
 })
 
 legendary_items.register_rare_weapon("sugar_sword_lvl_2", 2, {
 	description = "Sugar Sword",
 	inventory_image = "legendary_items_sugar_sword.png",
 	wield_scale = {x = 1.2, y = 1.2, z =1},
-	damage = 20,
+	damage = 2,
+	materials = {"default:stick", "farming:sugar"},
 })
 
 legendary_items.register_rare_weapon("sugar_sword_lvl_50", 50, {
 	description = "Sugar Sword",
 	inventory_image = "legendary_items_sugar_sword.png",
 	wield_scale = {x = 1.2, y = 1.2, z =1},
-	damage = 68,
+	damage = 7,
+	materials = {"default:stick", "farming:sugar"},
 })
 
 -- super rare

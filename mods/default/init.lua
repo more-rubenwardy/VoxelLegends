@@ -2,6 +2,7 @@ default = {}
 
 local modpath = minetest.get_modpath("default")
 
+dofile(modpath.."/functions.lua")
 dofile(modpath.."/player.lua")
 dofile(modpath.."/craftitems.lua")
 dofile(modpath.."/nodes.lua")

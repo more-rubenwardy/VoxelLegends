@@ -1,4 +1,3 @@
 default
-legendary_items
 xp
 central_message
