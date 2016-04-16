@@ -1,34 +1,36 @@
 potions = {}
 function potions.register_potion(name, def)
-	minetest.register_craftitem(name, {
-	description = def.description,
-	inventory_image = def.img,
- 
-	on_drop = function(itemstack, dropper, pos)
-		if not dropper or not dropper:is_player() then
-			return
-		end
-		return def.on_use(itemstack, dropper)
-	end,
+	for i = 1, 5 do
+		minetest.register_craftitem(name .. "_" .. tostring(i), {
+			description = def.description .. "\n Level : " .. tostring(i),
+			inventory_image = def.img,
+		 
+			on_drop = function(itemstack, dropper, pos)
+				if not dropper or not dropper:is_player() then
+					return
+				end
+				return def.on_use(itemstack, dropper, i)
+			end,
 
-	on_use = function(itemstack, user, pointed_thing)
-		if not user or not user:is_player() then
-			return
-		end
-		return def.on_use(itemstack, user)
-	end,
-})
+			on_use = function(itemstack, user, pointed_thing)
+				if not user or not user:is_player() then
+					return
+				end
+				return def.on_use(itemstack, user, i)
+			end,
+		})
+	end
 end
 
 potions.register_potion("potions:healing", {
 	description = "Potion of Healing",
 	img = "potions_red.png",
-	on_use = function(itemstack, user)
+	on_use = function(itemstack, user, lvl)
 		if not user or not user:is_player() then
 			return
 		end
-		cmsg.push_message_player(user, "[hp] + 10")
-		user:set_hp(user:get_hp()+10)
+		cmsg.push_message_player(user, "[hp] + ".. tostring(10+lvl))
+		user:set_hp(user:get_hp()+10+lvl)
 		itemstack:take_item()
 		return itemstack
 	end
@@ -37,7 +39,7 @@ potions.register_potion("potions:healing", {
 potions.register_potion("potions:jumping", {
 	description = "Potion of Jumping",
 	img = "potions_blue.png",
-	on_use = function(itemstack, user)
+	on_use = function(itemstack, user, lvl)
 		if not user or not user:is_player() then
 			return
 		end
@@ -46,7 +48,7 @@ potions.register_potion("potions:jumping", {
 		})
 		cmsg.push_message_player(user, "[effect] + jump")
 
-		minetest.after(10.0, function(pl)
+		minetest.after(10.0+lvl*2, function(pl)
 			if not pl or not pl:is_player() then
 				return
 			end
@@ -63,7 +65,7 @@ potions.register_potion("potions:jumping", {
 potions.register_potion("potions:running", {
 	description = "Potion of Running",
 	img = "potions_yellow.png",
-	on_use = function(itemstack, user)
+	on_use = function(itemstack, user, lvl)
 		if not user or not user:is_player() then
 			return
 		end
@@ -72,7 +74,7 @@ potions.register_potion("potions:running", {
 		})
 		cmsg.push_message_player(user, "[effect] + speed")
 
-		minetest.after(10.0, function(pl)
+		minetest.after(10.0+lvl*2, function(pl)
 			if not pl or not pl:is_player() then
 				return
 			end
