@@ -97,6 +97,21 @@ minetest.register_node("furnace:pattern_rod", {
 		inv:set_size("main", 8*4)
 	end,
 	after_dig_node = default.drop_items,
+	on_punch = function(pos, node, player, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+		for i = 1, inv:get_size("main") do
+			local stack = inv:get_stack("main", i)
+			if not stack:is_empty() then
+				local p = {	x = pos.x + math.random(0, 5)/5 - 0.5,
+						y = pos.y+1, 
+						z = pos.z + math.random(0, 5)/5 - 0.5
+					  }
+				minetest.add_item(p, stack)
+			end
+		end	
+		minetest.set_node(pos, {name="furnace:pattern_blade"})
+	end,
 })
 
 minetest.register_node("furnace:pattern_blade", {
@@ -111,6 +126,24 @@ minetest.register_node("furnace:pattern_blade", {
 		inv:set_size("main", 8*4)
 	end,
 	after_dig_node = default.drop_items,
+	on_punch = function(pos, node, player, pointed_thing)
+
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+		for i = 1, inv:get_size("main") do
+			local stack = inv:get_stack("main", i)
+			if not stack:is_empty() then
+				local p = {	x = pos.x + math.random(0, 5)/5 - 0.5,
+						y = pos.y+1, 
+						z = pos.z + math.random(0, 5)/5 - 0.5
+					  }
+				minetest.add_item(p, stack)
+			end
+		end
+
+		minetest.set_node(pos, {name="furnace:pattern_plate"})
+	end,
+	drop = "furnace:pattern_rod",
 })
 
 minetest.register_node("furnace:pattern_plate", {
@@ -125,6 +158,22 @@ minetest.register_node("furnace:pattern_plate", {
 		inv:set_size("main", 8*4)
 	end,
 	after_dig_node = default.drop_items,
+	on_punch = function(pos, node, player, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+		for i = 1, inv:get_size("main") do
+			local stack = inv:get_stack("main", i)
+			if not stack:is_empty() then
+				local p = {	x = pos.x + math.random(0, 5)/5 - 0.5,
+						y = pos.y+1, 
+						z = pos.z + math.random(0, 5)/5 - 0.5
+					  }
+				minetest.add_item(p, stack)
+			end
+		end
+		minetest.set_node(pos, {name="furnace:pattern_rod"})
+	end,
+	drop = "furnace:pattern_rod",
 })
 
 minetest.register_craftitem("furnace:iron_rod", {
@@ -193,24 +242,6 @@ minetest.register_craft({
 	output = "furnace:pattern_rod",
 	recipe = {
 		{"default:stonebrick", "", "default:stonebrick"},
-		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
-		{"default:wood", "default:wood", "default:wood"},
-	}
-})
-
-minetest.register_craft({
-	output = "furnace:pattern_blade",
-	recipe = {
-		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
-		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
-		{"default:wood", "default:wood", "default:wood"},
-	}
-})
-
-minetest.register_craft({
-	output = "furnace:pattern_plate",
-	recipe = {
-		{"", "", ""},
 		{"default:stonebrick", "default:stonebrick", "default:stonebrick"},
 		{"default:wood", "default:wood", "default:wood"},
 	}
