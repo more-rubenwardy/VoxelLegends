@@ -170,7 +170,7 @@ minetest.register_node("default:box", {
 	after_dig_node = default.drop_items,
 })
 
-default.treasure_chest_items = {"default:dirt", "default:sand", "default:stone_item", "default:coin", "default:coal_lump", "default:wood"}
+default.treasure_chest_items = {"money:coin", "money:silver_coin", "default:ruby"}
 minetest.register_node("default:treasure_chest", {
 	description = "Treasure Chest",
 	tiles = {"default_treasure_chest.png"},
