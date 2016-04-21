@@ -142,9 +142,9 @@ minetest.register_tool("default:knife_big", {
 	}
 })
 
-minetest.register_tool("default:leaves_cutter", {
-	description = "Leaves Cutter",
-	inventory_image = "default_leaves_cutter.png",
+minetest.register_tool("default:shears", {
+	description = "Shears",
+	inventory_image = "default_shears.png",
 	tool_capabilities = {
 		max_drop_level=3,
 		groupcaps= {
