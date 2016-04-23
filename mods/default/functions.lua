@@ -13,3 +13,38 @@ function default.drop_items(pos, oldnode, oldmetadata, digger)
 		end
 	end
 end
+
+default.sounds = {}
+
+function default.sounds.wood(t)
+	t = t or {}
+	t.dug = table.dug or
+			{name = "default_wood_1", gain = 0.25}
+	t.place = table.place or
+			{name = "default_wood_1", gain = 0.7}
+	t.footstep = t.footstep or
+			{name = "default_stone_2", gain = 0.1}
+	return t
+end
+
+function default.sounds.stone(t)
+	t = t or {}
+	t.dug = table.dug or
+			{name = "default_stone_2", gain = 0.2}
+	t.place = table.place or
+			{name = "default_stone_1", gain = 0.5}
+	t.footstep = t.footstep or
+			{name = "default_stone_2", gain = 0.2}
+	return t
+end
+
+function default.sounds.dirt(t)
+	t = t or {}
+	t.dug = table.dug or
+			{name = "default_dirt_1", gain = 0.25}
+	t.place = table.place or
+			{name = "default_dirt_1", gain = 0.7}
+	t.footstep = t.footstep or
+			{name = "default_dirt_1", gain = 0.3}
+	return t
+end
