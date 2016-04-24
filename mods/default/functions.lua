@@ -43,8 +43,8 @@ function default.sounds.dirt(t)
 	t.dug = table.dug or
 			{name = "default_dirt_1", gain = 0.25}
 	t.place = table.place or
-			{name = "default_dirt_1", gain = 0.7}
+			{name = "default_dirt_1", gain = 0.5}
 	t.footstep = t.footstep or
-			{name = "default_dirt_1", gain = 0.3}
+			{name = "default_dirt_1", gain = 0.1}
 	return t
 end
