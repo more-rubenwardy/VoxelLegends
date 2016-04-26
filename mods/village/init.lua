@@ -17,13 +17,12 @@ end
 --main func
 
 function village.gen(pos)
-	village.road(pos)
-	village.road(pos)
-	village.road(pos)
-	village.road(pos)
+	village.road(pos, math.random(1,3))
+	village.road(pos, math.random(1,3))
+	village.road(pos, math.random(1,3))
 end
 
-function village.road(pos)
+function village.road(pos, n)
 	local path_house_1 = minetest.get_modpath("village") .. "/schematics/house_1.mts"
 	local path_house_2 = minetest.get_modpath("village") .. "/schematics/house_2.mts"
 	local path_road = minetest.get_modpath("village") .. "/schematics/road.mts"
@@ -51,8 +50,10 @@ function village.road(pos)
 	end
 	minetest.place_schematic({x = pos.x+(dir.x*6*4), y = pos.y - 1, z = pos.z+(dir.z*6*4)}, path_road, 0, nil, true)
 
-	if math.random(2) == 1 then
-		village.road(vector.add(pos, vector.multiply(dir, 6*4)))
+	if n > 0 then
+		village.road(vector.add(pos, vector.multiply(dir, 6*4)), n-1)
+	else
+		return
 	end
 end
 
