@@ -69,7 +69,9 @@ function classes.register_tool(name, def)
 	minetest.register_craftitem("classes:" .. name, {
 		description = def.description,
 		inventory_image = def.inventory_image,
+		wield_image = def.wield_image or def.inventory_image,
 		class = def.class,
+		range = def.range or 4,
 		wield_scale = def.wield_scale,
 		on_use = function(itemstack, user, pointed_thing)
 			if user == nil then return end
@@ -250,6 +252,42 @@ classes.register_weapon("pitchfork",15, 30, {
 		{"", "default:string_strong", ""},
 		{"", "default:stick", ""},
 	}
+})
+
+classes.register_tool("bow", {
+	description = "Bow",
+	inventory_image = "classes_bow.png",
+	wield_image = "classes_bow_wield.png",
+	wield_scale = {x = 2.5, y=2.5, z = 1},
+	class = "farmer",
+	lvl = 0,
+	range = 20,
+	on_use = function(itemstack, user, pointed_thing)
+		local p = user:getpos()
+		p.y = p.y + 1.5
+		local dir = user:get_look_dir()
+		minetest.add_particle({
+			pos = p,
+			velocity = vector.multiply(dir, 10),
+			acceleration = {x=0, y=0, z=0},
+			expirationtime = 7,
+			size = 1,
+			collisiondetection = false,
+			vertical = false,
+			texture = "default_wood.png"
+		})
+		if pointed_thing.type == "object" then
+			minetest.after(vector.distance(p, pointed_thing.ref:getpos())/10.0, function(pt, u)
+				if not pt or not pt:getpos() or not user then
+					return
+				end
+				pt:punch(user, 1.0, {
+					full_punch_interval=1.0,
+					damage_groups={fleshy=classes.get_dmg(30)},
+				}, nil)
+			end, pointed_thing.ref, user)
+		end
+	end
 })
 
 classes.register_weapon("stick",2, 30, {
