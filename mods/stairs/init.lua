@@ -16,6 +16,7 @@ function stairs.register_stair_and_slab(name, base)
 					{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
 				},
 		},
+		sounds = minetest.registered_nodes[base].sounds or nil,
 	})
 	minetest.register_node(name.."_stair", {
 		description = minetest.registered_nodes[base].description .. " Stair",
@@ -31,6 +32,7 @@ function stairs.register_stair_and_slab(name, base)
 					{-0.5, -0.5, 0, 0.5, 0.5, 0.5},
 				},
 		},
+		sounds = minetest.registered_nodes[base].sounds or nil,
 	})
 
 	minetest.register_node(name.."_stair_corner_1", {
@@ -48,6 +50,7 @@ function stairs.register_stair_and_slab(name, base)
 					{0, -0.5, -0.5, 0.5, 0.5, 0.5},
 				},
 		},
+		sounds = minetest.registered_nodes[base].sounds or nil,
 	})
 
 	minetest.register_node(name.."_stair_corner_2", {
@@ -64,6 +67,7 @@ function stairs.register_stair_and_slab(name, base)
 					{0, -0.5, 0, 0.5, 0.5, 0.5},
 				},
 		},
+		sounds = minetest.registered_nodes[base].sounds or nil,
 	})
 
 	minetest.register_node(name.."_wall", {
@@ -79,6 +83,7 @@ function stairs.register_stair_and_slab(name, base)
 					{-0.5, -0.5, 0, 0.5, 0.5, 0.5},
 				},
 		},
+		sounds = minetest.registered_nodes[base].sounds or nil,
 	})
 
 	minetest.register_node(name.."_wall_corner_1", {
@@ -95,6 +100,7 @@ function stairs.register_stair_and_slab(name, base)
 					{0, -0.5, -0.5, 0.5, 0.5, 0.5},
 				},
 		},
+		sounds = minetest.registered_nodes[base].sounds or nil,
 	})
 
 	minetest.register_node(name.."_wall_corner_2", {
@@ -110,6 +116,7 @@ function stairs.register_stair_and_slab(name, base)
 					{0, -0.5, 0, 0.5, 0.5, 0.5},
 				},
 		},
+		sounds = minetest.registered_nodes[base].sounds or nil,
 	})
 	minetest.register_craft({
 		output = name.."_stair 3",
