@@ -15,8 +15,8 @@ minetest.register_item(":", {
 })
 
 
-minetest.register_tool("default:basic_hammer", {
-	description = "Basic Hammer\n For Level: - \n Damage: 8",
+minetest.register_tool("default:simple_hammer", {
+	description = "Simple Hammer\n For Level: - \n Damage: 8",
 	inventory_image = "default_basic_hammer.png",
 	tool_capabilities = {
 		max_drop_level=3,

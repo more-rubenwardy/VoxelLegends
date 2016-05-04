@@ -284,6 +284,7 @@ function story.generator.run(part, player, line_pos)
 					else
 						out = {part=cmd[2], wait=false}
 					end
+					return out
 				end
 				if cmd[1] == "$wait" then
 					return {cmd="$wait", param=i, wait=true, param2 = cmd[2] or "talk"}

@@ -11,6 +11,7 @@ minetest.register_craftitem("default:wood_item", {
 minetest.register_craftitem("default:stone_item", {
 	description = "Stone",
 	inventory_image = "default_stone_item.png",
+	stack_max = 99*9,
 })
 
 minetest.register_craftitem("default:flint", {

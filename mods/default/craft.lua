@@ -260,7 +260,7 @@ minetest.register_craft({
 -- tools
 
 minetest.register_craft({
-	output = "default:basic_hammer",
+	output = "default:simple_hammer",
 	recipe = {
 		{"", "default:log_1", ""},
 		{"", "default:string_strong", ""},

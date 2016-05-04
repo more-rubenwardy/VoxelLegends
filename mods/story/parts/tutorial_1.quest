@@ -12,4 +12,4 @@ $wait
 $give default:grass 9
 $dialog tutorial_1_4
 $wait
-$quit
+$next tutorial_2
