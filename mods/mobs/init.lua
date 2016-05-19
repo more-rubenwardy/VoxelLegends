@@ -27,24 +27,66 @@ function mobs.register_mob(name, def)
 		automatic_rotate = true,
 		speed = 0,
 		anim = "",
+		t = 0.0,
 		on_step = function(self, dtime)
-			if math.random(0, 50) == 15 then 
-				self.object:setvelocity({x=math.random(-2, 2), y=(def.gravity or -9.2), z=math.random(-2, 2)})
-				
+			self.t = self.t + dtime
+			if self.t > 1 then
 				local all_objects = minetest.get_objects_inside_radius(self.object:getpos(), def.range)
+				local found = false
 				local _,obj
 				for _,obj in ipairs(all_objects) do
 					if obj:is_player() then
-						print("[mob] PUNCH")
+						print("[mob] punch player")
+						local v = vector.direction(self.object:getpos(), obj:getpos())
+						v.y = (def.gravity or -9.2)
+						self.object:setvelocity(v)
+						self.object:setyaw(math.atan(v.x, v.z))
+
+						local yaw = math.atan(v.z/v.x)+math.pi/2
+						--yaw = yaw+(math.pi/2)
+						if v.x + self.object:getpos().x > self.object:getpos().x then
+							yaw = yaw+math.pi
+						end
+						self.object:setyaw(yaw)
+
+						found = true
 						obj:punch(self.object, 10, def.dmg, nil) 
+						break
 					end
 				end
-				if def.animations then
-					if self.anim ~= "walk" then
-						self.object:set_animation({x=def.animations.walk.x,y=def.animations.walk.y}, 30, 0) 
-						self.anim = "walk"
+
+				if not found then
+					all_objects = minetest.get_objects_inside_radius(self.object:getpos(), 10)
+					for _,obj in ipairs(all_objects) do
+						if obj:is_player() then
+							local obj_p = obj:getpos()
+							local p = self.object:getpos()
+							local v = vector.multiply(vector.direction(p, obj_p), 4)
+							local d = obj_p.y - p.y
+							if d > 0 and d < 2 then
+								v.y = 2
+							else
+								v.y = (def.gravity or -9.2)
+							end
+							self.object:setvelocity(v)
+
+							local yaw = math.atan(v.z/v.x)+math.pi/2
+							--yaw = yaw+(math.pi/2)
+							if v.x + self.object:getpos().x > self.object:getpos().x then
+								yaw = yaw+math.pi
+							end
+
+							self.object:setyaw(yaw)
+							found = true
+							break
+						end
 					end
 				end
+
+				if not found then
+					self.object:setvelocity({x=math.random(-2, 2), y=(def.gravity or -9.2), z=math.random(-2, 2)})
+				end
+				self.t = 0		
 			end
 		end,
 	})
