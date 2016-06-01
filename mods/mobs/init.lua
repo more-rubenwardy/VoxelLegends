@@ -16,9 +16,8 @@ function mobs.register_mob(name, def)
 		hp_max = def.hp,
 		physical = true,
 		collisionbox = def.collisionbox,
-	 	visual = "mesh",
-		mesh = def.mesh,
-	 	visual_size = {x=1, y=1},
+	 	visual = "upright_sprite",
+	 	visual_size = def.visual_size or {x=1, y=1},
 		textures = def.textures,
 		spritediv = {x=1, y=1},
 		initial_sprite_basepos = {x=0, y=0},	
@@ -109,9 +108,9 @@ function mobs.register_mob(name, def)
 	})
 end
 
-mobs.register_mob("mobs:angry_player", {
-	mesh = "character.x",
-	textures = {"character.png",},
+--mobs
+mobs.register_mob("mobs:slime", {
+	textures = {"mobs_slime.png",},
 	lvl = 3,
 	hits = 6,
 	dmg = {
@@ -121,49 +120,62 @@ mobs.register_mob("mobs:angry_player", {
 		},
 		damage_groups = {friendly=3},
 	},
-	collisionbox = {-0.3, -1, -0.3, 0.3, 0.5, 0.3},
-	description = "Angry Player",
+	collisionbox = {-0.4, -0.5, -0.4, 0.4, 0.5, 0.4},
+	description = "Slime",
 	range = 3,
 })
 
-mobs.register_mob("mobs:fire_cube", {
-	mesh = "mobs_fire_cube.x",
-	textures = {"mobs_fire_cube.png",},
-	lvl = 5,
+mobs.register_mob("mobs:big_slime", {
+	textures = {"mobs_slime.png",},
+	lvl = 7,
 	hits = 6,
+	visual_size = {x=2,y=2},
 	dmg = {
 		full_punch_interval = 0.9,
 		max_drop_level = 0,
 		groupcaps = {
 		},
-		damage_groups = {friendly=4},
+		damage_groups = {friendly=3},
 	},
-	collisionbox = {-1, -1, -1, 1, 1, 1},
-	description = "Fire Cube",
-	range = 5,
-	animations = {
-		walk = {x=0, y=30},
-		punch = {x=35, y = 60}
-	},
+	collisionbox = {-0.9, -1, -0.9, 0.9, 1, 0.9},
+	description = "Big Slime",
+	range = 3,
+	
 })
 
-mobs.register_mob("mobs:water_cube", {
-	mesh = "mobs_fire_cube.x",
-	textures = {"mobs_water_cube.png",},
-	lvl = 10,
+mobs.register_mob("mobs:dungeon_guardian", {
+	textures = {"mobs_dungeon_guardian.png",},
+	lvl = 15,
 	hits = 6,
+	visual_size = {x=2,y=2},
 	dmg = {
 		full_punch_interval = 0.9,
 		max_drop_level = 0,
 		groupcaps = {
 		},
-		damage_groups = {friendly=5},
+		damage_groups = {friendly=3},
 	},
-	collisionbox = {-1, -1, -1, 1, 1, 1},
-	description = "Water Cube",
-	range = 5,
-	animations = {
-		walk = {x=0, y=30},
-		punch = {x=35, y = 60}
-	},
+	collisionbox = {-0.8, -1, -0.8, 0.8, 1, 0.8},
+	description = "Dungeon Guardian",
+	range = 4,
+	
 })
+
+mobs.register_mob("mobs:blue_cube", {
+	textures = {"mobs_blue_cube.png",},
+	lvl = 20,
+	hits = 6,
+	visual_size = {x=1.5,y=1.5},
+	dmg = {
+		full_punch_interval = 0.9,
+		max_drop_level = 0,
+		groupcaps = {
+		},
+		damage_groups = {friendly=3},
+	},
+	collisionbox = {-0.6, -0.75, -0.6, 0.6, 0.75, 0.6},
+	description = "Blue Cube",
+	range = 4,
+	
+})
+
