@@ -268,7 +268,7 @@ classes.register_tool("bow", {
 		local dir = user:get_look_dir()
 		minetest.add_particle({
 			pos = p,
-			velocity = vector.multiply(dir, 10),
+			velocity = vector.multiply(dir, 50),
 			acceleration = {x=0, y=0, z=0},
 			expirationtime = 7,
 			size = 1,
@@ -277,7 +277,7 @@ classes.register_tool("bow", {
 			texture = "default_wood.png"
 		})
 		if pointed_thing.type == "object" then
-			minetest.after(vector.distance(p, pointed_thing.ref:getpos())/10.0, function(pt, u)
+			minetest.after(vector.distance(p, pointed_thing.ref:getpos())/50.0, function(pt, u)
 				if not pt or not pt:getpos() or not user then
 					return
 				end
