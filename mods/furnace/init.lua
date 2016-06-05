@@ -46,6 +46,9 @@ minetest.register_abm({
 				elseif myinv:contains_item("main", {name = "default:stone_with_gold"}) then
 					minetest.get_meta(patternpos):get_inventory():add_item("main", {name = "furnace:gold_rod"})
 					myinv:remove_item("main", {name = "default:stone_with_gold"})
+				elseif myinv:contains_item("main", {name = "default:stone_with_copper"}) then
+					minetest.get_meta(patternpos):get_inventory():add_item("main", {name = "furnace:copper_rod"})
+					myinv:remove_item("main", {name = "default:stone_with_copper"})
 				end
 			end
 			if pattern == "furnace:pattern_blade" then
@@ -181,6 +184,11 @@ minetest.register_craftitem("furnace:iron_rod", {
 	inventory_image = "furnace_iron_rod.png",
 })
 
+minetest.register_craftitem("furnace:copper_rod", {
+	description = "Copper Rod",
+	inventory_image = "furnace_copper_rod.png",
+})
+
 minetest.register_craftitem("furnace:gold_rod", {
 	description = "Gold Rod",
 	inventory_image = "furnace_gold_rod.png",
@@ -271,4 +279,12 @@ minetest.register_node("furnace:steel_frame", {
 	drawtype = "glasslike_framed_optional",
 	paramtype = "light",
 	groups = {choppy = 2},
+})
+
+
+minetest.register_craft({
+	output = "furnace:diamond_rod",
+	recipe = {
+		{"furnace:iron_rod", "default:diamond"},
+	}
 })

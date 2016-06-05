@@ -190,9 +190,9 @@ minetest.register_node("default:treasure_chest", {
 		inv:set_size("main", 8*4)
 		local items = default.treasure_chest_items
 		local item = items[math.random(#items)]
-		inv:add_item("main", {name = item, count = math.random(2,10)})
+		inv:add_item("main", {name = item, count = math.random(1,3)})
 		local item = items[math.random(#items)]
-		inv:add_item("main", {name = item, count = math.random(2,10)})
+		inv:add_item("main", {name = item, count = math.random(1,3)})
 	end,
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		local meta = minetest.get_meta(pos)
@@ -615,24 +615,6 @@ minetest.register_node("default:frame", {
 	groups = {choppy = 3},
 })
 
-minetest.register_node("default:frame_with_wood", {
-	description = "Frame with Wood",
-	tiles = {"default_wood.png^default_frame.png"},
-	groups = {choppy = 3},
-})
-
-minetest.register_node("default:frame_with_stonebrick", {
-	description = "Frame with Stonebrick",
-	tiles = {"default_stonebrick.png^default_frame.png"},
-	groups = {choppy = 3},
-})
-
-minetest.register_node("default:frame_with_log", {
-	description = "Frame with Log",
-	tiles = {"default_log.png^default_frame.png"},
-	groups = {choppy = 3},
-})
-
 -- glass
 
 minetest.register_node("default:glass", {
@@ -643,25 +625,6 @@ minetest.register_node("default:glass", {
 	paramtype = "light",
 	groups = {crumbly = 3},
 })
-
-minetest.register_node("default:glass_with_wood", {
-	description = "Glass with Wood",
-	tiles = {"default_wood.png^default_glass.png"},
-	groups = {crumbly = 3},
-})
-
-minetest.register_node("default:glass_with_log", {
-	description = "Glass with Log",
-	tiles = {"default_log.png^default_glass.png"},
-	groups = {crumbly = 3},
-})
-
-minetest.register_node("default:glass_with_stonebrick", {
-	description = "Glass with Stonebrick",
-	tiles = {"default_stonebrick.png^default_glass.png"},
-	groups = {crumbly = 3},
-})
-
 
 -- floor
 
@@ -685,7 +648,7 @@ default.register_floor("black")
 default.register_wool = function(color)
 	minetest.register_node("default:wool_"..color, {
 		description = color.." Wool",
-		tiles = {"default_wool.png^[colorize:"..color..":120"},
+		tiles = {"default_wool.png^[colorize:"..color..":130"},
 		groups = {crumbly=3},
 	})
 end
@@ -707,7 +670,6 @@ minetest.register_node("default:stone", {
 		max_items = 1,
 		items = {
 			{items = {'default:flint'},rarity = 5},
-			{items = {'default:stone_with_silver'},rarity = 60},
 			{items = {"default:stone_item 5"}},
 		}
 	},
@@ -834,21 +796,21 @@ minetest.register_node("default:stone_with_iron", {
 minetest.register_node("default:stone_with_copper", {
 	description = "Stone with Copper",
 	tiles = {"default_stone_with_copper.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 1},
 	sounds = default.sounds.stone(),
 })
 
 minetest.register_node("default:stone_with_zinc", {
 	description = "Stone with Zinc",
 	tiles = {"default_stone_with_zinc.png"},
-	groups = {cracky = 3},
+	groups = {cracky = 1},
 	sounds = default.sounds.stone(),
 })
 
 minetest.register_node("default:stone_with_silver", {
 	description = "Stone with Silver",
 	tiles = {"default_stone_with_silver.png"},
-	groups = {cracky = 3},
+	groups = {hard = 3},
 	sounds = default.sounds.stone(),
 })
 
@@ -862,7 +824,7 @@ minetest.register_node("default:stone_with_gold", {
 minetest.register_node("default:stone_with_diamond", {
 	description = "Stone with Diamond",
 	tiles = {"default_stone_with_diamond.png"},
-	groups = {cracky = 1},
+	groups = {hard = 2},
 	drop = "default:diamond",
 	sounds = default.sounds.stone(),
 })
@@ -870,7 +832,7 @@ minetest.register_node("default:stone_with_diamond", {
 minetest.register_node("default:stone_with_ruby", {
 	description = "Stone with Ruby",
 	tiles = {"default_stone_with_ruby.png"},
-	groups = {cracky = 1},
+	groups = {hard = 1},
 	drop = "default:ruby",
 	sounds = default.sounds.stone(),
 })
@@ -911,18 +873,6 @@ minetest.register_node("default:rail", {
 		"default_rail_t.png", "default_rail_cross.png"},
 	inventory_image = "default_rail.png",
 	wield_image = "default_rail.png",
-	paramtype = "light",
-	walkable = false,
-	groups = {choppy = 1, attached_node = 1},
-})
-
-minetest.register_node("default:wire", {
-	description = "Wire",
-	drawtype = "raillike",
-	tiles = {"default_wire.png", "default_wire_curve.png",
-		"default_wire_t.png", "default_wire_cross.png"},
-	inventory_image = "default_wire.png",
-	wield_image = "default_wire.png",
 	paramtype = "light",
 	walkable = false,
 	groups = {choppy = 1, attached_node = 1},

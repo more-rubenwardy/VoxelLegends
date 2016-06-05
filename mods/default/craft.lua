@@ -305,6 +305,24 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = "default:pick_copper",
+	recipe = {
+		{"", "furnace:copper_rod", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:stick", ""},
+	}
+})
+
+minetest.register_craft({
+	output = "default:pick_diamond",
+	recipe = {
+		{"", "furnace:diamond_rod", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:stick", ""},
+	}
+})
+
+minetest.register_craft({
 	output = "default:axe",
 	recipe = {
 		{"default:blade", "furnace:iron_plate", ""},
