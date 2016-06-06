@@ -83,7 +83,15 @@ function mobs.register_mob(name, def)
 				end
 
 				if not found then
-					self.object:setvelocity({x=math.random(-2, 2), y=(def.gravity or -9.2), z=math.random(-2, 2)})
+					local v = {x=math.random(-2, 2), y=(def.gravity or -9.2), z=math.random(-2, 2)}
+					self.object:setvelocity(v)
+
+					local yaw = math.atan(v.z/v.x)+math.pi/2
+					--yaw = yaw+(math.pi/2)
+					if v.x + self.object:getpos().x > self.object:getpos().x then
+						yaw = yaw+math.pi
+					end
+					self.object:setyaw(yaw)
 				end
 				self.t = 0		
 			end
@@ -175,6 +183,42 @@ mobs.register_mob("mobs:blue_cube", {
 	},
 	collisionbox = {-0.6, -0.75, -0.6, 0.6, 0.75, 0.6},
 	description = "Blue Cube",
+	range = 4,
+	
+})
+
+mobs.register_mob("mobs:small_grass_monster", {
+	textures = {"mobs_grass_monster.png",},
+	lvl = 7,
+	hits = 3,
+	visual_size = {x=0.5,y=0.5},
+	dmg = {
+		full_punch_interval = 0.9,
+		max_drop_level = 0,
+		groupcaps = {
+		},
+		damage_groups = {friendly=3},
+	},
+	collisionbox = {-0.25, -0.25, -0.25, 0.25, 0.25, 0.25},
+	description = "Small Grass Monster",
+	range = 4,
+	
+})
+
+mobs.register_mob("mobs:grass_monster", {
+	textures = {"mobs_grass_monster.png",},
+	lvl = 22,
+	hits = 6,
+	visual_size = {x=1.5,y=1.5},
+	dmg = {
+		full_punch_interval = 0.9,
+		max_drop_level = 0,
+		groupcaps = {
+		},
+		damage_groups = {friendly=3},
+	},
+	collisionbox = {-0.6, -0.75, -0.6, 0.6, 0.6, 0.6},
+	description = "Grass Monster",
 	range = 4,
 	
 })
