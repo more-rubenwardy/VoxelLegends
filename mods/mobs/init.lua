@@ -27,6 +27,15 @@ function mobs.register_mob(name, def)
 		speed = 0,
 		anim = "",
 		t = 0.0,
+
+		on_punch = function(self, player)
+			if self.object:get_hp() <= 0 then
+				if player and player:is_player() then
+					xp.add_xp(player, def.xp or xp.get_xp(def.lvl, 10))
+				end
+			end
+		end,
+
 		on_step = function(self, dtime)
 			self.t = self.t + dtime
 			if self.t > 1 then

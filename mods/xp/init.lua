@@ -8,6 +8,10 @@ xp.level_hud = {}
 xp.xp_file = minetest.get_worldpath() .. "/xp"
 xp.lvl_file = minetest.get_worldpath() .. "/levels"
 
+function xp.get_xp(lvl, x)
+	return (xp.lvl * lvl) / x
+end
+
 function xp.add_xp(player, num)
 	if xp.player_xp[player:get_player_name()] then
 		xp.player_xp[player:get_player_name()] = xp.player_xp[player:get_player_name()] + num
