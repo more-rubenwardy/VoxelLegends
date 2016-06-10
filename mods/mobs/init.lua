@@ -32,6 +32,12 @@ function mobs.register_mob(name, def)
 			if self.object:get_hp() <= 0 then
 				if player and player:is_player() then
 					xp.add_xp(player, def.xp or xp.get_xp(def.lvl, 10))
+					if def.drops then
+						minetest.spawn_item(self.object:getpos(), def.drops[math.random(1, #def.drops)])
+					else
+						minetest.spawn_item(self.object:getpos(), "money:silver_coin")
+					end
+					self.object:remove()
 				end
 			end
 		end,
@@ -208,6 +214,7 @@ mobs.register_mob("mobs:small_grass_monster", {
 		},
 		damage_groups = {friendly=3},
 	},
+	drops = {"default:grass 5"},
 	collisionbox = {-0.25, -0.25, -0.25, 0.25, 0.25, 0.25},
 	description = "Small Grass Monster",
 	range = 4,
@@ -226,6 +233,7 @@ mobs.register_mob("mobs:grass_monster", {
 		},
 		damage_groups = {friendly=3},
 	},
+	drops = {"default:grass 10"},
 	collisionbox = {-0.6, -0.75, -0.6, 0.6, 0.6, 0.6},
 	description = "Grass Monster",
 	range = 4,

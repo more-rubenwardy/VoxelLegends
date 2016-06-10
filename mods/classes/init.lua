@@ -277,15 +277,14 @@ classes.register_tool("bow", {
 			texture = "default_wood.png"
 		})
 		if pointed_thing.type == "object" then
-			minetest.after(vector.distance(p, pointed_thing.ref:getpos())/50.0, function(pt, u)
-				if not pt or not pt:getpos() or not user then
-					return
-				end
-				pt:punch(user, 1.0, {
-					full_punch_interval=1.0,
-					damage_groups={fleshy=classes.get_dmg(30)},
-				}, nil)
-			end, pointed_thing.ref, user)
+			local pt = pointed_thing.ref
+			if not pt or not pt:getpos() or not user then
+				return
+			end
+			pt:punch(user, 1.0, {
+				full_punch_interval=1.0,
+				damage_groups={fleshy=classes.get_dmg(30)},
+			})
 		end
 	end
 })
