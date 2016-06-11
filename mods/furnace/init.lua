@@ -12,7 +12,7 @@ local furnace_form = furnace_form.."listring[current_player;main]"
 
 minetest.register_node("furnace:furnace", {
 	description = "Furnace",
-	tiles = {"furnace_stone_top.png", "furnace_stone_tile.png", "furnace_stone_tile.png", "furnace_stone_tile.png","furnace_stone_tile.png","furnace_stone_front.png"},
+	tiles = {"default_stonebrick.png", "default_stonebrick.png", "default_stonebrick.png", "default_stonebrick.png","default_stonebrick.png","furnace_stone_front.png"},
 	groups = {cracky = 2},
 	paramtype2 = "facedir",
 	on_construct = function(pos)

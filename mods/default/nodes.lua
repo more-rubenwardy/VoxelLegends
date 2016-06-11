@@ -783,6 +783,7 @@ minetest.register_node("default:stone_with_coal", {
 	description = "Stone with Coal",
 	tiles = {"default_stone_with_coal.png"},
 	groups = {cracky = 2},
+	drops = "default:coal_lump",
 	sounds = default.sounds.stone(),
 })
 

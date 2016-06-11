@@ -137,6 +137,17 @@ minetest.register_craft({
 	}
 })
 
+--lamp
+
+minetest.register_craft({
+	output = "default:box 4",
+	recipe = {
+		{"", "default:wood", ""},
+		{"default:wood", "default:frame", "default:wood"},
+		{"", "default:wood", ""},
+	}
+})
+
 -- stone
 
 minetest.register_craft({
@@ -178,7 +189,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "default:coal_dust 3",
 	recipe = {
-		{"default:stone_with_coal"},
+		{"default:coal_lump"},
 	}
 })
 
@@ -206,6 +217,17 @@ minetest.register_craft({
 	}
 })
 
+
+--lamp
+
+minetest.register_craft({
+	output = "default:lamp 4",
+	recipe = {
+		{"", "default:glass", ""},
+		{"default:glass", "default:coal_lump", "default:glass"},
+		{"", "default:glass", ""},
+	}
+})
 
 --workbench
 
