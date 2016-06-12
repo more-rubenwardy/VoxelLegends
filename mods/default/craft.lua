@@ -137,8 +137,7 @@ minetest.register_craft({
 	}
 })
 
---lamp
-
+--box
 minetest.register_craft({
 	output = "default:box 4",
 	recipe = {
@@ -268,6 +267,18 @@ minetest.register_craft({
 		{"default:liana"},
 	}
 })
+
+-- rope
+
+minetest.register_craft({
+	output = "default:rope",
+	recipe = {
+		{"", "default:string_strong", ""},
+		{"", "default:string_strong", ""},
+		{"", "default:string_strong", ""},
+	}
+})
+
 
 
 -- grass

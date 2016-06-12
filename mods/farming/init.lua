@@ -218,7 +218,17 @@ minetest.register_craftitem("farming:cookie", {
 	on_use = minetest.item_eat(5),
 })
 
+minetest.register_craftitem("farming:mushroom_soup", {
+	description = "Mushroom Soup",
+	inventory_image = "farming_mushroom_soup.png",
+	on_use = minetest.item_eat(7),
+})
 
+minetest.register_craftitem("farming:cactus_soup", {
+	description = "Cactus Soup",
+	inventory_image = "farming_cactus_soup.png",
+	on_use = minetest.item_eat(7),
+})
 
 
 minetest.register_craft({
@@ -258,4 +268,16 @@ minetest.register_craft({
 	replacements = {
 		{"farming:bowl_with_water", "farming:bowl"}
 	}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "farming:mushroom_soup",
+	recipe = {"default:mushroom", "default:mushroom", "farming:bowl"},
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "farming:cactus_soup",
+	recipe = {"farming:cactus", "farming:cactus", "farming:bowl"},
 })

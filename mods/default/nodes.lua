@@ -218,34 +218,6 @@ minetest.register_node("default:lamp", {
 	groups = {crumbly = 3},
 })
 
-minetest.register_node("default:present", {
-	description = "Present",
-	tiles = {"default_present_top.png", "default_present_top.png", "default_present_side.png", "default_present_side.png", "default_present_side.png", "default_present_side.png"},
-	groups = {crumbly = 3},
-	drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-				{-0.4, -0.5, -0.4, 0.4, 0, 0.4},
-			},
-	},
-	paramtype = "light",
-})
-
-minetest.register_node("default:present_big", {
-	description = "Present (big)",
-	tiles = {"default_present_top.png", "default_present_top.png", "default_present_side.png", "default_present_side.png", "default_present_side.png", "default_present_side.png"},
-	groups = {crumbly = 3},
-	drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-				{-0.4, -0.5, -0.4, 0.4, 0.4, 0.4},
-			},
-	},
-	paramtype = "light",
-})
-
 
 minetest.register_node("default:ladder", {
 	description = "Ladder",
@@ -577,6 +549,20 @@ minetest.register_node("default:mushroom", {
 	},
 })
 
+minetest.register_abm({
+	nodenames = {"default:mushroom"},
+	neighbors = {"default:dirt"},
+	interval = 20,
+	chance = 2,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		local p = {x = pos.x + math.random(-1,1), y = pos.y, z = pos.z + math.random(-1,1)}
+		local under = vector.new(p.x, p.y-1, p.z)
+		if minetest.get_node(p).name == "air" and minetest.get_node(under).name == "default:dirt" then
+			minetest.set_node(p, {name = "default:mushroom"})
+		end
+	end,
+})
+
 minetest.register_node("default:liana", {
 	description = "Liana",
 	drawtype = "signlike",
@@ -639,7 +625,6 @@ end
 default.register_floor("red")
 default.register_floor("green")
 default.register_floor("yellow")
-default.register_floor("brown")
 default.register_floor("white")
 default.register_floor("black")
 
@@ -656,7 +641,6 @@ end
 default.register_wool("red")
 default.register_wool("green")
 default.register_wool("yellow")
-default.register_wool("brown")
 default.register_wool("white")
 default.register_wool("black")
 

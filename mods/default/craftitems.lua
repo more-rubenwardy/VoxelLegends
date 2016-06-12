@@ -3,11 +3,6 @@ minetest.register_craftitem("default:string", {
 	inventory_image = "default_string.png",
 })
 
-minetest.register_craftitem("default:wood_item", {
-	description = "Wood",
-	inventory_image = "default_wood_inv.png",
-})
-
 minetest.register_craftitem("default:stone_item", {
 	description = "Stone",
 	inventory_image = "default_stone_item.png",
@@ -27,16 +22,6 @@ minetest.register_craftitem("default:coal_lump", {
 minetest.register_craftitem("default:coal_dust", {
 	description = "Coal Dust",
 	inventory_image = "default_coal_dust.png",
-})
-
-minetest.register_craftitem("default:iron_lump", {
-	description = "Iron Lump",
-	inventory_image = "default_iron_lump.png",
-})
-
-minetest.register_craftitem("default:gold_lump", {
-	description = "Gold Lump",
-	inventory_image = "default_gold_lump.png",
 })
 
 minetest.register_craftitem("default:diamond", {
