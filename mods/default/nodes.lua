@@ -612,28 +612,12 @@ minetest.register_node("default:glass", {
 	groups = {crumbly = 3},
 })
 
--- floor
-
-default.register_floor = function(color)
-	minetest.register_node("default:floor_"..color, {
-		description = color.." Floor",
-		tiles = {"default_floor.png^[colorize:"..color..":120"},
-		groups = {crumbly=3},
-	})
-end
-
-default.register_floor("red")
-default.register_floor("green")
-default.register_floor("yellow")
-default.register_floor("white")
-default.register_floor("black")
-
 -- wool
 
 default.register_wool = function(color)
 	minetest.register_node("default:wool_"..color, {
 		description = color.." Wool",
-		tiles = {"default_wool.png^[colorize:"..color..":130"},
+		tiles = {"default_wool.png^[colorize:"..color..":150"},
 		groups = {crumbly=3},
 	})
 end
@@ -832,7 +816,7 @@ minetest.register_node("default:coalblock", {
 })
 
 minetest.register_node("default:coalblock_glowing", {
-	description = "Coalblock (GLOWING)",
+	description = "Glowing Coalblock",
 	tiles = {"default_coalblock_glowing.png"},
 	light_source = 7,
 	groups = {cracky = 2},
