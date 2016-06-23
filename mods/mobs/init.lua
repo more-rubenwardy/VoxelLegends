@@ -1,4 +1,5 @@
 mobs = {}
+mobs.mobs = {}
 function mobs.get_velocity(v, yaw, y)
 	local x = -math.sin(yaw) * v
 	local z =  math.cos(yaw) * v
@@ -6,6 +7,8 @@ function mobs.get_velocity(v, yaw, y)
 end
 
 function mobs.register_mob(name, def)
+	mobs.mobs[#mobs.mobs+1] = name
+	
 	if not def.hp then
 		if def.lvl and def.hits then
 			def.hp = classes.get_dmg(def.lvl)*def.hits
@@ -130,6 +133,23 @@ function mobs.register_mob(name, def)
 		end,
 	})
 end
+
+local timer = 0
+minetest.register_globalstep(function(dtime)
+	timer = timer + dtime;
+	if timer >= 5 then
+		for _, player in pairs(minetest.get_connected_players()) do
+			local p = player:getpos()
+			local a = {-1, 1}
+			local x = math.random(20, 40)*a[math.random(1,2)] + p.x
+			local z = math.random(20, 40)*a[math.random(1,2)] + p.z
+			if minetest.get_node(vector.new(x, p.y+2, z)).name == "air" then
+				minetest.add_entity(vector.new(x, p.y+2, z), mobs.mobs[math.random(1, #mobs.mobs)])
+			end
+		end
+		timer = 0
+	end
+end)
 
 --mobs
 mobs.register_mob("mobs:slime", {
