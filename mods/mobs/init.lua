@@ -260,3 +260,39 @@ mobs.register_mob("mobs:grass_monster", {
 	
 })
 
+mobs.register_mob("mobs:angry_cloud", {
+	textures = {"mobs_angry_cloud.png",},
+	lvl = 25,
+	hits = 4,
+	visual_size = {x=1.5,y=1.5},
+	dmg = {
+		full_punch_interval = 0.9,
+		max_drop_level = 0,
+		groupcaps = {
+		},
+		damage_groups = {friendly=4},
+	},
+	collisionbox = {-0.6, -0.25, -0.6, 0.6, 0.25, 0.6},
+	description = "Angry Cloud",
+	range = 5,
+	
+})
+
+mobs.register_mob("mobs:hedgehog", {
+	textures = {"mobs_hedgehog.png",},
+	lvl = 30,
+	hits = 7,
+	visual_size = {x=1,y=1},
+	dmg = {
+		full_punch_interval = 0.9,
+		max_drop_level = 0,
+		groupcaps = {
+		},
+		damage_groups = {friendly=1},
+	},
+	collisionbox = {-0.3, -0.5, -0.3, 0.3, -0.25, 0.3},
+	description = "Hedgehog",
+	range = 8,
+	
+})
+
