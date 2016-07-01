@@ -296,3 +296,57 @@ mobs.register_mob("mobs:hedgehog", {
 	
 })
 
+mobs.register_mob("mobs:book", {
+	textures = {"mobs_book.png",},
+	lvl = 35,
+	hits = 7,
+	visual_size = {x=1,y=1},
+	dmg = {
+		full_punch_interval = 0.9,
+		max_drop_level = 0,
+		groupcaps = {
+		},
+		damage_groups = {friendly=5},
+	},
+	collisionbox = {-0.3, -0.5, -0.3, 0.3, 0.4, 0.3},
+	description = "Book",
+	range = 3,
+	drops = {"money:coin"}
+})
+
+mobs.register_mob("mobs:coal_monster", {
+	textures = {"mobs_coal_monster.png",},
+	lvl = 40,
+	hits = 4,
+	visual_size = {x=1,y=1},
+	dmg = {
+		full_punch_interval = 0.9,
+		max_drop_level = 0,
+		groupcaps = {
+		},
+		damage_groups = {friendly=5},
+	},
+	collisionbox = {-0.3, -0.5, -0.3, 0.3, 0.3, 0.3},
+	description = "Coal Monster",
+	range = 6,
+	drops = {"money:coin"}
+})
+
+mobs.register_mob("mobs:lava_flower", {
+	textures = {"mobs_lava_flower.png",},
+	lvl = 37,
+	hits = 10,
+	visual_size = {x=1,y=1},
+	dmg = {
+		full_punch_interval = 0.9,
+		max_drop_level = 0,
+		groupcaps = {
+		},
+		damage_groups = {friendly=6},
+	},
+	collisionbox = {-0.3, -0.5, -0.3, 0.3, 0.3, 0.3},
+	description = "Lava Flower",
+	range = 2,
+	drops = {"money:coin 2"}
+})
+
