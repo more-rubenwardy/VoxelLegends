@@ -19,8 +19,8 @@ function farming.register_plant(name, steps, def)
 		minetest.register_abm({
 			nodenames = {"farming:"..name.."_"..tostring(i)},
 			neighbors = {"default:dirt", "default:grass"},
-			interval = 1.0,
-			chance = 1,
+			interval = 40.0,
+			chance = 10,
 			action = function(pos, node, active_object_count, active_object_count_wider)
 				if i < steps then
 					minetest.set_node(pos, {name = "farming:"..name.."_"..tostring(i+1)})
