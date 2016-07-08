@@ -8,18 +8,28 @@
 				padding: 0;
 				font-family: "Arial";
 				color: #FFECD1;
+			}
+
+			#bg {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				margin: 0;
+				padding: 0;
 				background: #333 url("background.png");
 				background-size: cover;
+				z-index: -1;
 			}
 
 			main {
 				width: 80%;
 				max-width: 1180px;
-				padding: 30px;
+				padding: 10px 30px;
 				margin: auto;
-				margin-top: 60px;
 				background: #a88e69;
-				border-radius: 10px;
+				border-radius: 0 10px 10px 10px;
 			}
 
 			h1, h2, h3 {
@@ -27,32 +37,58 @@
 				color: #FCDAA9;
 			}
 
-			.buttonlist {
+			header {
+				width: 80%;
+				max-width: 1180px;
+				padding: 50px 60px 50px 0;
+				margin: auto;
+			}
+
+			header h1 {
+				font-size: 250%;
+			}
+
+			nav {
+				width: 80%;
+				max-width: 1180px;
+				padding: 0 60px 0 0;
+				margin: auto;
+				list-style: none;
+				display: block;
+			}
+
+			nav li {
 				padding: 0;
-				margin: 15px 0 0 0;
+				margin: 0;
 				list-style: none;
 				display: inline-block;
 			}
 
-			.buttonlist li {
-				padding: 0;
-				margin: 0 10px 0 0;
-				list-style: none;
-				display: inline-block;
-			}
-
-			.buttonlist li a {
-				padding: 20px;
-				border-radius: 10px;
+			nav li a {
+				padding: 10px 20px;
+				border-radius: 10px 10px 0 0;
 				margin: 0;
 				display: block;
-				background: #7A674C;
 				color: #FFECD1;
+				background: #7A674C;
 				text-decoration: none;
+			}
+
+			nav li.selected a {
+				background: #a88e69;
 			}
 		</style>
 	</head>
 	<body>
+		<div id="bg"></div>
+		<header>
+			<h1>VoxelLegends</h1>
+		</header>
+		<nav class="buttonlist">
+			<li{% if page.title == "About" %} class="selected"{% endif %}><a href="index.html">About</a></li>
+			<li{% if page.title == "Design Docs" %} class="selected"{% endif %}><a href="design.html">Design Docs</a></li>
+			<li><a href="https://github.com/rubenwardy/VoxelLegends/">Github</a></li>
+		</nav>
 		<main>
 			{{ content }}
 		</main>
