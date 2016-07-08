@@ -3,7 +3,7 @@ title: Design Docs
 layout: default
 ---
 
-VoxelLegends is set in the medieval world of NAMEHERE. No modern technology.
+Voxel Legends is set in the medieval world of NAMEHERE. No modern technology.
 Procedurally generated towns. Towns have names and NPCs
 
 ## Inhabitants
