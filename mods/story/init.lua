@@ -34,13 +34,13 @@ end
 story.hud = {}
 
 minetest.register_on_joinplayer(function(player)
-	if story.generator.players_storys[player:get_player_name()] and story.generator.players_storys[player:get_player_name()].pos then
+	if story.generator.players_stories[player:get_player_name()] and story.generator.players_stories[player:get_player_name()].pos then
 		story.hud[player:get_player_name()] = player:hud_add({
 			hud_elem_type = "waypoint",
 			name = "story",
 			text = "",
 			number = 0x00FF00,
-			world_pos = story.generator.players_storys[player:get_player_name()].pos
+			world_pos = story.generator.players_stories[player:get_player_name()].pos
 		})
 	end
 
@@ -57,20 +57,20 @@ end)
 
 story.generator = {}
 story.generator.parts = {}
-story.generator.dialogs = {}	
-story.generator.players_storys = {}
+story.generator.dialogs = {}
+story.generator.players_stories = {}
 story.generator.file = minetest.get_worldpath() .. "/story"
 
-function story.generator.load_storys()
+function story.generator.load_stories()
 	local input = io.open(story.generator.file, "r")
 	if input then
 		local str = input:read("*all")
 		if str then
 			if minetest.deserialize(str) then
 				print("[story] FILE : " .. str)
-				story.generator.players_storys = minetest.deserialize(str)
+				story.generator.players_stories = minetest.deserialize(str)
 			end
-		else 
+		else
 			print("[WARNING] story file is empty")
 		end
 		io.close(input)
@@ -79,10 +79,10 @@ function story.generator.load_storys()
 	end
 end
 
-function story.generator.save_storys()
-	if story.generator.players_storys then
+function story.generator.save_stories()
+	if story.generator.players_stories then
 		local output = io.open(story.generator.file, "w")
-		local str = minetest.serialize(story.generator.players_storys)
+		local str = minetest.serialize(story.generator.players_stories)
 		output:write(str)
 		io.close(output)
 	end
@@ -90,62 +90,61 @@ end
 
 function story.generator.gen_next_step(player)
 	print("[INFO] generating story...")
-	if not story.generator.players_storys[player:get_player_name()] then
+	if not story.generator.players_stories[player:get_player_name()] then
 		print("[ERROR][story] could not find players story")
 		return
 	end
 	-- load part
-	local part = story.generator.players_storys[player:get_player_name()].part
-	part = story.generator.get_part(story.generator.players_storys[player:get_player_name()].part)
+	local part = story.generator.players_stories[player:get_player_name()].part
+	part = story.generator.get_part(story.generator.players_stories[player:get_player_name()].part)
 	if part then
 		local next_part = {}
 
 		-- run a new part?
-		if story.generator.players_storys[player:get_player_name()].wait then
-			next_part = story.generator.run(part, player, story.generator.players_storys[player:get_player_name()].wait_pos+1)
+		if story.generator.players_stories[player:get_player_name()].wait then
+			next_part = story.generator.run(part, player, story.generator.players_stories[player:get_player_name()].wait_pos+1)
 		else
 			next_part = story.generator.run(part, player, 0)
 		end
-		
+
 		--quit
 		if next_part.quit then
-			story.generator.players_storys[player:get_player_name()].pos = nil
-			story.generator.players_storys[player:get_player_name()].part = ""
-			story.generator.players_storys[player:get_player_name()].wait_for = nil
-			story.generator.players_storys[player:get_player_name()].wait_pos = 0
-			story.generator.players_storys[player:get_player_name()].wait = false
+			story.generator.players_stories[player:get_player_name()].pos = nil
+			story.generator.players_stories[player:get_player_name()].part = ""
+			story.generator.players_stories[player:get_player_name()].wait_for = nil
+			story.generator.players_stories[player:get_player_name()].wait_pos = 0
+			story.generator.players_stories[player:get_player_name()].wait = false
 			print("[story] QUIT")
 			return
 		end
-		
+
 		-- wait or not?
 		if next_part.wait then
-			story.generator.players_storys[player:get_player_name()].wait = true
-			story.generator.players_storys[player:get_player_name()].wait_pos = next_part.param
-			story.generator.players_storys[player:get_player_name()].wait_for = next_part.param2
+			story.generator.players_stories[player:get_player_name()].wait = true
+			story.generator.players_stories[player:get_player_name()].wait_pos = next_part.param
+			story.generator.players_stories[player:get_player_name()].wait_for = next_part.param2
 		else
-			story.generator.players_storys[player:get_player_name()].part = next_part.part
-			story.generator.players_storys[player:get_player_name()].wait_for = nil
-			story.generator.players_storys[player:get_player_name()].wait = false
-			story.generator.players_storys[player:get_player_name()].wait_pos = 0
+			story.generator.players_stories[player:get_player_name()].part = next_part.part
+			story.generator.players_stories[player:get_player_name()].wait_for = nil
+			story.generator.players_stories[player:get_player_name()].wait = false
+			story.generator.players_stories[player:get_player_name()].wait_pos = 0
 		end
-		
+
 		-- save
-		story.generator.save_storys()
-		return
+		story.generator.save_stories()
 	else
-		print("[ERROR][story] could not find part file : " .. (story.generator.players_storys[player:get_player_name()].part or "nothing"))
-		return
+		print("[ERROR][story] could not find part file : " .. (story.generator.players_stories[player:get_player_name()].part or "nothing"))
 	end
 end
 
 function story.generator.new_player(player)
 	-- adds a new entry to the story database
-	story.generator.players_storys[player:get_player_name()] = {}
-	story.generator.players_storys[player:get_player_name()].part = ""
-	story.generator.players_storys[player:get_player_name()].wait_pos = 0
-	story.generator.players_storys[player:get_player_name()].wait = false
-	story.generator.players_storys[player:get_player_name()].wait_for = nil
+	story.generator.players_stories[player:get_player_name()] = {
+		part = "",
+		wait_pos = 0,
+		wait = false,
+		wait_for = nil
+	}
 end
 
 function story.generator.get_part(name)
@@ -187,7 +186,7 @@ function story.generator.get_quest(player)
 					return val[math.random(#val)]
 				end
 			end
-		else 
+		else
 			print("[WARNING] quest.conf is empty")
 		end
 		io.close(input)
@@ -199,8 +198,9 @@ end
 
 quests.callback = function (player)
 	print("[quest]  done")
-	if (story.generator.players_storys[player:get_player_name()].wait_for and story.generator.players_storys[player:get_player_name()].wait_for == "quest") then
-		story.generator.gen_next_step(player)	
+	if (story.generator.players_stories[player:get_player_name()].wait_for and
+			story.generator.players_stories[player:get_player_name()].wait_for == "quest") then
+		story.generator.gen_next_step(player)
 	end
 end
 
@@ -208,9 +208,9 @@ function story.generator.run(part, player, line_pos)
 	local out = {}
 	print("[INFO] run script... " .. part)
 	local lines = part:split("\n")
-	if not lines then 
+	if not lines then
 		return ""
-	end	
+	end
 	local i = 0
 	for k,v in pairs(lines) do
 		if i > line_pos-1 then
@@ -219,33 +219,33 @@ function story.generator.run(part, player, line_pos)
 				print("[INFO] run line... " .. v)
 				if cmd[1] == "$dialog" and cmd[2] then
 					if story.generator.get_dialog(cmd[2], player) then
-						story.generator.players_storys[player:get_player_name()].text = story.generator.get_dialog(cmd[2], player)	
+						story.generator.players_stories[player:get_player_name()].text = story.generator.get_dialog(cmd[2], player)
 					end
 				end
 				if cmd[1] == "$create" then
-					story.generator.show(player, story.generator.players_storys[player:get_player_name()].pos)
+					story.generator.show(player, story.generator.players_stories[player:get_player_name()].pos)
 				end
 				if cmd[1] == "$place" and cmd[2] and cmd[3] then
 					if cmd[2] == "at" then
 						if places.pos[cmd[3]] then
-							story.generator.players_storys[player:get_player_name()].pos = places.pos[cmd[3]]
+							story.generator.players_stories[player:get_player_name()].pos = places.pos[cmd[3]]
 						end
 					elseif cmd[2] == "near" then
 						if cmd[3] == "player" then
 							if cmd[4] then
 								local place = minetest:get_player_by_name(cmd[4]):getpos()
-								story.generator.players_storys[player:get_player_name()].pos = {x=place.x+math.random(-5, 5), y=place.y, z=place.z+math.random(-5, 5)}
+								story.generator.players_stories[player:get_player_name()].pos = {x=place.x+math.random(-5, 5), y=place.y, z=place.z+math.random(-5, 5)}
 							else
 								local place = player:getpos()
-								story.generator.players_storys[player:get_player_name()].pos = {x=place.x+math.random(-5, 5), y=place.y, z=place.z+math.random(-5, 5)}						
+								story.generator.players_stories[player:get_player_name()].pos = {x=place.x+math.random(-5, 5), y=place.y, z=place.z+math.random(-5, 5)}
 							end
 						elseif places.pos[cmd[3]] then
 							local place = places.pos[cmd[3]]
-							story.generator.players_storys[player:get_player_name()].pos = {x=place.x+math.random(-5, 5), y=place.y, z=place.z+math.random(-5, 5)}
+							story.generator.players_stories[player:get_player_name()].pos = {x=place.x+math.random(-5, 5), y=place.y, z=place.z+math.random(-5, 5)}
 						end
 					else
 						if places.pos[cmd[3]] then
-							story.generator.players_storys[player:get_player_name()].pos = places.pos[cmd[3]]
+							story.generator.players_stories[player:get_player_name()].pos = places.pos[cmd[3]]
 						end
 					end
 				end
@@ -260,7 +260,7 @@ function story.generator.run(part, player, line_pos)
 					})
 				end
 				if cmd[1] == "$pos" then
-					story.generator.players_storys[player:get_player_name()].pos = {x=0,y=10,z=0}
+					story.generator.players_stories[player:get_player_name()].pos = {x=0,y=10,z=0}
 				end
 				if cmd[1] == "$next" and cmd[2] then
 					if cmd[2] == "rnd" then
@@ -280,7 +280,7 @@ function story.generator.run(part, player, line_pos)
 							else
 								out = {part=cmd[4], wait=false}
 							end
-						else 
+						else
 							out = {part=cmd[3], wait=false}
 						end
 					else
@@ -371,7 +371,7 @@ minetest.register_entity("story:human", {
 	textures = {"character.png",},
 	mesh = "character.x",
 	spritediv = {x=1, y=1},
-	initial_sprite_basepos = {x=0, y=0},	
+	initial_sprite_basepos = {x=0, y=0},
 	is_visible = true,
 	makes_footstep_sound = false,
 	automatic_rotate = true,
@@ -383,29 +383,29 @@ minetest.register_entity("story:human", {
 		if not clicker or not clicker:is_player() then
 			return
 		end
-		if not story.generator.players_storys[clicker:get_player_name()] then
+		if not story.generator.players_stories[clicker:get_player_name()] then
 			return
 		end
 		-- shows the dialog
-		if story.generator.players_storys[clicker:get_player_name()].pos then
-			if vector.distance(self.object:getpos(), story.generator.players_storys[clicker:get_player_name()].pos) < 3 then
+		if story.generator.players_stories[clicker:get_player_name()].pos then
+			if vector.distance(self.object:getpos(), story.generator.players_stories[clicker:get_player_name()].pos) < 3 then
 				print("[story] not near story position")
-				if (story.generator.players_storys[clicker:get_player_name()].wait_for and story.generator.players_storys[clicker:get_player_name()].wait_for == "talk") or not(story.generator.players_storys[clicker:get_player_name()].wait_for) then
-					story.generator.players_storys[clicker:get_player_name()].wait_for = nil			
-					minetest.show_formspec(clicker:get_player_name(), "story:story", story.get_talk_form(story.generator.players_storys[clicker:get_player_name()].text))
-					story.generator.gen_next_step(clicker)	
+				if (story.generator.players_stories[clicker:get_player_name()].wait_for and story.generator.players_stories[clicker:get_player_name()].wait_for == "talk") or not(story.generator.players_stories[clicker:get_player_name()].wait_for) then
+					story.generator.players_stories[clicker:get_player_name()].wait_for = nil
+					minetest.show_formspec(clicker:get_player_name(), "story:story", story.get_talk_form(story.generator.players_stories[clicker:get_player_name()].text))
+					story.generator.gen_next_step(clicker)
 				else
 					print("[story] waiting for something else")
 				end
-				-- TODO : delete npc after talking with it (or move it some where else)	
+				-- TODO : delete npc after talking with it (or move it some where else)
 			end
 		else
-			story.generator.players_storys[clicker:get_player_name()].wait_for = nil
-			story.generator.players_storys[clicker:get_player_name()].part = story.generator.get_quest(clicker)
-			story.generator.players_storys[clicker:get_player_name()].pos = self.object:getpos()
-			story.generator.players_storys[clicker:get_player_name()].wait_pos = 0
-			story.generator.players_storys[clicker:get_player_name()].wait = false
-			story.generator.gen_next_step(clicker)	
+			story.generator.players_stories[clicker:get_player_name()].wait_for = nil
+			story.generator.players_stories[clicker:get_player_name()].part = story.generator.get_quest(clicker)
+			story.generator.players_stories[clicker:get_player_name()].pos = self.object:getpos()
+			story.generator.players_stories[clicker:get_player_name()].wait_pos = 0
+			story.generator.players_stories[clicker:get_player_name()].wait = false
+			story.generator.gen_next_step(clicker)
 		end
 	end,
 
@@ -436,5 +436,4 @@ minetest.register_craftitem("story:human", {
 })
 
 
-story.generator.load_storys()
-
+story.generator.load_stories()
