@@ -19,7 +19,7 @@ function xp.add_xp(player, num)
 		xp.player_xp[player:get_player_name()] = num
 		if not xp.player_levels[player:get_player_name()] then
 			xp.player_levels[player:get_player_name()] = 1
-		end	
+		end
 	end
 
 	cmsg.push_message_player(player, "You got "..tostring(num).. " xp!")
@@ -71,6 +71,8 @@ minetest.register_on_joinplayer(function(player)
 			offset = {x=0, y=-(48*2+16)},
 		})
 	else
+		xp.player_xp[player:get_player_name()] = 0
+		xp.player_levels[player:get_player_name()] = 1
 		xp.xp_hud[player:get_player_name()] = player:hud_add({
 			hud_elem_type = "statbar",
 			position = {x=0.5,y=1.0},
@@ -96,7 +98,7 @@ function xp.load_xp()
 		local str = input:read()
 		if str then
 			for k, v in str.gmatch(str,"(%w+)=(%w+)") do
-    				xp.player_xp[k] = tonumber(v)
+    			xp.player_xp[k] = tonumber(v)
 			end
 		end
 		io.close(input)
@@ -107,7 +109,7 @@ function xp.save_xp()
 	if xp.player_xp then
 		local output = io.open(xp.xp_file, "w")
 		local str = ""
-		for k, v in pairs(xp.player_xp) do 
+		for k, v in pairs(xp.player_xp) do
 			str = str .. k .. "=" .. v .. ","
 		end
 		str = str:sub(1, #str - 1)
@@ -133,7 +135,7 @@ function xp.save_levels()
 	if xp.player_xp then
 		local output = io.open(xp.lvl_file, "w")
 		local str = ""
-		for k, v in pairs(xp.player_levels) do 
+		for k, v in pairs(xp.player_levels) do
 			str = str .. k .. "=" .. v .. ","
 		end
 		str = str:sub(1, #str - 1)

@@ -135,8 +135,8 @@ function mobs.register_mob(name, def)
 end
 
 function mobs.get_mob(lvl)
-	a = {}
-	found_mob = false
+	local a = {}
+	local found_mob = false
 	for i,n in ipairs(mobs.mobs) do
 		if n[2] < lvl +5 and n[2] > lvl-5 then
 			found_mob = true
