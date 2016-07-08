@@ -286,7 +286,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "default:plant_grass 3",
 	recipe = {
-		{"default:grass"},
+		{"default:dirt_with_grass"},
 	}
 })
 

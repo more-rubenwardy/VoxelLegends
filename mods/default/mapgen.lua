@@ -1,5 +1,5 @@
 minetest.register_alias("mapgen_dirt", "default:dirt")
-minetest.register_alias("mapgen_dirt_with_grass", "default:grass")
+minetest.register_alias("mapgen_dirt_with_grass", "default:dirt_with_grass")
 minetest.register_alias("mapgen_water_source", "default:water_source")
 minetest.register_alias("mapgen_river_water_source", "default:water_source")
 
@@ -51,7 +51,7 @@ minetest.register_biome({
 
 minetest.register_biome({
 	name = "grassland",
-	node_top = "default:grass",
+	node_top = "default:dirt_with_grass",
 	depth_top = 1,
 	node_filler = "default:dirt",
 	depth_filler = 0,
@@ -63,7 +63,7 @@ minetest.register_biome({
 
 minetest.register_biome({
 	name = "forest",
-	node_top = "default:grass",
+	node_top = "default:dirt_with_grass",
 	depth_top = 1,
 	node_filler = "default:dirt",
 	depth_filler = 0,
@@ -126,7 +126,7 @@ minetest.register_biome({
 
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"default:grass"},
+	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	fill_ratio = 0.07,
 	biomes = {
@@ -139,7 +139,7 @@ minetest.register_decoration({
 
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"default:grass"},
+	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	fill_ratio = 0.07,
 	biomes = {
@@ -152,7 +152,7 @@ minetest.register_decoration({
 
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"default:grass"},
+	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	fill_ratio = 0.06,
 	biomes = {
@@ -165,7 +165,7 @@ minetest.register_decoration({
 
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"default:grass"},
+	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	fill_ratio = 0.04,
 	biomes = {
@@ -178,7 +178,7 @@ minetest.register_decoration({
 
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"default:grass"},
+	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	fill_ratio = 0.04,
 	biomes = {
@@ -211,7 +211,7 @@ minetest.register_decoration({
 
 minetest.register_decoration({
 	deco_type = "simple",
-	place_on = {"default:dry_grass", "default:grass", "default:sand"},
+	place_on = {"default:dry_grass", "default:dirt_with_grass", "default:sand"},
 	sidelen = 16,
 	noise_params = {
 		offset = -0.015,
@@ -233,7 +233,7 @@ minetest.register_decoration({
 
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = {"default:grass"},
+	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	noise_params = {
 		offset = 0.04,
@@ -252,7 +252,7 @@ minetest.register_decoration({
 
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = {"default:grass"},
+	place_on = {"default:dirt_with_grass"},
 	sidelen = 16,
 	noise_params = {
 		offset = 0.04,
@@ -566,5 +566,3 @@ minetest.register_ore({
 	y_min          = -31000,
 	y_max          = -256,
 })
-
-

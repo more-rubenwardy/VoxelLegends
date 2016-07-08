@@ -142,7 +142,7 @@ stairs.register_stair_and_slab("stairs:brick", "default:brick")
 stairs.register_stair_and_slab("stairs:wood", "default:wood")
 stairs.register_stair_and_slab("stairs:wooden_planks", "default:wooden_planks")
 
-stairs.register_stair_and_slab("stairs:grass", "default:grass")
+stairs.register_stair_and_slab("stairs:grass", "default:dirt_with_grass")
 stairs.register_stair_and_slab("stairs:dirt", "default:dirt")
 
 minetest.register_craftitem("stairs:chisel", {

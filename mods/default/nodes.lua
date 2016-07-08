@@ -27,14 +27,14 @@ minetest.register_node("default:wet_grass", {
 	sounds = default.sounds.dirt(),
 })
 
-minetest.register_node("default:grass_flowers", {
+minetest.register_node("default:dirt_with_grass_flowers", {
 	description = "Grass with flowers",
 	tiles = {"default_grass_flowers.png"},
 	groups = {crumbly = 3},
 	sounds = default.sounds.dirt(),
 })
 
-minetest.register_node("default:grass", {
+minetest.register_node("default:dirt_with_grass", {
 	description = "Grass",
 	tiles = {"default_grass.png"},
 	groups = {crumbly = 3},
@@ -146,11 +146,11 @@ minetest.register_node("default:rope", {
 local box_form = "size[8,9]"
 local box_form = box_form..default.gui_colors
 local box_form = box_form..default.gui_bg
-local box_form = box_form.."list[current_name;main;0,0.3;8,4;]" 
+local box_form = box_form.."list[current_name;main;0,0.3;8,4;]"
 local box_form = box_form..default.itemslot_bg(0,0.3,8,4)
-local box_form = box_form.."list[current_player;main;0,4.85;8,1;]" 
+local box_form = box_form.."list[current_player;main;0,4.85;8,1;]"
 local box_form = box_form..default.itemslot_bg(0,4.85,8,1)
-local box_form = box_form.."list[current_player;main;0,6.08;8,3;8]" 
+local box_form = box_form.."list[current_player;main;0,6.08;8,3;8]"
 local box_form = box_form..default.itemslot_bg(0,6.08,8,3)
 local box_form = box_form.."listring[current_name;main]"
 local box_form = box_form.."listring[current_player;main]"
@@ -202,7 +202,7 @@ minetest.register_node("default:treasure_chest", {
 			local stack = inv:get_stack("main", i)
 			if not stack:is_empty() then
 				local p = {	x = pos.x + math.random(0, 5)/5 - 0.5,
-						y = pos.y, 
+						y = pos.y,
 						z = pos.z + math.random(0, 5)/5 - 0.5
 					  }
 				minetest.add_item(p, stack)
@@ -409,7 +409,7 @@ minetest.register_node("default:sapling", {
 
 minetest.register_abm({
 	nodenames = {"default:sapling"},
-	neighbors = {"default:grass", "default:dirt"},
+	neighbors = {"default:dirt_with_grass", "default:dirt"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
