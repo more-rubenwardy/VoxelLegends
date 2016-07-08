@@ -7,7 +7,7 @@ function mobs.get_velocity(v, yaw, y)
 end
 
 function mobs.register_mob(name, def)
-	mobs.mobs[#mobs.mobs+1] = name
+	mobs.mobs[#mobs.mobs+1] = {name, def.lvl}
 	
 	if not def.hp then
 		if def.lvl and def.hits then
@@ -134,6 +134,36 @@ function mobs.register_mob(name, def)
 	})
 end
 
+function mobs.get_mob(lvl) 
+	a = {}
+	found_mob = false
+	for i,n in ipairs(mobs.mobs) do
+		if n[2] < lvl +5 and n[2] > lvl-5 then
+			found_mob = true
+			a[#a+1] = n[1]
+		end
+	end
+
+	if found_mob then
+		return a[math.random(1, #a)]
+	end
+
+	a = {}
+	found_mob = false
+	for i,n in ipairs(mobs.mobs) do
+		if n[2] < lvl +5 then
+			found_mob = true
+			a[#a+1] = n[1]
+		end
+	end
+	
+	if found_mob then
+		return a[math.random(1, #a)]
+	end
+
+	return mobs.mobs[math.random(1, #mobs.mobs)][1]
+end
+
 local timer = 0
 minetest.register_globalstep(function(dtime)
 	timer = timer + dtime;
@@ -144,7 +174,8 @@ minetest.register_globalstep(function(dtime)
 			local x = math.random(20, 40)*a[math.random(1,2)] + p.x
 			local z = math.random(20, 40)*a[math.random(1,2)] + p.z
 			if minetest.get_node(vector.new(x, p.y+2, z)).name == "air" then
-				minetest.add_entity(vector.new(x, p.y+2, z), mobs.mobs[math.random(1, #mobs.mobs)])
+				local n = mobs.get_mob(xp.player_levels[player:get_player_name()])
+				minetest.add_entity(vector.new(x, p.y+2, z), n)
 			end
 		end
 		timer = 0
