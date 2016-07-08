@@ -1,4 +1,4 @@
-# VoxelLegends
+# Voxel Legends
 
 Voxel Legends is my fork of the rpgtest subgame for Minetest, focusing more on
 singleplayer gameplay and quests. I forked the game as I want to be able to
