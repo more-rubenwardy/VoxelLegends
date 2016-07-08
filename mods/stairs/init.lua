@@ -3,11 +3,11 @@ stairs = {}
 stairs.blocks = {}
 
 function stairs.register_stair_and_slab(name, base)
-	if not minetest.registered_nodes[base] then 
+	if not minetest.registered_nodes[base] then
 		return
 	end
 
-	minetest.register_node(name.."_slab", {
+	minetest.register_node(":"..name.."_slab", {
 		description = minetest.registered_nodes[base].description .. " Slab",
 		tiles = minetest.registered_nodes[base].tiles,
 		groups = minetest.registered_nodes[base].groups,
@@ -24,7 +24,7 @@ function stairs.register_stair_and_slab(name, base)
 
 	stairs.blocks[base] = name.."_slab"
 
-	minetest.register_node(name.."_stair", {
+	minetest.register_node(":" .. name.."_stair", {
 		description = minetest.registered_nodes[base].description .. " Stair",
 		tiles = minetest.registered_nodes[base].tiles,
 		groups = minetest.registered_nodes[base].groups,
@@ -43,7 +43,7 @@ function stairs.register_stair_and_slab(name, base)
 
 	stairs.blocks[name.."_slab"] = name.."_stair"
 
-	minetest.register_node(name.."_stair_corner_1", {
+	minetest.register_node(":"..name.."_stair_corner_1", {
 		description = minetest.registered_nodes[base].description .. " Corner",
 		tiles = minetest.registered_nodes[base].tiles,
 		groups = minetest.registered_nodes[base].groups,
@@ -63,7 +63,7 @@ function stairs.register_stair_and_slab(name, base)
 
 	stairs.blocks[name.."_stair"] = name.."_stair_corner_1"
 
-	minetest.register_node(name.."_stair_corner_2", {
+	minetest.register_node(":"..name.."_stair_corner_2", {
 		description = minetest.registered_nodes[base].description .. " Corner",
 		tiles = minetest.registered_nodes[base].tiles,
 		groups = minetest.registered_nodes[base].groups,
@@ -84,7 +84,7 @@ function stairs.register_stair_and_slab(name, base)
 
 	stairs.blocks[name.."_stair_corner_2"] = base
 
-	minetest.register_node(name.."_wall", {
+	minetest.register_node(":"..name.."_wall", {
 		description = minetest.registered_nodes[base].description .. " Wall",
 		tiles = minetest.registered_nodes[base].tiles,
 		groups = minetest.registered_nodes[base].groups,
@@ -100,7 +100,7 @@ function stairs.register_stair_and_slab(name, base)
 		sounds = minetest.registered_nodes[base].sounds or nil,
 	})
 
-	minetest.register_node(name.."_wall_corner_1", {
+	minetest.register_node(":"..name.."_wall_corner_1", {
 		description = minetest.registered_nodes[base].description .. " Corner",
 		tiles = minetest.registered_nodes[base].tiles,
 		groups = minetest.registered_nodes[base].groups,
@@ -117,7 +117,7 @@ function stairs.register_stair_and_slab(name, base)
 		sounds = minetest.registered_nodes[base].sounds or nil,
 	})
 
-	minetest.register_node(name.."_wall_corner_2", {
+	minetest.register_node(":"..name.."_wall_corner_2", {
 		description = minetest.registered_nodes[base].description .. " Corner",
 		tiles = minetest.registered_nodes[base].tiles,
 		groups = minetest.registered_nodes[base].groups,
@@ -148,7 +148,7 @@ stairs.register_stair_and_slab("stairs:dirt", "default:dirt")
 minetest.register_craftitem("stairs:chisel", {
 	description = "Chisel",
 	inventory_image = "stairs_chisel.png",
- 
+
 	on_use = function(itemstack, user, pt)
 		if pt.type == "node" then
 			if stairs.blocks[minetest.get_node(pt.under).name] then
