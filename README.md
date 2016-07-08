@@ -24,3 +24,5 @@ Minetest : http://www.minetest.net/
 * ExcaliburZero (cleaning up my code)
 * mahmutelmas06 (Turkish translation)
 * srifqi (Indonesian translation)
+* Wuzzy (@Wuzzy2 - central_message mod)
+* celeron55 + minetest community (creative mod)
