@@ -8,7 +8,7 @@ end
 
 function mobs.register_mob(name, def)
 	mobs.mobs[#mobs.mobs+1] = {name, def.lvl}
-	
+
 	if not def.hp then
 		if def.lvl and def.hits then
 			def.hp = classes.get_dmg(def.lvl)*def.hits
@@ -23,7 +23,7 @@ function mobs.register_mob(name, def)
 	 	visual_size = def.visual_size or {x=1, y=1},
 		textures = def.textures,
 		spritediv = {x=1, y=1},
-		initial_sprite_basepos = {x=0, y=0},	
+		initial_sprite_basepos = {x=0, y=0},
 		is_visible = true,
 		makes_footstep_sound = false,
 		automatic_rotate = true,
@@ -67,7 +67,7 @@ function mobs.register_mob(name, def)
 						self.object:setyaw(yaw)
 
 						found = true
-						obj:punch(self.object, 10, def.dmg, nil) 
+						obj:punch(self.object, 10, def.dmg, nil)
 						break
 					end
 				end
@@ -111,7 +111,7 @@ function mobs.register_mob(name, def)
 					end
 					self.object:setyaw(yaw)
 				end
-				self.t = 0		
+				self.t = 0
 			end
 		end,
 	})
@@ -134,7 +134,7 @@ function mobs.register_mob(name, def)
 	})
 end
 
-function mobs.get_mob(lvl) 
+function mobs.get_mob(lvl)
 	a = {}
 	found_mob = false
 	for i,n in ipairs(mobs.mobs) do
@@ -156,7 +156,7 @@ function mobs.get_mob(lvl)
 			a[#a+1] = n[1]
 		end
 	end
-	
+
 	if found_mob then
 		return a[math.random(1, #a)]
 	end
@@ -214,7 +214,7 @@ mobs.register_mob("mobs:big_slime", {
 	collisionbox = {-0.9, -1, -0.9, 0.9, 1, 0.9},
 	description = "Big Slime",
 	range = 3,
-	
+
 })
 
 mobs.register_mob("mobs:dungeon_guardian", {
@@ -232,7 +232,7 @@ mobs.register_mob("mobs:dungeon_guardian", {
 	collisionbox = {-0.8, -1, -0.8, 0.8, 1, 0.8},
 	description = "Dungeon Guardian",
 	range = 4,
-	
+
 })
 
 mobs.register_mob("mobs:blue_cube", {
@@ -250,7 +250,7 @@ mobs.register_mob("mobs:blue_cube", {
 	collisionbox = {-0.6, -0.75, -0.6, 0.6, 0.75, 0.6},
 	description = "Blue Cube",
 	range = 4,
-	
+
 })
 
 mobs.register_mob("mobs:small_grass_monster", {
@@ -269,7 +269,7 @@ mobs.register_mob("mobs:small_grass_monster", {
 	collisionbox = {-0.25, -0.25, -0.25, 0.25, 0.25, 0.25},
 	description = "Small Grass Monster",
 	range = 4,
-	
+
 })
 
 mobs.register_mob("mobs:grass_monster", {
@@ -288,7 +288,7 @@ mobs.register_mob("mobs:grass_monster", {
 	collisionbox = {-0.6, -0.75, -0.6, 0.6, 0.6, 0.6},
 	description = "Grass Monster",
 	range = 4,
-	
+
 })
 
 mobs.register_mob("mobs:angry_cloud", {
@@ -306,7 +306,7 @@ mobs.register_mob("mobs:angry_cloud", {
 	collisionbox = {-0.6, -0.25, -0.6, 0.6, 0.25, 0.6},
 	description = "Angry Cloud",
 	range = 5,
-	
+
 })
 
 mobs.register_mob("mobs:hedgehog", {
@@ -324,7 +324,7 @@ mobs.register_mob("mobs:hedgehog", {
 	collisionbox = {-0.3, -0.5, -0.3, 0.3, -0.25, 0.3},
 	description = "Hedgehog",
 	range = 8,
-	
+
 })
 
 mobs.register_mob("mobs:book", {
@@ -380,4 +380,3 @@ mobs.register_mob("mobs:lava_flower", {
 	range = 2,
 	drops = {"money:coin 2"}
 })
-
