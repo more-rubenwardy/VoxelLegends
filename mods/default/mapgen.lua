@@ -25,14 +25,17 @@ minetest.register_alias("mapgen_mossycobble", "default:mossy_stonebrick")
 minetest.register_alias("mapgen_sandstonebrick", "default:stonebrick")
 minetest.register_alias("mapgen_stair_sandstonebrick", "default:stonebrick")
 
+local SNOW_MIN = 100
+local SNOW_MAX = 31000
+
 minetest.register_biome({
       name = "tundra",
       node_top = "default:dirt_with_snow",
       node_filler = "default:dirt",
       depth_filler = 2,
       depth_top = 1,
-      y_min = 1,
-      y_max = 55,
+      y_min = SNOW_MIN,
+      y_max = SNOW_MAX,
       heat_point = 15,
       humidity_point = 35,
 })
@@ -282,8 +285,8 @@ minetest.register_decoration({
 		persist = 0.66
 	},
 	biomes = {"tundra"},
-	y_min = 1,
-	y_max = 31000,
+	y_min = SNOW_MIN,
+	y_max = SNOW_MAX,
 	schematic = minetest.get_modpath("default").."/schematics/pinetree1.mts",
 	flags = "place_center_x, place_center_z",
 })
