@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+	<head>
+		<title>{{ page.title }} | Voxel Legends</title>
+		<style>
+			html, body {
+				margin: 0;
+				padding: 0;
+				font-family: "Arial";
+				color: #FFECD1;
+				background: #333 url("background.png");
+				background-size: cover;
+			}
+
+			main {
+				width: 80%;
+				max-width: 1180px;
+				padding: 30px;
+				margin: auto;
+				margin-top: 60px;
+				background: #a88e69;
+				border-radius: 10px;
+			}
+
+			h1, h2, h3 {
+				margin: 0;
+				color: #FCDAA9;
+			}
+
+			.buttonlist {
+				padding: 0;
+				margin: 15px 0 0 0;
+				list-style: none;
+				display: inline-block;
+			}
+
+			.buttonlist li {
+				padding: 0;
+				margin: 0 10px 0 0;
+				list-style: none;
+				display: inline-block;
+			}
+
+			.buttonlist li a {
+				padding: 20px;
+				border-radius: 10px;
+				margin: 0;
+				display: block;
+				background: #7A674C;
+				color: #FFECD1;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			{{ content }}
+		</main>
+	</body>
+
+</html>
