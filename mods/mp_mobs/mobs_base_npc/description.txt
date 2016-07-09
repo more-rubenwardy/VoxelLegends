@@ -1,0 +1,1 @@
+Library: provides a prototype to build NPCs on top of
