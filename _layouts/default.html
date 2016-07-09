@@ -27,9 +27,13 @@
 				width: 80%;
 				max-width: 1180px;
 				padding: 10px 30px;
-				margin: auto;
+				margin: auto auto 50px auto;
 				background: #a88e69;
 				border-radius: 0 10px 10px 10px;
+			}
+
+			a {
+				color: #33a;
 			}
 
 			h1, h2, h3 {
@@ -95,7 +99,8 @@
 		</header>
 		<nav class="buttonlist">
 			<li{% if page.title == "About" %} class="selected"{% endif %}><a href="index.html">About</a></li>
-			<li{% if page.title == "Design Docs" %} class="selected"{% endif %}><a href="design.html">Design Docs</a></li>
+			<li{% if page.title == "Basic Design" %} class="selected"{% endif %}><a href="design.html">Basic Design</a></li>
+			<li{% if page.title == "NPCs and Quests" %} class="selected"{% endif %}><a href="quests.html">NPCs and Quests</a></li>
 			<li><a href="https://github.com/rubenwardy/VoxelLegends/">Github</a></li>
 		</nav>
 		<main>

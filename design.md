@@ -1,5 +1,5 @@
 ---
-title: Design Docs
+title: Basic Design
 layout: default
 ---
 
