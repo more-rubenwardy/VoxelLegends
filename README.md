@@ -31,7 +31,7 @@ Minetest: http://www.minetest.net/
 ## Thanks to
 
 * RPGtest
-	* cd5 (for creating rpgtest)
+	* cd2 (@cdqwertz - for creating rpgtest)
 	* farfadet46 (dog/wolf model + French translation)
 	* ExcaliburZero (cleaning up my code)
 	* mahmutelmas06 (Turkish translation)
