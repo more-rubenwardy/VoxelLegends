@@ -846,3 +846,21 @@ minetest.register_node("default:rail", {
 	walkable = false,
 	groups = {choppy = 1, attached_node = 1},
 })
+
+-- fences
+
+default.register_fence("default:fence_wood", {
+	material = "default:wood",
+})
+
+default.register_fence("default:fence_cobble", {
+	material = "default:cobble",
+})
+
+default.register_fence("default:fence_jungle_wood", {
+	material = "default:jungle_wood",
+})
+
+default.register_fence("default:fence_quartz", {
+	material = "default:quartz",
+})

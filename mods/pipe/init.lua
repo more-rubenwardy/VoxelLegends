@@ -10,7 +10,7 @@ local pipe_form = pipe_form..default.itemslot_bg(0,3.08,8,3)
 
 minetest.register_node("pipe:pipe", {
 	description = "Pipe",
-	tiles = {"pipe_top.png", "pipe_side.png"},
+	tiles = {"pipe_top.png", "pipe_bottom.png", "pipe_side.png"},
 	groups = {choppy = 3},
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -18,7 +18,7 @@ minetest.register_node("pipe:pipe", {
 	node_box = {
 		type = "fixed",
 		fixed = {
-				{-0.1, -0.1, -0.5, 0.1, 0.1, 0.5},
+				{-5/32, -5/32, -0.5, 5/32, 5/32, 0.5},
 			},
 	},
 	on_construct = function(pos)
@@ -111,7 +111,7 @@ minetest.register_abm({
 
 blueprint.register_blueprint("pipe", {
 	description = "Pipe",
-	materials = {"furnace:iron_plate"},
+	materials = {"default:wood"},
 	out = "pipe:pipe",
 	color = "blue"
 })
