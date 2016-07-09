@@ -38,3 +38,4 @@ Minetest: http://www.minetest.net/
 	* srifqi (Indonesian translation)
 	* Wuzzy (@Wuzzy2 - central_message mod)
 	* celeron55 + minetest community (creative mod)
+	* rubenwardy (fix mobs crash on no XP found + cleanups of classes and story)
