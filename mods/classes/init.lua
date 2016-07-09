@@ -7,7 +7,7 @@ function classes.get_dmg(lvl)
 	return lvl+2
 end
 
-classes.register_weapon = function(name,fromLevel,levels, def)
+function classes.register_weapon(name, fromLevel, levels, def)
 	if not def.damage then
 		if def.damage_m and def.damage_d then
 			def.damage = math.floor(classes.get_dmg(fromLevel)*def.damage_m-def.damage_d)
@@ -26,19 +26,19 @@ classes.register_weapon = function(name,fromLevel,levels, def)
     			on_use = function(itemstack, user, pointed_thing)
 				if user == nil then return end
 				if minetest.registered_tools[itemstack:get_name()].class then print(minetest.registered_tools[itemstack:get_name()].class) end
-				if classes.selected[user:get_player_name()] == minetest.registered_tools[itemstack:get_name()].class then	
+				if classes.selected[user:get_player_name()] == minetest.registered_tools[itemstack:get_name()].class then
 					if pointed_thing.type == "object" then
 						if xp.player_levels[user:get_player_name()] and xp.player_levels[user:get_player_name()] > i-1 then
 							pointed_thing.ref:punch(user, 10,minetest.registered_tools[itemstack:get_name()].tool_capabilities)
 							itemstack:add_wear(300)
 							print("[info]" .. user:get_player_name() .. " is fighting!")
 						else
-							cmsg.push_message_player(user, "[info] You have to be level "..tostring(i).. " to use this weapon!")	
-						end					
+							cmsg.push_message_player(user, "[info] You have to be level "..tostring(i).. " to use this weapon!")
+						end
 						return itemstack
 					end
 				else
-					cmsg.push_message_player(user, "[info] You cant use this weapon.")	
+					cmsg.push_message_player(user, "[info] You cant use this weapon.")
 					return itemstack
 				end
 			end
@@ -75,15 +75,15 @@ function classes.register_tool(name, def)
 		wield_scale = def.wield_scale,
 		on_use = function(itemstack, user, pointed_thing)
 			if user == nil then return end
-			if classes.selected[user:get_player_name()] == def.class then	
+			if classes.selected[user:get_player_name()] == def.class then
 				if xp.player_levels[user:get_player_name()] and xp.player_levels[user:get_player_name()] > def.lvl-1 then
 					def.on_use(itemstack, user, pointed_thing)
 				else
-					cmsg.push_message_player(user, "[info] You have to be level "..tostring(def.lvl).. " to use this tool!")	
-				end					
+					cmsg.push_message_player(user, "[info] You have to be level "..tostring(def.lvl).. " to use this tool!")
+				end
 				return nil
 			else
-				cmsg.push_message_player(user, "[info] You cant use this tool.")	
+				cmsg.push_message_player(user, "[info] You cant use this tool.")
 				return itemstack
 			end
 		end
@@ -109,7 +109,7 @@ function classes.save_selected_classes()
 	if classes.selected then
 		local output = io.open(classes.classes_file, "w")
 		local str = ""
-		for k, v in pairs(classes.selected) do 
+		for k, v in pairs(classes.selected) do
 			str = str .. k .. "=" .. v .. ","
 		end
 		str = str:sub(1, #str - 1)
@@ -125,9 +125,9 @@ minetest.register_chatcommand("class", {
 	description = "Set your class to <class>",
 	privs = {},
 	func = function(name, text)
-		if classes.selected[name] then 
+		if classes.selected[name] then
 			return true, "Your class is : ".. classes.selected[name] .. "\nYou cant switch your class. If you want to player an other class, you should ask an admin :)"
-		end		
+		end
 		if classes.all_classes[text] then
 			classes.selected[name] = text
 			minetest.chat_send_all(name .. " is now a " .. text)
@@ -197,7 +197,7 @@ classes.register_tool("shield", {
 			speed = 0.3,
 		})
 		cmsg.push_message_player(user, "[armor] + shield")
-		
+
 		minetest.after(3.0, function(player)
 			if not player or not player:is_player() then
 				return
