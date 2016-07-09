@@ -14,6 +14,34 @@ function default.drop_items(pos, oldnode, oldmetadata, digger)
 	end
 end
 
+function default.register_fence(name,def)
+	def.description = def.description or minetest.registered_nodes[def.material].description .. " Fence"
+	def.tiles = def.tiles or minetest.registered_nodes[def.material].tiles
+	def.groups = def.groups or minetest.registered_nodes[def.material].groups
+	def.sounds = def.sounds or minetest.registered_nodes[def.material].sounds
+	def.drawtype = "nodebox"
+	def.node_box = {
+		type = "connected",
+		fixed = {{-3/16, -0.5, -3/16, 3/16, 0.5, 3/16}},
+		connect_front = {{-2/16,-0.5,-1/2,2/16,0.5,-2/16}},
+		connect_left = {{-1/2,-0.5,-2/16,-2/16,0.5,2/16}},
+		connect_back = {{-2/16,-0.5,2/16,2/16,0.5,1/2}},
+		connect_right = {{2/16,-0.5,-2/16,1/2,0.5,2/16}},
+	}
+	def.paramtype = "light"
+	def.connects_to = {name, "group:cracky", "group:choppy"}
+
+	minetest.register_node(name, def)
+
+	minetest.register_craft({
+		output = name .. " 12",
+		recipe = {
+			{def.material, def.material, def.material},
+			{def.material, def.material, def.material}
+		}
+	})
+end
+
 default.sounds = {}
 
 function default.sounds.wood(t)
