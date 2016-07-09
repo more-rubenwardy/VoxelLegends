@@ -14,14 +14,14 @@ Features:
  * traders can be spawned with the chatcommand "/trader <type>", i.e. "/trader individual";
    the trader_spawn priv is needed in order to use that chat command
  * traders can be picked up, added to your inventory, carried to another place and be placed there;
-   it requires the trader_take priv or ownership of that particular trader ('.. is my employer') and is offered in the trader's formspec 
+   it requires the trader_take priv or ownership of that particular trader ('.. is my employer') and is offered in the trader's formspec
  * supports money  mod: use mobf_trader:money as item name for money and stack size for actual price
  * supports money2 mod: use mobf_trader:money2 as item name and stack size for actual price
  * no media data required other than skins for the traders; the normal player-model is used
  * traders only do something if you right-click them and call up their offer, so they do not require many ressources
  * the formspec could also be used by i.e. trade chests (mobs are more decorative!)
 --]]
- 
+
 
 -- TODO: produce a bench occasionally and sit down on it; pick up bench when getting up
 -- TODO: rename mod?
@@ -41,7 +41,7 @@ dofile(minetest.get_modpath("mobf_trader").."/village_traders.lua");   -- functi
 
 
 -- find out the right mesh; if the wrong one is used, the traders become invisible
-mobf_trader.mesh = "character.b3d";
+mobf_trader.mesh = "mobs_basic_npc.b3d";
 --[[
 -- if we are dealing with realtest - that still uses the old model
 if(    minetest.get_modpath( 'trees' )
@@ -112,7 +112,7 @@ mobf_trader.trader_entity_prototype = {
 	trader_stock     = nil,
 	-- unique ID for each trader
 	trader_id        = '',
-	
+
         decription = "Default NPC",
         inventory_image = "npcf_inv_top.png",
 
@@ -202,7 +202,7 @@ mobf_trader.trader_entity_get_staticdata = function( self, serialized_data )
 	data.mob_prefix       = 'trader';
 	data.trader_name      = self.trader_name;
 	data.trader_typ       = self.trader_typ;
-	data.trader_owner     = self.trader_owner; 
+	data.trader_owner     = self.trader_owner;
 	data.trader_home_pos  = self.trader_home_pos;
 	data.trader_pos       = self.trader_pos;
 	data.trader_birthtime = self.trader_birthtime;
@@ -222,17 +222,17 @@ end
 mobf_trader.trader_entity_on_activate = function(self, staticdata, dtime_s)
 	-- do the opposite of get_staticdata
 	if( staticdata ) then
-		
+
 		local data = minetest.deserialize( staticdata );
 		if( data and data.trader_id ~= '') then
 
 			self.trader_name      = data.trader_name;
 			self.trader_typ       = data.trader_typ;
-	                self.trader_owner     = data.trader_owner; 
+	                self.trader_owner     = data.trader_owner;
 	                self.trader_home_pos  = data.trader_home_pos;
 			self.trader_pos       = data.trader_pos;
 	                self.trader_birthtime = data.trader_birthtime;
-	                self.trader_sold      = data.trader_sold; 
+	                self.trader_sold      = data.trader_sold;
 	                self.trader_stock     = data.trader_stock;
 			self.trader_id        = data.trader_id;
 			self.trader_texture   = data.trader_texture;
@@ -253,7 +253,7 @@ mobf_trader.trader_entity_on_activate = function(self, staticdata, dtime_s)
 			mob_basics.update_visual_size( self, self.trader_vsize, false, 'trader' );
 		end
 	end
-						
+
 	-- initialize a new trader
 	if( not( self.trader_name ) or self.trader_name=='' or self.trader_id=='') then
 		-- no name supplied - it will be choosen automaticly
@@ -334,7 +334,7 @@ minetest.register_craftitem("mobf_trader:trader_item", {
 			  end,
 	-- carries individual metadata - stacking would interfere with that
 	stack_max = 1,
-	
+
 })
 
 
@@ -375,7 +375,7 @@ mob_pickup.register_mob_for_pickup( 'mobf_trader:trader', 'mobf_trader:trader_it
 
 		return '';
 	end,
-	
+
 	pickup_success_msg = 'Mob picked up. In order to use him again, just wield him and place him somewhere.',
 
 	place_success_msg  = 'Trader placed and waiting for trades.',
@@ -404,14 +404,14 @@ dofile(minetest.get_modpath("mobf_trader").."/trader_village.lua");   -- histori
 mobf_trader.add_as_trader_data = {}
 for i,v in ipairs( mobf_trader.add_as_trader ) do
 	local entity = minetest.registered_entities[ v ];
-	
+
 	if( entity ) then
 		mobf_trader.add_as_trader_data[ v ] = {
 			get_staticdata = entity.get_staticdata,
 			on_activate    = entity.on_activate,
 			on_rightclick  = entity.on_rightclick,
 		}
-	
+
 		entity.get_staticdata = function(self)
 			local data = mobf_trader.add_as_trader_data[ v ].get_staticdata( self );
 			return mobf_trader.trader_entity_get_staticdata( self, data );
