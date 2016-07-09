@@ -1,7 +1,34 @@
-mobs_base_npc = {
+npc = {
 }
 
-mobs_base_npc.prototype = {
+function npc.new(name, def)
+	if not name or not def then
+		error("Incorrect params to npc.new(name, def)")
+	end
+
+	return npc.extend(npc.prototype, name, def)
+end
+
+function npc.extend(parent, name, def)
+	if not parent or not name or not def then
+		error("Incorrect params to NPC. npc.extend(parent, name, def)")
+	end
+
+	local tmp = {}
+	for key, value in pairs(parent) do
+		tmp[key] = value
+	end
+	for key, value in pairs(def) do
+		tmp[key] = value
+	end
+	print(dump(tmp))
+	mobs:register_mob(name, tmp)
+	mobs:register_egg(name, name, "default_stone.png", 1)
+
+	return tmp
+end
+
+npc.prototype = {
 	type = "npc",
 	passive = false,
 	damage = 3,
@@ -38,7 +65,7 @@ mobs_base_npc.prototype = {
 	-- follow = {"farming:bread", "mobs:meat", "default:diamond"},
 	view_range = 15,
 	owner = "",
-	order = "",
+	order = "stand",
 	fear_height = 3,
 	animation = {
 		speed_normal = 30,
@@ -52,6 +79,7 @@ mobs_base_npc.prototype = {
 		punch_start = 200,
 		punch_end = 219,
 	},
-	on_rightclick = function(self, clicker)
-	end,
+	say = function(self, clicker, msg)
+		minetest.chat_send_player(clicker:get_player_name(), msg)
+	end
 }
