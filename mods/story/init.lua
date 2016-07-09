@@ -29,6 +29,15 @@ story.get_talk_form = function(text)
 	return string.format(story.talk_form, text)
 end
 
+function story.show_dialog(player, text)
+	local lines = text:split("\n")
+	for i,t in ipairs(lines) do
+		minetest.after((i-1)*2.3, function(player, t) 
+			cmsg.push_message_player(player, t)
+		end, player,t)
+	end
+end
+
 -- hud
 
 story.hud = {}
@@ -392,7 +401,8 @@ minetest.register_entity("story:human", {
 				print("[story] not near story position")
 				if (story.generator.players_stories[clicker:get_player_name()].wait_for and story.generator.players_stories[clicker:get_player_name()].wait_for == "talk") or not(story.generator.players_stories[clicker:get_player_name()].wait_for) then
 					story.generator.players_stories[clicker:get_player_name()].wait_for = nil
-					minetest.show_formspec(clicker:get_player_name(), "story:story", story.get_talk_form(story.generator.players_stories[clicker:get_player_name()].text))
+					--minetest.show_formspec(clicker:get_player_name(), "story:story", story.get_talk_form(story.generator.players_stories[clicker:get_player_name()].text))
+					story.show_dialog(clicker, story.generator.players_stories[clicker:get_player_name()].text)
 					story.generator.gen_next_step(clicker)
 				else
 					print("[story] waiting for something else")
