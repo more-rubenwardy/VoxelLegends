@@ -9,7 +9,11 @@ $quest placenode default:workbench 1 7
 $wait quest
 $dialog tutorial_1_3
 $wait
+<<<<<<< HEAD
 $give default:dirt_with_grass 9
+=======
+$give default:plant_grass 9
+>>>>>>> 8f2b6ff... updated story mod
 $dialog tutorial_1_4
 $wait
 $next tutorial_2
