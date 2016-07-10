@@ -82,7 +82,7 @@ function default.sounds.dirt(t)
 end
 default.node_sound_dirt_defaults = default.sounds.dirt
 
-LIGHT_MAX = 15
 default.node_sound_leaves_defaults = default.sounds.dirt
 default.node_sound_sand_defaults = default.sounds.dirt
+default.node_sound_glass_defaults = default.sounds.dirt
 default.node_sound_defaults = default.sounds.dirt

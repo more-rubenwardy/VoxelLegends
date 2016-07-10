@@ -50,7 +50,7 @@ minetest.register_node("farming:soil_wet", {
 		wet = "farming:soil_wet"
 	}
 })
---
+
 -- minetest.override_item("default:desert_sand", {
 -- 	groups = {crumbly=3, falling_node=1, sand=1, soil = 1},
 -- 	soil = {
@@ -59,7 +59,6 @@ minetest.register_node("farming:soil_wet", {
 -- 		wet = "farming:desert_sand_soil_wet"
 -- 	}
 -- })
---
 -- minetest.register_node("farming:desert_sand_soil", {
 -- 	description = "Desert Sand Soil",
 -- 	drop = "default:desert_sand",
@@ -148,15 +147,15 @@ minetest.register_abm({
 
 
 -- for i = 1, 5 do
--- 	minetest.override_item("default:dirt_with_grass_"..i, {drop = {
+-- 	minetest.override_item("default:grass_"..i, {drop = {
 -- 		max_items = 1,
 -- 		items = {
 -- 			{items = {'farming:seed_wheat'},rarity = 5},
--- 			{items = {'default:dirt_with_grass_1'}},
+-- 			{items = {'default:grass_1'}},
 -- 		}
 -- 	}})
 -- end
-
+--
 -- minetest.override_item("default:junglegrass", {drop = {
 -- 	max_items = 1,
 -- 	items = {

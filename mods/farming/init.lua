@@ -40,6 +40,26 @@ minetest.register_craft({
 	recipe = "farming:flour"
 })
 
+-- Cotton
+farming.register_plant("farming:cotton", {
+	description = "Cotton seed",
+	inventory_image = "farming_cotton_seed.png",
+	steps = 8,
+	minlight = 13,
+	maxlight = default.LIGHT_MAX,
+	fertility = {"grassland", "desert"}
+})
+
+minetest.register_alias("farming:string", "farming:cotton")
+
+minetest.register_craft({
+	output = "wool:white",
+	recipe = {
+		{"farming:cotton", "farming:cotton"},
+		{"farming:cotton", "farming:cotton"},
+	}
+})
+
 -- Straw
 minetest.register_craft({
 	output = "farming:straw 3",

@@ -41,7 +41,7 @@ dofile(minetest.get_modpath("mobf_trader").."/village_traders.lua");   -- functi
 
 
 -- find out the right mesh; if the wrong one is used, the traders become invisible
-mobf_trader.mesh = "mobs_basic_npc.b3d";
+mobf_trader.mesh = "character.b3d";
 --[[
 -- if we are dealing with realtest - that still uses the old model
 if(    minetest.get_modpath( 'trees' )
