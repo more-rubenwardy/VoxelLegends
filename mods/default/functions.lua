@@ -1,3 +1,5 @@
+default.LIGHT_MAX = 14
+
 function default.drop_items(pos, oldnode, oldmetadata, digger)
 	local meta = minetest.get_meta(pos)
 	meta:from_table(oldmetadata)
@@ -54,7 +56,6 @@ function default.sounds.wood(t)
 			{name = "default_stone_2", gain = 0.1}
 	return t
 end
-default.node_sound_wood_defaults = default.sounds.wood
 
 function default.sounds.stone(t)
 	t = t or {}
@@ -68,7 +69,6 @@ function default.sounds.stone(t)
 			{name = "default_stone_2", gain = 0.2}
 	return t
 end
-default.node_sound_stone_defaults = default.sounds.stone
 
 function default.sounds.dirt(t)
 	t = t or {}
@@ -80,9 +80,12 @@ function default.sounds.dirt(t)
 			{name = "default_dirt_1", gain = 0.1}
 	return t
 end
-default.node_sound_dirt_defaults = default.sounds.dirt
 
-default.node_sound_leaves_defaults = default.sounds.dirt
+default.node_sound_stone_defaults = default.sounds.stone
+default.node_sound_dirt_defaults = default.sounds.dirt
+default.node_sound_wood_defaults = default.sounds.wood
+
 default.node_sound_sand_defaults = default.sounds.dirt
+default.node_sound_gravel_defaults = default.sounds.dirt
+default.node_sound_leaves_defaults = default.sounds.dirt
 default.node_sound_glass_defaults = default.sounds.dirt
-default.node_sound_defaults = default.sounds.dirt
