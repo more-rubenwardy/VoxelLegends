@@ -1,13 +1,13 @@
 local furnace_form = "size[8,9]"
 local furnace_form = furnace_form..default.gui_colors
 local furnace_form = furnace_form..default.gui_bg
-local furnace_form = furnace_form.."list[current_name;main;2,0.3;4,4;]" 
+local furnace_form = furnace_form.."list[current_name;main;2,0.3;4,4;]"
 local furnace_form = furnace_form..default.itemslot_bg(2,0.3,4,4)
-local furnace_form = furnace_form.."list[current_player;main;0,4.85;8,1;]" 
+local furnace_form = furnace_form.."list[current_player;main;0,4.85;8,1;]"
 local furnace_form = furnace_form..default.itemslot_bg(0,4.85,8,1)
-local furnace_form = furnace_form.."list[current_player;main;0,6.08;8,3;8]" 
+local furnace_form = furnace_form.."list[current_player;main;0,6.08;8,3;8]"
 local furnace_form = furnace_form..default.itemslot_bg(0,6.08,8,3)
-local furnace_form = furnace_form.."listring[current_name;main]" 
+local furnace_form = furnace_form.."listring[current_name;main]"
 local furnace_form = furnace_form.."listring[current_player;main]"
 
 minetest.register_node("furnace:furnace", {
@@ -25,6 +25,8 @@ minetest.register_node("furnace:furnace", {
 	after_dig_node = default.drop_items,
 })
 
+minetest.register_alias("default:furnace", "furnace:furnace")
+
 minetest.register_abm({
 	nodenames = {"furnace:furnace"},
 	neighbors = {"group:pattern"},
@@ -36,7 +38,7 @@ minetest.register_abm({
 		if minetest.get_node(pos).name == "lava:lava_source" or minetest.get_node(pos).name == "default:coalblock_glowing" then
 			local dir = vector.multiply(minetest.facedir_to_dir(minetest.get_node({x = pos.x, y= pos.y+1, z=pos.z}).param2), -1)
 			local patternpos = vector.add(pos, dir)
-	
+
 			local pattern = minetest.get_node(patternpos).name
 			if pattern == "furnace:pattern_rod" then
 				local myinv = mymeta:get_inventory()
@@ -79,11 +81,11 @@ minetest.register_abm({
 local pattern_form = "size[8,9]"
 local pattern_form = pattern_form..default.gui_colors
 local pattern_form = pattern_form..default.gui_bg
-local pattern_form = pattern_form.."list[current_name;main;0,0.3;8,4;]" 
+local pattern_form = pattern_form.."list[current_name;main;0,0.3;8,4;]"
 local pattern_form = pattern_form..default.itemslot_bg(0,0.3,8,4)
-local pattern_form = pattern_form.."list[current_player;main;0,4.85;8,1;]" 
+local pattern_form = pattern_form.."list[current_player;main;0,4.85;8,1;]"
 local pattern_form = pattern_form..default.itemslot_bg(0,4.85,8,1)
-local pattern_form = pattern_form.."list[current_player;main;0,6.08;8,3;8]" 
+local pattern_form = pattern_form.."list[current_player;main;0,6.08;8,3;8]"
 local pattern_form = pattern_form..default.itemslot_bg(0,6.08,8,3)
 local pattern_form = pattern_form.."listring[current_name;main]"
 local pattern_form = pattern_form.."listring[current_player;main]"
@@ -107,12 +109,12 @@ minetest.register_node("furnace:pattern_rod", {
 			local stack = inv:get_stack("main", i)
 			if not stack:is_empty() then
 				local p = {	x = pos.x + math.random(0, 5)/5 - 0.5,
-						y = pos.y+1, 
+						y = pos.y+1,
 						z = pos.z + math.random(0, 5)/5 - 0.5
 					  }
 				minetest.add_item(p, stack)
 			end
-		end	
+		end
 		minetest.set_node(pos, {name="furnace:pattern_blade"})
 	end,
 })
@@ -137,7 +139,7 @@ minetest.register_node("furnace:pattern_blade", {
 			local stack = inv:get_stack("main", i)
 			if not stack:is_empty() then
 				local p = {	x = pos.x + math.random(0, 5)/5 - 0.5,
-						y = pos.y+1, 
+						y = pos.y+1,
 						z = pos.z + math.random(0, 5)/5 - 0.5
 					  }
 				minetest.add_item(p, stack)
@@ -168,7 +170,7 @@ minetest.register_node("furnace:pattern_plate", {
 			local stack = inv:get_stack("main", i)
 			if not stack:is_empty() then
 				local p = {	x = pos.x + math.random(0, 5)/5 - 0.5,
-						y = pos.y+1, 
+						y = pos.y+1,
 						z = pos.z + math.random(0, 5)/5 - 0.5
 					  }
 				minetest.add_item(p, stack)

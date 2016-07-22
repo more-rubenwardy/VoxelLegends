@@ -67,7 +67,7 @@ handle_schematics.analyze_mts_file = function( path )
 	end
 
 	size.x, size.y, size.z, size.version = get_schematic_size(file)
-	
+
 	-- read the slice probability for each y value that was introduced in version 3
 	if( size.version >= 3 ) then
 		-- the probability is not very intresting for buildings so we just skip it
@@ -92,7 +92,7 @@ handle_schematics.analyze_mts_file = function( path )
 		-- the text of the next name
 		local name_text   = file:read( name_length );
 
-		table.insert( nodenames, name_text );
+		table.insert(nodenames, name_text);
 		-- in order to get this information, the node has to be defined and loaded
 		if( minetest.registered_nodes[ name_text ] and minetest.registered_nodes[ name_text ].on_construct) then
 			table.insert( on_constr, name_text );
@@ -100,6 +100,10 @@ handle_schematics.analyze_mts_file = function( path )
 		-- some nodes need after_place_node to be called for initialization
 		if( minetest.registered_nodes[ name_text ] and minetest.registered_nodes[ name_text ].after_place_node) then
 			table.insert( after_place_node, name_text );
+		end
+
+		if not minetest.registered_nodes[name_text] then
+			print("\"" .. name_text .. "\",")
 		end
 	end
 
@@ -182,18 +186,18 @@ handle_schematics.store_mts_file = function( path, data )
 
 	local write_s16 = function( fi, a )
 		fi:write( string.char( math.floor( a/256) ));
-		fi:write( string.char( a%256 ));	
+		fi:write( string.char( a%256 ));
 	end
 
 	data.size.version = 3; -- we only support version 3 of the .mts file format
 
 	file:write( "MTSM" );
-	write_s16( file, data.size.version ); 
+	write_s16( file, data.size.version );
 	write_s16( file, data.size.x );
 	write_s16( file, data.size.y );
 	write_s16( file, data.size.z );
 
-	
+
 	-- set the slice probability for each y value that was introduced in version 3
 	if( data.size.version >= 3 ) then
 		-- the probability is not very intresting for buildings so we just skip it
@@ -220,7 +224,7 @@ handle_schematics.store_mts_file = function( path, data )
 	for x = 1, data.size.x do
 		local a = data.scm_data_cache[y][x][z];
 		if( a and type( a ) == 'table') then
-			node_data = node_data..string.char( math.floor( a[1]/256) )..string.char( a[1]%256-1);	
+			node_data = node_data..string.char( math.floor( a[1]/256) )..string.char( a[1]%256-1);
 		else
 			node_data = node_data..string.char( 0 )..string.char( #data.nodenames-1 );
 		end
@@ -243,9 +247,9 @@ handle_schematics.store_mts_file = function( path, data )
 	for x = 1, data.size.x do
 		local a = data.scm_data_cache[y][x][z];
 		if( a and type( a) == 'table' ) then
-			node_data = node_data..string.char( a[2] );	
+			node_data = node_data..string.char( a[2] );
 		else
-			node_data = node_data..string.char( 0 );	
+			node_data = node_data..string.char( 0 );
 		end
 	end
 	end
@@ -254,13 +258,13 @@ handle_schematics.store_mts_file = function( path, data )
 	local compressed_data = minetest.compress( node_data, "deflate" );
 	file:write( compressed_data );
 	file.close(file);
-	print('SAVING '..path..'.mts (converted from .we).'); 
+	print('SAVING '..path..'.mts (converted from .we).');
 end
 
 
 -- read .mts and .we files
 handle_schematics.analyze_file = function( file_name, origin_offset, store_as_mts )
-	local res  = handle_schematics.analyze_mts_file( file_name ); 
+	local res  = handle_schematics.analyze_mts_file( file_name );
 	-- alternatively, read the mts file
 	if( not( res )) then
 		res = handle_schematics.analyze_we_file( file_name, origin_offset );

@@ -413,6 +413,11 @@ function doors.register(name, def)
 
 	_doors.registered_doors[name .. "_a"] = true
 	_doors.registered_doors[name .. "_b"] = true
+
+	minetest.register_alias(name .. "_b_1", name .. "_a")
+	minetest.register_alias(name .. "_b_2", name .. "_b")
+	minetest.register_alias(name .. "_t_1", "doors:hidden")
+	minetest.register_alias(name .. "_t_2", "doors:hidden")
 end
 
 doors.register("door_wood", {
