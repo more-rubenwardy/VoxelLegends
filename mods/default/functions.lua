@@ -81,6 +81,8 @@ function default.sounds.dirt(t)
 	return t
 end
 
+default.node_sound_defaults = default.sounds.dirt
+
 default.node_sound_stone_defaults = default.sounds.stone
 default.node_sound_dirt_defaults = default.sounds.dirt
 default.node_sound_wood_defaults = default.sounds.wood

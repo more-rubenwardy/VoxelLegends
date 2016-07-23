@@ -10,6 +10,8 @@ function dialogue.ask(name, question, answers)
 	-- generate formspec and show
 	local arrays = {
 		"size[8,3]",
+		default.gui_colors,
+		default.gui_bg,
 		"label[0,0;",
 		question
 	}
@@ -45,7 +47,6 @@ end
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= "dialogue:ask" then
-		print("not right fs")
 		return
 	end
 
@@ -59,7 +60,5 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				end
 			end
 		end
-	else
-		print("no context")
 	end
 end)
