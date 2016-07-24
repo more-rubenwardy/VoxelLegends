@@ -1,20 +1,42 @@
+default.gui_color_theme = 2
+
 function default.itemslot_bg(x,y,w,h)
-	local imgs = ""
-	for i = 0, w-1,1 do
-		for j=0, h-1,1 do
-			imgs = imgs .."image["..x+i..","..y+j..";1,1;gui_itemslot_bg.png]"
+	if default.gui_color_theme == 1 then
+		local imgs = ""
+		for i = 0, w-1,1 do
+			for j=0, h-1,1 do
+				imgs = imgs .."image["..x+i..","..y+j..";1,1;gui_itemslot_bg.png]"
+			end
 		end
+		return imgs
+	else
+		return ""
 	end
-	return imgs
 end
 
-default.gui_bg = "bgcolor[#a88e69FF;false]"
-default.gui_colors = "listcolors[#00000000;#10101030;#00000000;#68B259;#FFF]"
 default.gui_bg_img = ""--"background[5,5;1,1;gui_formbg.png;true]"
 default.gui_slots = "listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
 
 function default.get_hotbar_bg()
 	return ""
+end
+
+if default.gui_color_theme == 1 then
+	default.gui_bg = "bgcolor[#a88e69FF;false]"
+	default.gui_colors = "listcolors[#00000000;#10101030;#00000000;#68B259;#FFF]"
+	default.text_color = "#FFF"
+elseif default.gui_color_theme == 2 then
+	default.gui_bg = "bgcolor[#333333FF;false]"
+	default.gui_colors = "listcolors[#222222FF;#333333FF;#000000FF;#444444FF;#FFF]"
+	default.text_color = "#FFF"
+elseif default.gui_color_theme == 3 then
+	default.gui_bg = "bgcolor[#CCCCCCFF;false]"
+	default.gui_colors = "listcolors[#AAAAAAFF;#777777FF;#666666FF;#444444FF;#FFF]"
+	default.text_color = "#000"
+elseif default.gui_color_theme == 4 then
+	default.gui_bg = "bgcolor[#00000000;false]"
+	default.gui_colors = "listcolors[#00000022;#44444477;#000000FF;#444444FF;#FFF]"
+	default.text_color = "#FFF"
 end
 
 default.player_anim = {}
