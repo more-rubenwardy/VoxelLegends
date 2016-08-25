@@ -1,35 +1,10 @@
 ---
-title: NPCs and Quests
+title: Quests
 layout: default
 ---
 
-Each town has NPCs roughly equal to the number of houses.
+Each town has [NPCs](npcs.html) roughly equal to the number of houses.
 NPCs generate quests.
-
-### NPC roles
-
-Each NPC has a role. Each role can have special quests
-
-* King
-	* Retrieve treasure from dungeon
-	* Deliver messages
-* Knight
-	* ???
-* Shop keeper
-	* Retrieve treasure from dungeon
-* Tavern
-	* ???
-* Blacksmith
-	* Fetch rare metal
-* Maid
-	* ???
-* Thief
-	* Steal from this house
-	* Assassinate this person
-* Wife/Husband
-	* ???
-* Farmer
-	* Bandits are stealing all their havests, clear the bandits
 
 ### Story overarch
 
